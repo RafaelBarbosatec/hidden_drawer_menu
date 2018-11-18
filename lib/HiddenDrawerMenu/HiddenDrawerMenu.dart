@@ -4,18 +4,19 @@ import 'package:hidden_drawer_menu/HiddenDrawerMenu/HiddenMenu.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/ScreenHiddenDrawer.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
-
   final List<ScreenHiddenDrawer> screens;
   final int initPositionSelected;
   final DecorationImage backgroundContent;
   final Color backgroundColorContent;
-  final bool whithTittle;
-  final TextStyle styleTittle;
+  final bool whithAutoTittleName;
+  final TextStyle styleAutoTittleName;
 
   //AppBar
   final Color backgroundColorAppBar;
   final double elevationAppBar;
   final Widget iconMenuAppBar;
+  final List<Widget> actionsAppBar;
+  final Widget tittleAppBar;
 
   //Menu
   final DecorationImage backgroundMenu;
@@ -27,12 +28,15 @@ class HiddenDrawerMenu extends StatefulWidget {
       this.initPositionSelected = 0,
       this.backgroundColorAppBar,
       this.elevationAppBar = 4.0,
-        this.iconMenuAppBar = const Icon(Icons.menu),
-        this.backgroundMenu,
-        this.backgroundColorMenu,
-        this.backgroundContent,
-        this.backgroundColorContent = Colors.white,
-        this.whithTittle = true, this.styleTittle})
+      this.iconMenuAppBar = const Icon(Icons.menu),
+      this.backgroundMenu,
+      this.backgroundColorMenu,
+      this.backgroundContent,
+      this.backgroundColorContent = Colors.white,
+      this.whithAutoTittleName = true,
+      this.styleAutoTittleName,
+      this.actionsAppBar,
+      this.tittleAppBar})
       : assert(
             screens.length > 0 && initPositionSelected <= (screens.length - 1)),
         super(key: key);
@@ -64,7 +68,6 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     widget.screens.forEach((f) {
       itensMenu.add(f.itemMenu);
     });
-
   }
 
   @override
@@ -97,20 +100,20 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   createContentDisplay() {
     return animateContent(Container(
       decoration: BoxDecoration(
-        image: widget.backgroundContent,
-        color: widget.backgroundColorContent
-      ),
+          image: widget.backgroundContent,
+          color: widget.backgroundColorContent),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: widget.backgroundColorAppBar,
           elevation: widget.elevationAppBar,
-          title: widget.whithTittle ? Text(widget.screens[positionSelected].itemMenu.name,style: widget.styleTittle,) :  Container(),
+          title: getTittleAppBar(),
           leading: new IconButton(
               icon: widget.iconMenuAppBar,
               onPressed: () {
                 _controller.toggle();
               }),
+          actions: widget.actionsAppBar,
         ),
         body: widget.screens[positionSelected].screen,
       ),
@@ -166,5 +169,18 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
             child: content),
       ),
     );
+  }
+
+  getTittleAppBar() {
+    if (widget.tittleAppBar == null) {
+      return widget.whithAutoTittleName
+          ? Text(
+              widget.screens[positionSelected].itemMenu.name,
+              style: widget.styleAutoTittleName,
+            )
+          : Container();
+    } else {
+      return widget.tittleAppBar;
+    }
   }
 }
