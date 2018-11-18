@@ -20,7 +20,7 @@ class Book extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return new Container(
-      height: 95.0,
+      height: 100.0,
       margin: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
       child: new Card(
         elevation: 4.0,
@@ -79,9 +79,9 @@ class Book extends StatelessWidget{
           borderRadius: BorderRadius.only(topLeft: Radius.circular(4.0),bottomLeft: Radius.circular(4.0)),
           child: Image.network(
               _img,
-              fit: BoxFit.cover,
-              width: 60.0,
-              height: 95.0),
+              fit: BoxFit.fill,
+              width: 70.0,
+              height: 100.0),
         )
     );
 

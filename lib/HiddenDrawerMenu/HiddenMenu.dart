@@ -28,10 +28,13 @@ class ItemHiddenMenu extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: <Widget>[
-            Container(
-              height: 40.0,
-              color: selected ? colorLineSelected : Colors.transparent,
-              width: 5.0,
+            ClipRRect(
+              borderRadius: BorderRadius.only(topRight: Radius.circular(4.0),bottomRight: Radius.circular(4.0)),
+              child: Container(
+                height: 40.0,
+                color: selected ? colorLineSelected : Colors.transparent,
+                width: 5.0,
+              ),
             ),
             Expanded(
               child: Container(
