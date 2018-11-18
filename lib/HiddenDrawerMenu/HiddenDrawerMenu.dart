@@ -9,6 +9,8 @@ class HiddenDrawerMenu extends StatefulWidget {
   final int initPositionSelected;
   final DecorationImage backgroundContent;
   final Color backgroundColorContent;
+  final bool whithTittle;
+  final TextStyle styleTittle;
 
   //AppBar
   final Color backgroundColorAppBar;
@@ -29,7 +31,8 @@ class HiddenDrawerMenu extends StatefulWidget {
         this.backgroundMenu,
         this.backgroundColorMenu,
         this.backgroundContent,
-        this.backgroundColorContent = Colors.white})
+        this.backgroundColorContent = Colors.white,
+        this.whithTittle = true, this.styleTittle})
       : assert(
             screens.length > 0 && initPositionSelected <= (screens.length - 1)),
         super(key: key);
@@ -102,6 +105,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
         appBar: AppBar(
           backgroundColor: widget.backgroundColorAppBar,
           elevation: widget.elevationAppBar,
+          title: widget.whithTittle ? Text(widget.screens[positionSelected].itemMenu.name,style: widget.styleTittle,) :  Container(),
           leading: new IconButton(
               icon: widget.iconMenuAppBar,
               onPressed: () {
