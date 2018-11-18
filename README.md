@@ -1,6 +1,8 @@
 # hidden_drawer_menu
 
-A new Flutter application.
+<p align="center">
+  <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/img1.png" width="200"/>
+</p>
 
 ## Getting Started
 
