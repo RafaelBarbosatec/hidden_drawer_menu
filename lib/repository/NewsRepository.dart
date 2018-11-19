@@ -14,7 +14,15 @@ class NewsRepository{
 
     final Map response = await _api.get("technology/$page");
 
-    return response["news"].map<Notice>( (notice) => new Notice.fromMap(notice)).toList();
+    return response["data"]["news"].map<Notice>( (notice) => new Notice.fromMap(notice)).toList();
+
+  }
+
+  Future<List<Notice>> getNewsCat(String category) async{
+
+    final Map response = await _api.get("$category/0");
+
+    return response["data"]["news"].map<Notice>( (notice) => new Notice.fromMap(notice)).toList();
 
   }
 

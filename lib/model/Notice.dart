@@ -57,8 +57,74 @@ class NoticeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return new Container(
+      height: 100.0,
+      margin: EdgeInsets.only(top: 20.0, left: 15.0, right: 15.0),
+      child: new Card(
+        elevation: 4.0,
+        child: new Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _getImage(_img),
+            _getColumText(_title,_date,_description),
+          ],
+        ),
+      ),
+    );
   }
+
+  Widget _getColumText(tittle,date, description){
+
+    return new Expanded(
+        child: new Container(
+          margin: new EdgeInsets.only(left: 20.0, right: 10.0, bottom: 10.0, top: 10.0),
+          child: new Column(
+            crossAxisAlignment:CrossAxisAlignment.start,
+            children: <Widget>[
+              _getTitleWidget(tittle),
+              _getDateWidget(date),
+              _getDescriptionWidget(description)],
+          ),
+        )
+    );
+  }
+
+  Widget _getTitleWidget(String curencyName){
+    return new Text(
+      curencyName,
+      maxLines: 1,
+      style: new TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _getDescriptionWidget(String description){
+    return new Container(
+      margin: new EdgeInsets.only(top: 5.0),
+      child: new Text(description,maxLines: 2,),
+    );
+  }
+
+  Widget _getDateWidget(String date){
+    return new Text(date,
+      style: new TextStyle(color: Colors.grey,fontSize: 10.0),);
+  }
+
+  Widget _getImage(String img) {
+
+    return Container(
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(topLeft: Radius.circular(4.0),bottomLeft: Radius.circular(4.0)),
+          child: FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: _img,
+              fit: BoxFit.cover,
+              width: 100.0,
+              height: 100.0),
+        )
+    );
+
+  }
+
 }
 
 class NoticeViewSpotlight extends StatelessWidget {
@@ -78,7 +144,7 @@ class NoticeViewSpotlight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 15.0,left: 15.0,right: 15.0),
+      margin: EdgeInsets.only(top: 20.0,left: 15.0,right: 15.0),
       child: Material(
         elevation: 4.0,
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -113,7 +179,7 @@ class NoticeViewSpotlight extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.only(top: 10.0),
-            child: Text(_description),
+            child: Text(_description,maxLines: 3),
           )
         ],
       ),

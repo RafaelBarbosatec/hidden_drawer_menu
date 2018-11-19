@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/HiddenDrawerMenu.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/HiddenMenu.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/ScreenHiddenDrawer.dart';
-import 'package:hidden_drawer_menu/Screens/Destaques/DestaquesBloc.dart';
 import 'package:hidden_drawer_menu/Screens/Destaques/DestaquesScreen.dart';
-import 'package:hidden_drawer_menu/Screens/HomeScreen.dart';
-import 'package:hidden_drawer_menu/supporte/BlocProvider.dart';
+import 'package:hidden_drawer_menu/Screens/Tecnologia/TecnologiaScreen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -43,19 +41,20 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(
         new ScreenHiddenDrawer(
             new ItemHiddenMenu(
-              name: "Home",
-              colorLineSelected: Colors.orange,
+              name: "Destaques",
+              colorTextUnSelected: Colors.white.withOpacity(0.5),
             ),
-            HomeScreen()
+            DestaquesScreen.create()
         )
     );
 
     itens.add(
         new ScreenHiddenDrawer(
             new ItemHiddenMenu(
-              name: "Categorias",
+              name: "Tecnologia",
+              colorTextUnSelected: Colors.white.withOpacity(0.5),
             ),
-            DestaquesScreen.create()
+            TecnologiaScreen.create()
         )
     );
 
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
-      backgroundColorMenu: Colors.blueGrey,
+      backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
 
   }
