@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/HiddenDrawerMenu.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/HiddenMenu.dart';
 import 'package:hidden_drawer_menu/HiddenDrawerMenu/ScreenHiddenDrawer.dart';
+import 'package:hidden_drawer_menu/Screens/Destaques/DestaquesBloc.dart';
+import 'package:hidden_drawer_menu/Screens/Destaques/DestaquesScreen.dart';
 import 'package:hidden_drawer_menu/Screens/HomeScreen.dart';
+import 'package:hidden_drawer_menu/supporte/BlocProvider.dart';
 
 void main() => runApp(new MyApp());
 
@@ -31,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+
   List <ScreenHiddenDrawer> itens = new List();
 
   @override
@@ -51,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             new ItemHiddenMenu(
               name: "Categorias",
             ),
-            Container()
+            DestaquesScreen.create()
         )
     );
 
@@ -64,10 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.blueGrey,
-      backgroundMenu: new DecorationImage(
-        image: new AssetImage('assets/bg_livros.jpg'),
-        fit: BoxFit.cover,
-      ),
     );
 
   }

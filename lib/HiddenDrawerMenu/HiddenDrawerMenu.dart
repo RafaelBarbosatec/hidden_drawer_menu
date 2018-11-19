@@ -121,6 +121,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   }
 
   animateContent(Widget content) {
+
     var slidePercent, scalePercent;
 
     switch (_controller.state) {
@@ -166,7 +167,8 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
         ),
         child: new ClipRRect(
             borderRadius: new BorderRadius.circular(cornerRadius),
-            child: content),
+            child: content
+        ),
       ),
     );
   }
