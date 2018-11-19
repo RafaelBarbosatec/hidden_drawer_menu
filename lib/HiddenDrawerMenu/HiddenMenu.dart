@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ItemHiddenMenu extends StatelessWidget {
+
   final String name;
   Function onTap;
   final Color colorLineSelected;
@@ -55,7 +56,9 @@ class ItemHiddenMenu extends StatelessWidget {
 }
 
 class HiddenMenu extends StatefulWidget {
+
   final DecorationImage background;
+  final bool enableShadowItensMenu;
   final Color backgroundColorMenu;
   final List<ItemHiddenMenu> itens;
   final Function(int) selectedListern;
@@ -67,7 +70,8 @@ class HiddenMenu extends StatefulWidget {
       this.itens,
       this.selectedListern,
       this.initPositionSelected,
-      this.backgroundColorMenu})
+      this.backgroundColorMenu,
+        this.enableShadowItensMenu = false})
       : super(key: key);
 
   @override
@@ -92,31 +96,44 @@ class _HiddenMenuState extends State<HiddenMenu> {
           color: widget.backgroundColorMenu,
         ),
         child: Center(
-          child: ListView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.all(0.0),
-              itemCount: widget.itens.length,
-              itemBuilder: (context, index) {
+            child: Container(
+              padding: EdgeInsets.only(top: 40.0,bottom: 40.0),
+              decoration: BoxDecoration(
+                  boxShadow: widget.enableShadowItensMenu ? [
+                    new BoxShadow(
+                      color: const Color(0x44000000),
+                      offset: const Offset(0.0, 5.0),
+                      blurRadius: 50.0,
+                      spreadRadius: 30.0,
+                    ),
+                  ]: []
+              ),
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(0.0),
+                  itemCount: widget.itens.length,
+                  itemBuilder: (context, index) {
 
-                return new ItemHiddenMenu(
-                  name: widget.itens[index].name,
-                  selected: index == indexSelected,
-                  colorLineSelected: widget.itens[index].colorLineSelected,
-                  colorTextSelected: widget.itens[index].colorTextSelected,
-                  colorTextUnSelected: widget.itens[index].colorTextUnSelected,
-                  onTap: () {
-                    if (index != indexSelected) {
-                      setState(() {
-                        indexSelected = index;
-                        widget.selectedListern(index);
-                      });
-                    }
-                  },
-                );
+                    return new ItemHiddenMenu(
+                      name: widget.itens[index].name,
+                      selected: index == indexSelected,
+                      colorLineSelected: widget.itens[index].colorLineSelected,
+                      colorTextSelected: widget.itens[index].colorTextSelected,
+                      colorTextUnSelected: widget.itens[index].colorTextUnSelected,
+                      onTap: () {
+                        if (index != indexSelected) {
+                          setState(() {
+                            indexSelected = index;
+                            widget.selectedListern(index);
+                          });
+                        }
+                      },
+                    );
 
-              }),
+                  }),
+            ),
+          ),
         ),
-      ),
     );
   }
 }

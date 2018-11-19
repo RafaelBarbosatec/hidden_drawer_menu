@@ -66,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
-      backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+      backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_plexus.jpg'),fit: BoxFit.cover),
+      enableShadowItensMenu: true,
     );
 
   }

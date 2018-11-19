@@ -42,6 +42,8 @@ flutter:
   assets:
     - assets/bg_livros.jpg
     - assets/bg_news.jpg
+    - assets/bg_menu.jpg
+    - assets/bg_plexus.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

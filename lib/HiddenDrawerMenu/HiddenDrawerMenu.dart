@@ -21,6 +21,7 @@ class HiddenDrawerMenu extends StatefulWidget {
   //Menu
   final DecorationImage backgroundMenu;
   final Color backgroundColorMenu;
+  final bool enableShadowItensMenu;
 
   HiddenDrawerMenu(
       {Key key,
@@ -36,7 +37,8 @@ class HiddenDrawerMenu extends StatefulWidget {
       this.whithAutoTittleName = true,
       this.styleAutoTittleName,
       this.actionsAppBar,
-      this.tittleAppBar})
+      this.tittleAppBar,
+        this.enableShadowItensMenu = false})
       : assert(
             screens.length > 0 && initPositionSelected <= (screens.length - 1)),
         super(key: key);
@@ -85,6 +87,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
           background: widget.backgroundMenu,
           backgroundColorMenu: widget.backgroundColorMenu,
           initPositionSelected: widget.initPositionSelected,
+          enableShadowItensMenu: widget.enableShadowItensMenu,
           selectedListern: (position) {
             if (position != positionSelected) {
               positionSelected = position;
