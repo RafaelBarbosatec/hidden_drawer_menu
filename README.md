@@ -4,7 +4,6 @@ Custom Drawer for your beautiful app
 
 <p align="start">
   <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/app2.gif" width="200"/>
-  <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/img1.png" width="200"/>
 </p>
 
 # Menu
