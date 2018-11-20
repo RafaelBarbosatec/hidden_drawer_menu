@@ -1,9 +1,8 @@
-# hidden_drawer_menu
+# Hidden Drawer Menu
 
-Hidden Drawer Menu
+Custom Drawer for your beautiful app
 
-## Getting Started
+<p align="start">
+  <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/img1.png" width="200"/>
+</p>
 
-For help getting started with Flutter, view our online [documentation](https://flutter.io/).
-
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
