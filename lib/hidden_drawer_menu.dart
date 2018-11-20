@@ -1,9 +1,9 @@
 library hidden_drawer_menu;
 
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/HiddenDrawerController.dart';
-import 'package:hidden_drawer_menu/HiddenMenu.dart';
-import 'package:hidden_drawer_menu/ScreenHiddenDrawer.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/hidden_menu.dart';
+import 'package:hidden_drawer_menu/screen_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
   final List<ScreenHiddenDrawer> screens;

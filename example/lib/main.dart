@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/HiddenMenu.dart';
-import 'package:hidden_drawer_menu/ScreenHiddenDrawer.dart';
-import 'package:hidden_drawer_menu/HiddenDrawerMenu.dart';
+import 'package:hidden_drawer_menu/hidden_menu.dart';
+import 'package:hidden_drawer_menu/screen_hidden_drawer.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 
 void main() => runApp(MyApp());
 
