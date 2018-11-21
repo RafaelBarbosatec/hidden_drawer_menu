@@ -1,3 +1,5 @@
+[![pub package](https://img.shields.io/pub/v/hidden_drawer_menu.svg)](https://pub.dartlang.org/packages/hidden_drawer_menu)
+
 # Hidden Drawer Menu
 
 Custom Drawer for your beautiful app
