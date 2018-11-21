@@ -1,3 +1,5 @@
+# Example Usage
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_menu.dart';
