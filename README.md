@@ -2,10 +2,7 @@
 
 Custom Drawer for your beautiful app
 
-<p align="start">
-  <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/img1.png" height="400"/>
-  <img src="https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/app2.gif" height="400"/> 
-</p>
+![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/app2.gif)
 
 # Menu
 * change BackgroundColor
