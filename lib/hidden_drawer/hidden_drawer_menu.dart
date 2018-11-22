@@ -1,11 +1,13 @@
 library hidden_drawer_menu;
 
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/hidden_menu.dart';
-import 'package:hidden_drawer_menu/screen_hidden_drawer.dart';
+import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
+import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
+
   final List<ScreenHiddenDrawer> screens;
   final int initPositionSelected;
   final DecorationImage backgroundContent;
@@ -45,12 +47,14 @@ class HiddenDrawerMenu extends StatefulWidget {
             screens.length > 0 && initPositionSelected <= (screens.length - 1)),
         super(key: key);
 
+
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
 }
 
 class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     with TickerProviderStateMixin {
+
   List<ItemHiddenMenu> itensMenu = new List();
   int positionSelected;
   HiddenDrawerController _controller;
@@ -82,6 +86,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
       children: [
         HiddenMenu(
