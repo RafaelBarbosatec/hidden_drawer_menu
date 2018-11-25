@@ -10,6 +10,9 @@ import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
 
 class HiddenDrawerMenuBloc implements BlocBase{
 
+  @override
+  TickerProvider vsync;
+
   final HiddenDrawerMenuBuilder _hiddenDrawer;
 
   List<ItemHiddenMenu> itensMenu = new List();
@@ -27,12 +30,6 @@ class HiddenDrawerMenuBloc implements BlocBase{
   StreamController<Widget> screenSelected ;
   StreamController<String> tittleAppBar ;
   StreamController<HiddenDrawerController> contollerAnimation ;
-
-  initController(TickerProvider vsync){
-    _controller = new HiddenDrawerController(
-      vsync: vsync,
-    )..addListener(() => contollerAnimation.sink.add(_controller) );
-  }
   
   toggle(){
 
@@ -78,6 +75,10 @@ class HiddenDrawerMenuBloc implements BlocBase{
 
     screenSelected = StreamController<Widget>();
     screenSelected.sink.add(_hiddenDrawer.screens[_positionSelected].screen);
+
+    _controller = new HiddenDrawerController(
+      vsync: vsync,
+    )..addListener(() => contollerAnimation.sink.add(_controller) );
 
   }
 

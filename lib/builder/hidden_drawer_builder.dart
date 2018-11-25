@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu_2.dart';
 import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 
@@ -45,7 +44,7 @@ class HiddenDrawerMenuBuilder {
   Widget build() {
     return BlocProvider<HiddenDrawerMenuBloc>(
       bloc: HiddenDrawerMenuBloc(this),
-      child: HiddenDrawerMenu2(hiddenDrawer:this)
+      child: HiddenDrawerMenu(hiddenDrawer:this)
     );
   }
 }
