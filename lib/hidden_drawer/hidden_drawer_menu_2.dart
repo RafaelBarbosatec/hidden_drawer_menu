@@ -21,7 +21,7 @@ class HiddenDrawerMenu2 extends StatefulWidget {
 class _HiddenDrawerMenu2State extends State<HiddenDrawerMenu2> with TickerProviderStateMixin{
 
   HiddenDrawerMenuBloc bloc;
-  Curve scaleDownCurve = new Interval(0.0, 0.8, curve: Curves.easeOut);
+  Curve scaleDownCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
   Curve scaleUpCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
   Curve slideOutCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
   Curve slideInCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
@@ -40,16 +40,24 @@ class _HiddenDrawerMenu2State extends State<HiddenDrawerMenu2> with TickerProvid
           stream: bloc.listItensMenu.stream,
           initialData: new List<ItemHiddenMenu>(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return HiddenMenu(
-              itens: snapshot.data,
-              background: widget.hiddenDrawer.backgroundMenu,
-              backgroundColorMenu: widget.hiddenDrawer.backgroundColorMenu,
-              initPositionSelected: widget.hiddenDrawer.initPositionSelected,
-              enableShadowItensMenu: widget.hiddenDrawer.enableShadowItensMenu,
-              selectedListern: (position) {
-                bloc.clickItemPositionMenu(position);
-              },
-            );
+
+            if(snapshot.data.length > 0){
+
+              return HiddenMenu(
+                itens: snapshot.data,
+                background: widget.hiddenDrawer.backgroundMenu,
+                backgroundColorMenu: widget.hiddenDrawer.backgroundColorMenu,
+                initPositionSelected: widget.hiddenDrawer.initPositionSelected,
+                enableShadowItensMenu: widget.hiddenDrawer.enableShadowItensMenu,
+                selectedListern: (position) {
+                  bloc.clickItemPositionMenu(position);
+                },
+              );
+
+            }else{
+              return Container();
+            }
+
           },
         ),
         createContentDisplay()
@@ -91,6 +99,7 @@ class _HiddenDrawerMenu2State extends State<HiddenDrawerMenu2> with TickerProvid
         stream: bloc.contollerAnimation.stream,
         initialData: new HiddenDrawerController(vsync: this),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+
           var slidePercent, scalePercent;
           var _controller = snapshot.data;
 
