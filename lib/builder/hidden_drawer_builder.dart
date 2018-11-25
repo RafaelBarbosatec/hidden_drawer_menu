@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu_2.dart';
 import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 
@@ -26,25 +27,25 @@ class HiddenDrawerMenuBuilder {
   final bool enableShadowItensMenu;
 
   HiddenDrawerMenuBuilder(
-      {this.screens,
-      this.initPositionSelected,
-      this.backgroundContent,
-      this.backgroundColorContent,
-      this.whithAutoTittleName,
-      this.styleAutoTittleName,
-      this.backgroundColorAppBar,
-      this.elevationAppBar,
-      this.iconMenuAppBar,
-      this.actionsAppBar,
-      this.tittleAppBar,
-      this.backgroundMenu,
-      this.backgroundColorMenu,
-      this.enableShadowItensMenu});
+      { this.screens,
+        this.initPositionSelected = 0,
+        this.backgroundColorAppBar,
+        this.elevationAppBar = 4.0,
+        this.iconMenuAppBar = const Icon(Icons.menu),
+        this.backgroundMenu,
+        this.backgroundColorMenu,
+        this.backgroundContent,
+        this.backgroundColorContent = Colors.white,
+        this.whithAutoTittleName = true,
+        this.styleAutoTittleName,
+        this.actionsAppBar,
+        this.tittleAppBar,
+        this.enableShadowItensMenu = false});
 
   Widget build() {
     return BlocProvider<HiddenDrawerMenuBloc>(
       bloc: HiddenDrawerMenuBloc(this),
-      child: HiddenDrawerMenu(),
+      child: HiddenDrawerMenu2(hiddenDrawer:this)
     );
   }
 }

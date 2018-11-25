@@ -7,7 +7,6 @@ import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
-
   final List<ScreenHiddenDrawer> screens;
   final int initPositionSelected;
   final DecorationImage backgroundContent;
@@ -42,11 +41,10 @@ class HiddenDrawerMenu extends StatefulWidget {
       this.styleAutoTittleName,
       this.actionsAppBar,
       this.tittleAppBar,
-        this.enableShadowItensMenu = false})
+      this.enableShadowItensMenu = false})
       : assert(
             screens.length > 0 && initPositionSelected <= (screens.length - 1)),
         super(key: key);
-
 
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
@@ -54,7 +52,6 @@ class HiddenDrawerMenu extends StatefulWidget {
 
 class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     with TickerProviderStateMixin {
-
   List<ItemHiddenMenu> itensMenu = new List();
   int positionSelected;
   HiddenDrawerController _controller;
@@ -86,7 +83,6 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         HiddenMenu(
@@ -131,7 +127,6 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   }
 
   animateContent(Widget content) {
-
     var slidePercent, scalePercent;
 
     switch (_controller.state) {
@@ -177,8 +172,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
         ),
         child: new ClipRRect(
             borderRadius: new BorderRadius.circular(cornerRadius),
-            child: content
-        ),
+            child: content),
       ),
     );
   }
