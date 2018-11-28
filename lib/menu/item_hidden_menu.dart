@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 
 class ItemHiddenMenu extends StatelessWidget {
 
+  /// name of the menu item
   final String name;
-  Function onTap;
+
+  /// callback to recibe action click in item
+  final Function onTap;
+
+  /// color used for selected item in line
   final Color colorLineSelected;
+
+  /// color used in text for selected item
   final Color colorTextSelected;
+
+  /// color used in text for unselected item
   final Color colorTextUnSelected;
 
   ItemHiddenMenu(

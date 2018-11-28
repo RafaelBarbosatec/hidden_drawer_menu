@@ -8,18 +8,24 @@ import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
 
+  /// builder containing the drawer settings
   final HiddenDrawerMenuBuilder hiddenDrawer;
 
-  HiddenDrawerMenu({Key key, this.hiddenDrawer}) : super(key: key);
+  /// Curves to animations
+  final Curve curveAnimation;
 
+  HiddenDrawerMenu({Key key, this.hiddenDrawer,this.curveAnimation = Curves.decelerate}) : super(key: key);
+
+  /// Curves to animations
+  Curve _animationCurve;
+
+  /// controlling block
   HiddenDrawerMenuBloc _bloc;
-  Curve _scaleDownCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve _scaleUpCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve _slideOutCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve _slideInCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
 
   @override
   Widget build(BuildContext context) {
+
+    _animationCurve = new Interval(0.0, 1.0, curve: curveAnimation);
 
     _bloc = BlocProvider.of<HiddenDrawerMenuBloc>(context);
 
@@ -37,7 +43,7 @@ class HiddenDrawerMenu extends StatelessWidget {
                 initPositionSelected: hiddenDrawer.initPositionSelected,
                 enableShadowItensMenu: hiddenDrawer.enableShadowItensMenu,
                 selectedListern: (position) {
-                  _bloc.clickItemPositionMenu(position);
+                  _bloc.positionSelected.sink.add(position);
                 },
               );
             } else {
@@ -83,32 +89,28 @@ class HiddenDrawerMenu extends StatelessWidget {
         stream: _bloc.contollerAnimation.stream,
         initialData: new HiddenDrawerController(vsync: _bloc.vsync),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          var slidePercent, scalePercent;
+          var animatePercent;
           var _controller = snapshot.data;
 
           switch (_controller.state) {
             case MenuState.closed:
-              slidePercent = 0.0;
-              scalePercent = 0.0;
+              animatePercent = 0.0;
               break;
             case MenuState.open:
-              slidePercent = 1.0;
-              scalePercent = 1.0;
+              animatePercent = 1.0;
               break;
             case MenuState.opening:
-              slidePercent = _slideOutCurve.transform(_controller.percentOpen);
-              scalePercent = _scaleDownCurve.transform(_controller.percentOpen);
+              animatePercent = _animationCurve.transform(_controller.percentOpen);
               break;
             case MenuState.closing:
-              slidePercent = _slideInCurve.transform(_controller.percentOpen);
-              scalePercent = _scaleUpCurve.transform(_controller.percentOpen);
+              animatePercent = _animationCurve.transform(_controller.percentOpen);
               break;
           }
 
-          final slideAmount = 275.0 * slidePercent;
-          final contentScale = 1.0 - (0.2 * scalePercent);
-          final contentPerspective = 0.4 * _controller.percentOpen;
-          final cornerRadius = 10.0 * _controller.percentOpen;
+          final slideAmount = 275.0 * animatePercent;
+          final contentScale = 1.0 - (0.2 * animatePercent);
+          final contentPerspective = 0.4 * animatePercent;
+          final cornerRadius = 10.0 * animatePercent;
 
           return Transform(
             transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)

@@ -3,11 +3,22 @@ import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 class HiddenMenu extends StatefulWidget {
 
+  /// Decocator that allows us to add backgroud in the menu(img)
   final DecorationImage background;
+
+  /// that allows us to add shadow above menu items
   final bool enableShadowItensMenu;
+
+  /// that allows us to add backgroud in the menu(color)
   final Color backgroundColorMenu;
+
+  /// Items of the menu
   final List<ItemHiddenMenu> itens;
+
+  /// Callback to recive item selected for user
   final Function(int) selectedListern;
+
+  /// position to set initial item selected in menu
   final int initPositionSelected;
 
   HiddenMenu(
@@ -26,11 +37,11 @@ class HiddenMenu extends StatefulWidget {
 
 class _HiddenMenuState extends State<HiddenMenu> {
 
-  int indexSelected;
+  int _indexSelected;
 
   @override
   void initState() {
-    indexSelected = widget.initPositionSelected;
+    _indexSelected = widget.initPositionSelected;
     super.initState();
   }
 
@@ -64,14 +75,14 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
                     return new ItemHiddenMenu(
                       name: widget.itens[index].name,
-                      selected: index == indexSelected,
+                      selected: index == _indexSelected,
                       colorLineSelected: widget.itens[index].colorLineSelected,
                       colorTextSelected: widget.itens[index].colorTextSelected,
                       colorTextUnSelected: widget.itens[index].colorTextUnSelected,
                       onTap: () {
-                        if (index != indexSelected) {
+                        if (index != _indexSelected) {
                           setState(() {
-                            indexSelected = index;
+                            _indexSelected = index;
                             widget.selectedListern(index);
                           });
                         }

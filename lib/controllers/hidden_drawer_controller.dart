@@ -9,8 +9,13 @@ enum MenuState {
 
 class HiddenDrawerController extends ChangeNotifier {
 
+  /// provider used to animation
   final TickerProvider vsync;
+
+  /// animationController used to animation of the drawer
   final AnimationController _animationController;
+
+  /// used to control of the state of the drawer
   MenuState state = MenuState.closed;
 
   HiddenDrawerController({this.vsync})
@@ -45,18 +50,22 @@ class HiddenDrawerController extends ChangeNotifier {
     super.dispose();
   }
 
+  /// channel to access percent of the animation
   get percentOpen {
     return _animationController.value;
   }
 
+  ///method to open drawer
   open() {
     _animationController.forward();
   }
 
+  ///method to close drawer
   close() {
     _animationController.reverse();
   }
 
+  ///method to change state of the drawer
   toggle() {
     if (state == MenuState.open) {
       close();
