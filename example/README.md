@@ -70,22 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return HiddenDrawerMenu(
-      initPositionSelected: 0,
-      screens: itens,
-      backgroundColorMenu: Colors.blueGrey,
-//    iconMenuAppBar: Icon(Icons.menu),
-//    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-//    whithAutoTittleName: true,
-//    styleAutoTittleName: TextStyle(color: Colors.red),
-//    actionsAppBar: <Widget>[],
-//    backgroundColorContent: Colors.blue,
-//    backgroundColorAppBar: Colors.blue,
-//    elevationAppBar: 4.0,
-//    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-//    enableShadowItensMenu: true,
-//    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-    );
+    return HiddenDrawerMenuBuilder(
+          initPositionSelected: 0,
+          screens: itens,
+          backgroundColorMenu: Colors.blueGrey,
+    //    iconMenuAppBar: Icon(Icons.menu),
+    //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+    //    whithAutoTittleName: true,
+    //    styleAutoTittleName: TextStyle(color: Colors.red),
+    //    actionsAppBar: <Widget>[],
+    //    backgroundColorContent: Colors.blue,
+    //    backgroundColorAppBar: Colors.blue,
+    //    elevationAppBar: 4.0,
+    //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
+    //    enableShadowItensMenu: true,
+    //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+        ).build();
   }
 }
 

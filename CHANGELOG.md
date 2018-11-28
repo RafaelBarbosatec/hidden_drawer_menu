@@ -13,3 +13,9 @@
 ## [0.0.4] - TODO: Add release date.
 
 * TODO: Update readme
+
+## [0.0.5] - TODO: Add BloC architecture.
+
+* TODO: Update readme
+* TODO: Add BloC architecture
+* TODO: Improve performance

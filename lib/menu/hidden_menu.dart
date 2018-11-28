@@ -1,67 +1,24 @@
 import 'package:flutter/material.dart';
-
-class ItemHiddenMenu extends StatelessWidget {
-
-  final String name;
-  Function onTap;
-  final Color colorLineSelected;
-  final Color colorTextSelected;
-  final Color colorTextUnSelected;
-
-  ItemHiddenMenu(
-      {Key key,
-      this.name,
-      this.selected = false,
-      this.onTap,
-      this.colorLineSelected = Colors.blue,
-      this.colorTextSelected = Colors.white,
-      this.colorTextUnSelected = Colors.grey})
-      : super(key: key);
-
-  bool selected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.only(bottom: 15.0),
-      child: InkWell(
-        onTap: onTap,
-        child: Row(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(4.0),bottomRight: Radius.circular(4.0)),
-              child: Container(
-                height: 40.0,
-                color: selected ? colorLineSelected : Colors.transparent,
-                width: 5.0,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  name,
-                  style: TextStyle(
-                      color: selected ? colorTextSelected : colorTextUnSelected,
-                      fontSize: 25.0),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 class HiddenMenu extends StatefulWidget {
 
+  /// Decocator that allows us to add backgroud in the menu(img)
   final DecorationImage background;
+
+  /// that allows us to add shadow above menu items
   final bool enableShadowItensMenu;
+
+  /// that allows us to add backgroud in the menu(color)
   final Color backgroundColorMenu;
+
+  /// Items of the menu
   final List<ItemHiddenMenu> itens;
+
+  /// Callback to recive item selected for user
   final Function(int) selectedListern;
+
+  /// position to set initial item selected in menu
   final int initPositionSelected;
 
   HiddenMenu(
@@ -79,16 +36,18 @@ class HiddenMenu extends StatefulWidget {
 }
 
 class _HiddenMenuState extends State<HiddenMenu> {
-  int indexSelected;
+
+  int _indexSelected;
 
   @override
   void initState() {
-    indexSelected = widget.initPositionSelected;
+    _indexSelected = widget.initPositionSelected;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -116,14 +75,14 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
                     return new ItemHiddenMenu(
                       name: widget.itens[index].name,
-                      selected: index == indexSelected,
+                      selected: index == _indexSelected,
                       colorLineSelected: widget.itens[index].colorLineSelected,
                       colorTextSelected: widget.itens[index].colorTextSelected,
                       colorTextUnSelected: widget.itens[index].colorTextUnSelected,
                       onTap: () {
-                        if (index != indexSelected) {
+                        if (index != _indexSelected) {
                           setState(() {
-                            indexSelected = index;
+                            _indexSelected = index;
                             widget.selectedListern(index);
                           });
                         }
