@@ -12,21 +12,21 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   HiddenDrawerMenu({Key key, this.hiddenDrawer}) : super(key: key);
 
-  HiddenDrawerMenuBloc bloc;
-  Curve scaleDownCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve scaleUpCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve slideOutCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
-  Curve slideInCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
+  HiddenDrawerMenuBloc _bloc;
+  Curve _scaleDownCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
+  Curve _scaleUpCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
+  Curve _slideOutCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
+  Curve _slideInCurve = new Interval(0.0, 1.0, curve: Curves.easeOut);
 
   @override
   Widget build(BuildContext context) {
 
-    bloc = BlocProvider.of<HiddenDrawerMenuBloc>(context);
+    _bloc = BlocProvider.of<HiddenDrawerMenuBloc>(context);
 
     return Stack(
       children: [
         StreamBuilder(
-          stream: bloc.listItensMenu.stream,
+          stream: _bloc.listItensMenu.stream,
           initialData: new List<ItemHiddenMenu>(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data.length > 0) {
@@ -37,7 +37,7 @@ class HiddenDrawerMenu extends StatelessWidget {
                 initPositionSelected: hiddenDrawer.initPositionSelected,
                 enableShadowItensMenu: hiddenDrawer.enableShadowItensMenu,
                 selectedListern: (position) {
-                  bloc.clickItemPositionMenu(position);
+                  _bloc.clickItemPositionMenu(position);
                 },
               );
             } else {
@@ -64,12 +64,12 @@ class HiddenDrawerMenu extends StatelessWidget {
           leading: new IconButton(
               icon: hiddenDrawer.iconMenuAppBar,
               onPressed: () {
-                bloc.toggle();
+                _bloc.toggle();
               }),
           actions: hiddenDrawer.actionsAppBar,
         ),
         body: StreamBuilder(
-            stream: bloc.screenSelected.stream,
+            stream: _bloc.screenSelected.stream,
             initialData: Container(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               return snapshot.data;
@@ -80,8 +80,8 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   animateContent(Widget content) {
     return StreamBuilder(
-        stream: bloc.contollerAnimation.stream,
-        initialData: new HiddenDrawerController(vsync: bloc.vsync),
+        stream: _bloc.contollerAnimation.stream,
+        initialData: new HiddenDrawerController(vsync: _bloc.vsync),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           var slidePercent, scalePercent;
           var _controller = snapshot.data;
@@ -96,12 +96,12 @@ class HiddenDrawerMenu extends StatelessWidget {
               scalePercent = 1.0;
               break;
             case MenuState.opening:
-              slidePercent = slideOutCurve.transform(_controller.percentOpen);
-              scalePercent = scaleDownCurve.transform(_controller.percentOpen);
+              slidePercent = _slideOutCurve.transform(_controller.percentOpen);
+              scalePercent = _scaleDownCurve.transform(_controller.percentOpen);
               break;
             case MenuState.closing:
-              slidePercent = slideInCurve.transform(_controller.percentOpen);
-              scalePercent = scaleUpCurve.transform(_controller.percentOpen);
+              slidePercent = _slideInCurve.transform(_controller.percentOpen);
+              scalePercent = _scaleUpCurve.transform(_controller.percentOpen);
               break;
           }
 
@@ -138,7 +138,7 @@ class HiddenDrawerMenu extends StatelessWidget {
   getTittleAppBar() {
     if (hiddenDrawer.tittleAppBar == null) {
       return StreamBuilder(
-          stream: bloc.tittleAppBar.stream,
+          stream: _bloc.tittleAppBar.stream,
           initialData: "",
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return hiddenDrawer.whithAutoTittleName
@@ -152,4 +152,5 @@ class HiddenDrawerMenu extends StatelessWidget {
       return hiddenDrawer.tittleAppBar;
     }
   }
+
 }

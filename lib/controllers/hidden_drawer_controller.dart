@@ -39,22 +39,21 @@ class HiddenDrawerController extends ChangeNotifier {
       });
   }
 
-
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
-  get percentOpen{
+  get percentOpen {
     return _animationController.value;
   }
 
-  open(){
+  open() {
     _animationController.forward();
   }
 
-  close(){
+  close() {
     _animationController.reverse();
   }
 
@@ -65,5 +64,4 @@ class HiddenDrawerController extends ChangeNotifier {
       open();
     }
   }
-
 }

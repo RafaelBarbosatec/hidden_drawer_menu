@@ -1,7 +1,6 @@
 
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/builder/hidden_drawer_builder.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
@@ -14,16 +13,17 @@ class HiddenDrawerMenuBloc implements BlocBase{
   TickerProvider vsync;
 
   final HiddenDrawerMenuBuilder _hiddenDrawer;
-
   List<ItemHiddenMenu> itensMenu = new List();
   int _positionSelected;
   HiddenDrawerController _controller;
 
   HiddenDrawerMenuBloc(this._hiddenDrawer){
+
     _positionSelected = _hiddenDrawer.initPositionSelected;
     _hiddenDrawer.screens.forEach((f) {
       itensMenu.add(f.itemMenu);
     });
+
   }
 
   StreamController<List<ItemHiddenMenu>> listItensMenu;
@@ -56,11 +56,13 @@ class HiddenDrawerMenuBloc implements BlocBase{
 
   @override
   void dispose() {
+
     listItensMenu.close();
     screenSelected.close();
     tittleAppBar.close();
     contollerAnimation.close();
     _controller.close();
+
   }
 
   @override

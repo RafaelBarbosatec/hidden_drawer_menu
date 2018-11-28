@@ -25,6 +25,7 @@ class HiddenMenu extends StatefulWidget {
 }
 
 class _HiddenMenuState extends State<HiddenMenu> {
+
   int indexSelected;
 
   @override
@@ -35,8 +36,6 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
   @override
   Widget build(BuildContext context) {
-
-    print("build _HiddenMenuState");
 
     return Scaffold(
       body: Container(
