@@ -2,7 +2,7 @@
 
 # Hidden Drawer Menu
 
-Custom Drawer for your beautiful app
+Hidden Drawer Menu is a library for adding a beautiful drawer mode menu feature with perspective animation
 
 ![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/app2.gif)
 
