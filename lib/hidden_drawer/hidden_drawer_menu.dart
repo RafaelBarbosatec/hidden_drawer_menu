@@ -4,7 +4,7 @@ import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
+import 'package:hidden_drawer_menu/providers/bloc_provider.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
 

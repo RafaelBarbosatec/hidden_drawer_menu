@@ -20,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="hidden_drawer_menu.dart" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hidden_drawer_menu.dart" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1245">
-              <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+            <state relative-caret-position="135">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -32,11 +32,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <file leaf-file-name="hidden_drawer_builder.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/builder/hidden_drawer_builder.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="72" column="43" selection-start-line="72" selection-start-column="43" selection-end-line="72" selection-end-column="43" />
+            <state relative-caret-position="240">
+              <caret line="28" column="6" lean-forward="true" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="hidden_menu.dart" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/menu/hidden_menu.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="64" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -81,9 +93,9 @@
         <option value="$PROJECT_DIR$/lib/menu/item_hidden_menu.dart" />
         <option value="$PROJECT_DIR$/lib/menu/hidden_menu.dart" />
         <option value="$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_bloc.dart" />
-        <option value="$PROJECT_DIR$/lib/builder/hidden_drawer_builder.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart" />
+        <option value="$PROJECT_DIR$/lib/builder/hidden_drawer_builder.dart" />
       </list>
     </option>
   </component>
@@ -112,17 +124,6 @@
             <path>
               <item name="hidden_drawer_menu" type="b2602c69:ProjectViewProjectNode" />
               <item name="hidden_drawer_menu" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hidden_drawer_menu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hidden_drawer_menu" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hidden_drawer_menu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hidden_drawer_menu" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -130,12 +131,6 @@
               <item name="hidden_drawer_menu" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="builder" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hidden_drawer_menu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hidden_drawer_menu" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="hidden_drawer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hidden_drawer_menu" type="b2602c69:ProjectViewProjectNode" />
@@ -252,9 +247,9 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="bottom" id="Event Log" order="17" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="14" weight="0.3275862" />
-      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.38871473" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.38871473" />
       <window_info anchor="bottom" id="Version Control" order="16" />
-      <window_info anchor="bottom" id="Terminal" order="15" weight="0.3286385" />
+      <window_info anchor="bottom" id="Terminal" order="15" visible="true" weight="0.3275862" />
       <window_info anchor="right" id="Flutter Outline" order="10" />
       <window_info id="Capture Tool" order="8" />
       <window_info id="Designer" order="9" />
@@ -467,24 +462,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/providers/BlocProvider.dart">
+    <entry file="file://$PROJECT_DIR$/lib/providers/bloc_provider.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="417">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="87" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -516,16 +497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/menu/hidden_menu.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_bloc.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -538,25 +509,15 @@
     </entry>
     <entry file="file://$USER_HOME$/flutter/packages/flutter/lib/src/animation/curves.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="127" column="2" selection-start-line="127" selection-start-column="2" selection-end-line="127" selection-end-column="20" />
+        <state relative-caret-position="289">
+          <caret line="127" column="14" selection-start-line="127" selection-start-column="14" selection-end-line="127" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/controllers/hidden_drawer_controller.dart">
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/builder/hidden_drawer_builder.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="34" column="28" lean-forward="true" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -570,10 +531,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/example/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="81" column="43" selection-start-line="81" selection-start-column="43" selection-end-line="81" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="101" column="46" selection-start-line="101" selection-start-column="46" selection-end-line="101" selection-end-column="46" />
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/controllers/hidden_drawer_controller.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/menu/hidden_menu.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="64" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/builder/hidden_drawer_builder.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="28" column="6" lean-forward="true" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="42" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

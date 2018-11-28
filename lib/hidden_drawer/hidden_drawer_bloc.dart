@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/builder/hidden_drawer_builder.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/providers/BlocProvider.dart';
+import 'package:hidden_drawer_menu/providers/bloc_provider.dart';
 
 class HiddenDrawerMenuBloc implements BlocBase {
 
