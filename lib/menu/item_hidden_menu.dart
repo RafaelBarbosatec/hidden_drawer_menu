@@ -19,6 +19,8 @@ class ItemHiddenMenu extends StatelessWidget {
   /// color used in text for unselected item
   final Color colorTextUnSelected;
 
+  final bool selected;
+
   ItemHiddenMenu(
       {Key key,
         this.name,
@@ -28,8 +30,6 @@ class ItemHiddenMenu extends StatelessWidget {
         this.colorTextSelected = Colors.white,
         this.colorTextUnSelected = Colors.grey})
       : super(key: key);
-
-  bool selected = false;
 
   @override
   Widget build(BuildContext context) {
