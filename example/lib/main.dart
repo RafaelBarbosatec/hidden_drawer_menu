@@ -55,12 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           color: Colors.orange,
           child: Center(
-            child: RaisedButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Container()),
-              );
-            }),
+            child: Text("Screen 1",
+                style: TextStyle(color: Colors.white, fontSize: 30.0)),
           ),
         )));
 
