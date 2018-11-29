@@ -55,10 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           color: Colors.orange,
           child: Center(
-            child: Text(
-              "Screen 2",
-              style: TextStyle(color: Colors.white, fontSize: 30.0),
-            ),
+            child: RaisedButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Container()),
+              );
+            }),
           ),
         )));
 
@@ -70,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenuBuilder(
       initPositionSelected: 0,
       screens: itens,
-      backgroundColorMenu: Colors.blueGrey,
+      backgroundColorMenu: Colors.cyan,
 //    iconMenuAppBar: Icon(Icons.menu),
 //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
 //    whithAutoTittleName: true,

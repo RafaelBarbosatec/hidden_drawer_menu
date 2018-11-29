@@ -68,9 +68,6 @@ class HiddenDrawerMenuBuilder {
         this.enableShadowItensMenu = false});
 
   Widget build() {
-    return BlocProvider<HiddenDrawerMenuBloc>(
-      bloc: HiddenDrawerMenuBloc(this),
-      child: HiddenDrawerMenu(hiddenDrawer:this)
-    );
+    return HiddenDrawerMenu(hiddenDrawer:this);
   }
 }

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 abstract class BlocBase {
-  TickerProvider vsync;
   void dispose();
   void initState();
   void didChangeDependencies();
@@ -31,7 +30,7 @@ class BlocProvider<T extends BlocBase> extends StatefulWidget {
   static Type _typeOf<T>() => T;
 }
 
-class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> with TickerProviderStateMixin {
+class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> {
 
   @override
   void dispose() {
@@ -47,7 +46,6 @@ class _BlocProviderState<T> extends State<BlocProvider<BlocBase>> with TickerPro
 
   @override
   void initState() {
-    widget.bloc.vsync = this;
     widget.bloc.initState();
     super.initState();
   }

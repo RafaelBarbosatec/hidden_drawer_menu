@@ -4,9 +4,9 @@ import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/providers/bloc_provider.dart';
 
-class HiddenDrawerMenu extends StatelessWidget {
+
+class HiddenDrawerMenu extends StatefulWidget {
 
   /// builder containing the drawer settings
   final HiddenDrawerMenuBuilder hiddenDrawer;
@@ -16,6 +16,12 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   HiddenDrawerMenu({Key key, this.hiddenDrawer,this.curveAnimation = Curves.decelerate}) : super(key: key);
 
+  @override
+  _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
+}
+
+class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProviderStateMixin{
+
   /// Curves to animations
   Curve _animationCurve;
 
@@ -23,11 +29,16 @@ class HiddenDrawerMenu extends StatelessWidget {
   HiddenDrawerMenuBloc _bloc;
 
   @override
+  void initState() {
+
+    _bloc = HiddenDrawerMenuBloc(widget.hiddenDrawer,this);
+    _animationCurve = new Interval(0.0, 1.0, curve: widget.curveAnimation);
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    _animationCurve = new Interval(0.0, 1.0, curve: curveAnimation);
-
-    _bloc = BlocProvider.of<HiddenDrawerMenuBloc>(context);
 
     return Stack(
       children: [
@@ -38,10 +49,10 @@ class HiddenDrawerMenu extends StatelessWidget {
             if (snapshot.data.length > 0) {
               return HiddenMenu(
                 itens: snapshot.data,
-                background: hiddenDrawer.backgroundMenu,
-                backgroundColorMenu: hiddenDrawer.backgroundColorMenu,
-                initPositionSelected: hiddenDrawer.initPositionSelected,
-                enableShadowItensMenu: hiddenDrawer.enableShadowItensMenu,
+                background: widget.hiddenDrawer.backgroundMenu,
+                backgroundColorMenu: widget.hiddenDrawer.backgroundColorMenu,
+                initPositionSelected: widget.hiddenDrawer.initPositionSelected,
+                enableShadowItensMenu: widget.hiddenDrawer.enableShadowItensMenu,
                 selectedListern: (position) {
                   _bloc.positionSelected.sink.add(position);
                 },
@@ -59,20 +70,20 @@ class HiddenDrawerMenu extends StatelessWidget {
   createContentDisplay() {
     return animateContent(Container(
       decoration: BoxDecoration(
-          image: hiddenDrawer.backgroundContent,
-          color: hiddenDrawer.backgroundColorContent),
+          image: widget.hiddenDrawer.backgroundContent,
+          color: widget.hiddenDrawer.backgroundColorContent),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          backgroundColor: hiddenDrawer.backgroundColorAppBar,
-          elevation: hiddenDrawer.elevationAppBar,
+          backgroundColor: widget.hiddenDrawer.backgroundColorAppBar,
+          elevation: widget.hiddenDrawer.elevationAppBar,
           title: getTittleAppBar(),
           leading: new IconButton(
-              icon: hiddenDrawer.iconMenuAppBar,
+              icon: widget.hiddenDrawer.iconMenuAppBar,
               onPressed: () {
                 _bloc.toggle();
               }),
-          actions: hiddenDrawer.actionsAppBar,
+          actions: widget.hiddenDrawer.actionsAppBar,
         ),
         body: StreamBuilder(
             stream: _bloc.screenSelected.stream,
@@ -87,7 +98,7 @@ class HiddenDrawerMenu extends StatelessWidget {
   animateContent(Widget content) {
     return StreamBuilder(
         stream: _bloc.contollerAnimation.stream,
-        initialData: new HiddenDrawerController(vsync: _bloc.vsync),
+        initialData: new HiddenDrawerController(vsync: this),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           var animatePercent;
           var _controller = snapshot.data;
@@ -138,21 +149,27 @@ class HiddenDrawerMenu extends StatelessWidget {
   }
 
   getTittleAppBar() {
-    if (hiddenDrawer.tittleAppBar == null) {
+    if (widget.hiddenDrawer.tittleAppBar == null) {
       return StreamBuilder(
           stream: _bloc.tittleAppBar.stream,
           initialData: "",
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return hiddenDrawer.whithAutoTittleName
+            return widget.hiddenDrawer.whithAutoTittleName
                 ? Text(
-                    snapshot.data,
-                    style: hiddenDrawer.styleAutoTittleName,
-                  )
+              snapshot.data,
+              style: widget.hiddenDrawer.styleAutoTittleName,
+            )
                 : Container();
           });
     } else {
-      return hiddenDrawer.tittleAppBar;
+      return widget.hiddenDrawer.tittleAppBar;
     }
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
   }
 
 }
