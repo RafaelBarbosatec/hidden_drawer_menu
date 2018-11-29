@@ -19,3 +19,9 @@
 * TODO: Update readme
 * TODO: Add BloC architecture
 * TODO: Improve performance
+
+## [0.1.0] - TODO: Fix bugs.
+
+* TODO: Remove builder
+* TODO: Remove BlocProvider
+
