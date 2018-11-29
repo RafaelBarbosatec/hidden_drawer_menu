@@ -1,20 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/builder/hidden_drawer_builder.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 
 class HiddenDrawerMenu extends StatefulWidget {
 
-  /// builder containing the drawer settings
-  final HiddenDrawerMenuBuilder hiddenDrawer;
+  /// List item menu and respective screens
+  final List<ScreenHiddenDrawer> screens;
 
-  /// Curves to animations
+  /// position initial item selected in menu( sart in 0)
+  final int initPositionSelected;
+
+  /// Decocator that allows us to add backgroud in the content(img)
+  final DecorationImage backgroundContent;
+
+  /// Decocator that allows us to add backgroud in the content(color)
+  final Color backgroundColorContent;
+
+  /// enable auto title in appbar with menu item name
+  final bool whithAutoTittleName;
+
+  /// Style of the title in appbar
+  final TextStyle styleAutoTittleName;
+
+  //AppBar
+  /// change backgroundColor of the AppBar
+  final Color backgroundColorAppBar;
+
+  ///Change elevation of the AppBar
+  final double elevationAppBar;
+
+  ///Change iconmenu of the AppBar
+  final Widget iconMenuAppBar;
+
+  /// Add actions in the AppBar
+  final List<Widget> actionsAppBar;
+
+  /// Set custom widget in tittleAppBar
+  final Widget tittleAppBar;
+
+  //Menu
+  /// Decocator that allows us to add backgroud in the menu(img)
+  final DecorationImage backgroundMenu;
+
+  /// that allows us to add backgroud in the menu(color)
+  final Color backgroundColorMenu;
+
+  /// that allows us to add shadow above menu items
+  final bool enableShadowItensMenu;
+
   final Curve curveAnimation;
 
-  HiddenDrawerMenu({Key key, this.hiddenDrawer,this.curveAnimation = Curves.decelerate}) : super(key: key);
+  HiddenDrawerMenu(
+  { this.screens,
+  this.initPositionSelected = 0,
+  this.backgroundColorAppBar,
+  this.elevationAppBar = 4.0,
+  this.iconMenuAppBar = const Icon(Icons.menu),
+  this.backgroundMenu,
+  this.backgroundColorMenu,
+  this.backgroundContent,
+  this.backgroundColorContent = Colors.white,
+  this.whithAutoTittleName = true,
+  this.styleAutoTittleName,
+  this.actionsAppBar,
+  this.tittleAppBar,
+  this.enableShadowItensMenu = false,
+    this.curveAnimation = Curves.decelerate});
 
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
@@ -31,7 +86,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
   @override
   void initState() {
 
-    _bloc = HiddenDrawerMenuBloc(widget.hiddenDrawer,this);
+    _bloc = HiddenDrawerMenuBloc(widget,this);
     _animationCurve = new Interval(0.0, 1.0, curve: widget.curveAnimation);
 
     super.initState();
@@ -49,10 +104,10 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
             if (snapshot.data.length > 0) {
               return HiddenMenu(
                 itens: snapshot.data,
-                background: widget.hiddenDrawer.backgroundMenu,
-                backgroundColorMenu: widget.hiddenDrawer.backgroundColorMenu,
-                initPositionSelected: widget.hiddenDrawer.initPositionSelected,
-                enableShadowItensMenu: widget.hiddenDrawer.enableShadowItensMenu,
+                background: widget.backgroundMenu,
+                backgroundColorMenu: widget.backgroundColorMenu,
+                initPositionSelected: widget.initPositionSelected,
+                enableShadowItensMenu: widget.enableShadowItensMenu,
                 selectedListern: (position) {
                   _bloc.positionSelected.sink.add(position);
                 },
@@ -70,20 +125,20 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
   createContentDisplay() {
     return animateContent(Container(
       decoration: BoxDecoration(
-          image: widget.hiddenDrawer.backgroundContent,
-          color: widget.hiddenDrawer.backgroundColorContent),
+          image: widget.backgroundContent,
+          color: widget.backgroundColorContent),
       child: new Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          backgroundColor: widget.hiddenDrawer.backgroundColorAppBar,
-          elevation: widget.hiddenDrawer.elevationAppBar,
+          backgroundColor: widget.backgroundColorAppBar,
+          elevation: widget.elevationAppBar,
           title: getTittleAppBar(),
           leading: new IconButton(
-              icon: widget.hiddenDrawer.iconMenuAppBar,
+              icon: widget.iconMenuAppBar,
               onPressed: () {
                 _bloc.toggle();
               }),
-          actions: widget.hiddenDrawer.actionsAppBar,
+          actions: widget.actionsAppBar,
         ),
         body: StreamBuilder(
             stream: _bloc.screenSelected.stream,
@@ -149,20 +204,20 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
   }
 
   getTittleAppBar() {
-    if (widget.hiddenDrawer.tittleAppBar == null) {
+    if (widget.tittleAppBar == null) {
       return StreamBuilder(
           stream: _bloc.tittleAppBar.stream,
           initialData: "",
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return widget.hiddenDrawer.whithAutoTittleName
+            return widget.whithAutoTittleName
                 ? Text(
               snapshot.data,
-              style: widget.hiddenDrawer.styleAutoTittleName,
+              style: widget.styleAutoTittleName,
             )
                 : Container();
           });
     } else {
-      return widget.hiddenDrawer.tittleAppBar;
+      return widget.tittleAppBar;
     }
   }
 

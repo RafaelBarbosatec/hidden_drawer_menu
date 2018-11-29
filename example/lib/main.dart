@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-import 'package:hidden_drawer_menu/builder/hidden_drawer_builder.dart';
 
 void main() => runApp(MyApp());
 
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return HiddenDrawerMenuBuilder(
+    return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.cyan,
@@ -84,6 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
 //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
 //    enableShadowItensMenu: true,
 //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-    ).build();
+    );
   }
 }

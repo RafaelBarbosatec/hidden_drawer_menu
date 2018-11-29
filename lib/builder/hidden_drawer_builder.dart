@@ -67,7 +67,4 @@ class HiddenDrawerMenuBuilder {
         this.tittleAppBar,
         this.enableShadowItensMenu = false});
 
-  Widget build() {
-    return HiddenDrawerMenu(hiddenDrawer:this);
-  }
 }

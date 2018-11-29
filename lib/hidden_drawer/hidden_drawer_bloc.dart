@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/builder/hidden_drawer_builder.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 class HiddenDrawerMenuBloc {
 
   /// builder containing the drawer settings
-  final HiddenDrawerMenuBuilder _hiddenDrawer;
+  final HiddenDrawerMenu _hiddenDrawer;
   final TickerProvider vsync;
 
   /// controller responsible to animation of the drawer
