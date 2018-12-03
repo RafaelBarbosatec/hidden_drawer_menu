@@ -21,7 +21,7 @@ class HiddenDrawerController extends ChangeNotifier {
   HiddenDrawerController({this.vsync})
       : _animationController = new AnimationController(vsync: vsync) {
     _animationController
-      ..duration = const Duration(milliseconds: 250)
+      ..duration = const Duration(milliseconds: 300)
       ..addListener(() {
         notifyListeners();
       })
