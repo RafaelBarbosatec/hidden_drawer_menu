@@ -55,8 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           color: Colors.orange,
           child: Center(
-            child: Text("Screen 1",
-                style: TextStyle(color: Colors.white, fontSize: 30.0)),
+            child: RaisedButton(onPressed: (){
+              Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (BuildContext context) {
+                    return SecondSreen();
+                  }
+                  )
+              );
+            }),
           ),
         )));
 
@@ -83,3 +89,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class SecondSreen extends StatefulWidget {
+  @override
+  _SecondSreenState createState() => _SecondSreenState();
+}
+
+class _SecondSreenState extends State<SecondSreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("Seconde Screen"),
+      ),
+    );
+  }
+}
+
