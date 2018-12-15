@@ -58,7 +58,7 @@ class HiddenDrawerMenu extends StatefulWidget {
       {this.screens,
       this.initPositionSelected = 0,
       this.backgroundColorAppBar,
-      this.elevationAppBar = 2.0,
+      this.elevationAppBar = 4.0,
       this.iconMenuAppBar = const Icon(Icons.menu),
       this.backgroundMenu,
       this.backgroundColorMenu,
@@ -192,8 +192,8 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
           return Transform(
             transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-              ..setEntry(3, 2, 0.001)
-              ..rotateY(contentPerspective)
+              //..setEntry(3, 2, 0.001)
+              //..rotateY(contentPerspective)
               ..scale(contentScale, contentScale),
             alignment: Alignment.centerLeft,
             child: Container(

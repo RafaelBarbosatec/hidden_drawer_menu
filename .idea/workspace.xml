@@ -32,8 +32,8 @@
       <file leaf-file-name="hidden_drawer_menu.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="139" column="22" selection-start-line="139" selection-start-column="22" selection-end-line="139" selection-end-column="22" />
+            <state relative-caret-position="210">
+              <caret line="57" column="20" lean-forward="true" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -85,8 +85,8 @@
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/lib/controllers/hidden_drawer_controller.dart" />
         <option value="$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_bloc.dart" />
-        <option value="$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
+        <option value="$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart" />
       </list>
     </option>
   </component>
@@ -244,11 +244,11 @@
       <window_info anchor="bottom" id="Dart Analysis" order="14" weight="0.3275862" />
       <window_info anchor="bottom" id="Run" order="4" weight="0.38714734" />
       <window_info anchor="bottom" id="Version Control" order="16" />
-      <window_info anchor="bottom" id="Terminal" order="15" weight="0.31924883" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="15" visible="true" weight="0.3181818" />
       <window_info anchor="right" id="Flutter Outline" order="10" />
       <window_info id="Capture Tool" order="8" />
       <window_info id="Designer" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.30454546" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.30454546" />
       <window_info id="Structure" order="4" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
@@ -529,8 +529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/hidden_drawer/hidden_drawer_menu.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="139" column="22" selection-start-line="139" selection-start-column="22" selection-end-line="139" selection-end-column="22" />
+        <state relative-caret-position="210">
+          <caret line="57" column="20" lean-forward="true" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
         </state>
       </provider>
     </entry>
