@@ -50,13 +50,15 @@ class HiddenDrawerMenu extends StatefulWidget {
   /// that allows us to add shadow above menu items
   final bool enableShadowItensMenu;
 
+  final bool isDraggable;
+
   final Curve curveAnimation;
 
   HiddenDrawerMenu(
       {this.screens,
       this.initPositionSelected = 0,
       this.backgroundColorAppBar,
-      this.elevationAppBar = 4.0,
+      this.elevationAppBar = 2.0,
       this.iconMenuAppBar = const Icon(Icons.menu),
       this.backgroundMenu,
       this.backgroundColorMenu,
@@ -67,7 +69,8 @@ class HiddenDrawerMenu extends StatefulWidget {
       this.actionsAppBar,
       this.tittleAppBar,
       this.enableShadowItensMenu = false,
-      this.curveAnimation = Curves.decelerate});
+      this.curveAnimation = Curves.decelerate,
+        this.isDraggable = true});
 
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
@@ -150,12 +153,14 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                       }),
                   GestureDetector(
                     onHorizontalDragUpdate:(detail){
-                      var globalPosition = detail.globalPosition.dx;
-                      if(globalPosition < 0) {
-                        globalPosition = 0;
+                      if(widget.isDraggable) {
+                        var globalPosition = detail.globalPosition.dx;
+                        if (globalPosition < 0) {
+                          globalPosition = 0;
+                        }
+                        double position = globalPosition / constraints.maxWidth;
+                        _bloc.contollerDragHorizontal.sink.add(position);
                       }
-                      double position = globalPosition / constraints.maxWidth;
-                      _bloc.contollerDragHorizontal.sink.add(position);
                     },
                     onHorizontalDragEnd:(detail){
                       _bloc.contollerEndDrag.sink.add(detail);
