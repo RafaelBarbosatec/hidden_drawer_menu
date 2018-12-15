@@ -5,9 +5,7 @@ import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
-
 class HiddenDrawerMenu extends StatefulWidget {
-
   /// List item menu and respective screens
   final List<ScreenHiddenDrawer> screens;
 
@@ -55,27 +53,30 @@ class HiddenDrawerMenu extends StatefulWidget {
   final Curve curveAnimation;
 
   HiddenDrawerMenu(
-  { this.screens,
-  this.initPositionSelected = 0,
-  this.backgroundColorAppBar,
-  this.elevationAppBar = 4.0,
-  this.iconMenuAppBar = const Icon(Icons.menu),
-  this.backgroundMenu,
-  this.backgroundColorMenu,
-  this.backgroundContent,
-  this.backgroundColorContent = Colors.white,
-  this.whithAutoTittleName = true,
-  this.styleAutoTittleName,
-  this.actionsAppBar,
-  this.tittleAppBar,
-  this.enableShadowItensMenu = false,
-    this.curveAnimation = Curves.decelerate});
+      {this.screens,
+      this.initPositionSelected = 0,
+      this.backgroundColorAppBar,
+      this.elevationAppBar = 4.0,
+      this.iconMenuAppBar = const Icon(Icons.menu),
+      this.backgroundMenu,
+      this.backgroundColorMenu,
+      this.backgroundContent,
+      this.backgroundColorContent = Colors.white,
+      this.whithAutoTittleName = true,
+      this.styleAutoTittleName,
+      this.actionsAppBar,
+      this.tittleAppBar,
+      this.enableShadowItensMenu = false,
+      this.curveAnimation = Curves.decelerate});
 
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
 }
 
-class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProviderStateMixin{
+class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
+    with TickerProviderStateMixin {
+
+  final double _weightGestureDetector = 30.0;
 
   /// Curves to animations
   Curve _animationCurve;
@@ -85,16 +86,13 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
 
   @override
   void initState() {
-
-    _bloc = HiddenDrawerMenuBloc(widget,this);
+    _bloc = HiddenDrawerMenuBloc(widget, this);
     _animationCurve = new Interval(0.0, 1.0, curve: widget.curveAnimation);
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Stack(
       children: [
         StreamBuilder(
@@ -123,55 +121,64 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
   }
 
   createContentDisplay() {
-    return animateContent(Container(
-      decoration: BoxDecoration(
-          image: widget.backgroundContent,
-          color: widget.backgroundColorContent),
-      child: new Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          backgroundColor: widget.backgroundColorAppBar,
-          elevation: widget.elevationAppBar,
-          title: getTittleAppBar(),
-          leading: new IconButton(
-              icon: widget.iconMenuAppBar,
-              onPressed: () {
-                _bloc.toggle();
-              }),
-          actions: widget.actionsAppBar,
-        ),
-        body: StreamBuilder(
-            stream: _bloc.screenSelected.stream,
-            initialData: Container(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              return snapshot.data;
-            }),
-      ),
+    return animateContent(LayoutBuilder(
+      builder: (context, constraints) =>
+          Container(
+            decoration: BoxDecoration(
+                image: widget.backgroundContent,
+                color: widget.backgroundColorContent),
+            child: new Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: widget.backgroundColorAppBar,
+                elevation: widget.elevationAppBar,
+                title: getTittleAppBar(),
+                leading: new IconButton(
+                    icon: widget.iconMenuAppBar,
+                    onPressed: () {
+                      _bloc.toggle();
+                    }),
+                actions: widget.actionsAppBar,
+              ),
+              body: Stack(
+                children: <Widget>[
+                  StreamBuilder(
+                      stream: _bloc.screenSelected.stream,
+                      initialData: 0,
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        return widget.screens[snapshot.data].screen;
+                      }),
+                  GestureDetector(
+                    onHorizontalDragUpdate:(detail){
+                      var globalPosition = detail.globalPosition.dx;
+                      if(globalPosition < 0) {
+                        globalPosition = 0;
+                      }
+                      double position = globalPosition / constraints.maxWidth;
+                      _bloc.contollerDragHorizontal.sink.add(position);
+                    },
+                    onHorizontalDragEnd:(detail){
+                      _bloc.contollerEndDrag.sink.add(detail);
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      width: _weightGestureDetector,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
     ));
   }
 
   animateContent(Widget content) {
     return StreamBuilder(
         stream: _bloc.contollerAnimation.stream,
-        initialData: new HiddenDrawerController(vsync: this),
+        initialData: 0.0,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          var animatePercent;
-          var _controller = snapshot.data;
 
-          switch (_controller.state) {
-            case MenuState.closed:
-              animatePercent = 0.0;
-              break;
-            case MenuState.open:
-              animatePercent = 1.0;
-              break;
-            case MenuState.opening:
-              animatePercent = _animationCurve.transform(_controller.percentOpen);
-              break;
-            case MenuState.closing:
-              animatePercent = _animationCurve.transform(_controller.percentOpen);
-              break;
-          }
+          var animatePercent = _animationCurve.transform(snapshot.data);
 
           final slideAmount = 275.0 * animatePercent;
           final contentScale = 1.0 - (0.2 * animatePercent);
@@ -211,9 +218,9 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return widget.whithAutoTittleName
                 ? Text(
-              snapshot.data,
-              style: widget.styleAutoTittleName,
-            )
+                    snapshot.data,
+                    style: widget.styleAutoTittleName,
+                  )
                 : Container();
           });
     } else {
@@ -226,5 +233,4 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu> with TickerProvider
     _bloc.dispose();
     super.dispose();
   }
-
 }

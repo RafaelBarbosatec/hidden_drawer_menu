@@ -15,6 +15,8 @@ class HiddenDrawerController extends ChangeNotifier {
   /// animationController used to animation of the drawer
   final AnimationController _animationController;
 
+  double value = 0.0;
+
   /// used to control of the state of the drawer
   MenuState state = MenuState.closed;
 
@@ -23,6 +25,7 @@ class HiddenDrawerController extends ChangeNotifier {
     _animationController
       ..duration = const Duration(milliseconds: 300)
       ..addListener(() {
+        value = _animationController.value;
         notifyListeners();
       })
       ..addStatusListener((AnimationStatus status) {
@@ -56,13 +59,13 @@ class HiddenDrawerController extends ChangeNotifier {
   }
 
   ///method to open drawer
-  open() {
-    _animationController.forward();
+  open([double percent = 0.0]) {
+    _animationController.forward(from: percent);
   }
 
   ///method to close drawer
-  close() {
-    _animationController.reverse();
+  close([double percent = 1.0]) {
+    _animationController.reverse(from: percent);
   }
 
   ///method to change state of the drawer

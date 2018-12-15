@@ -23,13 +23,22 @@ class HiddenDrawerMenuBloc {
   StreamController<List<ItemHiddenMenu>> listItensMenu =  StreamController<List<ItemHiddenMenu>>();
 
   /// stream used to control screen selected
-  StreamController<Widget> screenSelected =  StreamController<Widget>();
+  StreamController<int> screenSelected =  StreamController<int>();
 
   /// stream used to control title
   StreamController<String> tittleAppBar = StreamController<String>();
 
   /// stream used to control animation
-  StreamController<HiddenDrawerController> contollerAnimation = StreamController<HiddenDrawerController>();
+  StreamController<double> contollerAnimation = StreamController<double>();
+
+  /// stream used to control drag axisX
+  StreamController<double> contollerDragHorizontal = StreamController<double>();
+
+  /// stream used to control endrag
+  StreamController<void> contollerEndDrag = StreamController<void>();
+
+  double _actualPositionDrag = 0;
+  bool _startDrag = false;
 
   HiddenDrawerMenuBloc(this._hiddenDrawer, this.vsync) {
 
@@ -39,19 +48,48 @@ class HiddenDrawerMenuBloc {
 
     listItensMenu.sink.add(itensMenu);
     tittleAppBar.sink.add(itensMenu[_hiddenDrawer.initPositionSelected].name);
-    screenSelected.sink
-        .add(_hiddenDrawer.screens[_hiddenDrawer.initPositionSelected].screen);
 
     positionSelected.stream.listen((position) {
       tittleAppBar.sink.add(itensMenu[position].name);
-      screenSelected.sink.add(_hiddenDrawer.screens[position].screen);
-
+      screenSelected.sink.add(position);
       toggle();
     });
 
     _controller = new HiddenDrawerController(
       vsync: vsync,
-    )..addListener(() => contollerAnimation.sink.add(_controller));
+    )..addListener(() {
+      var animatePercent = _controller.value;
+      switch (_controller.state) {
+        case MenuState.closed:
+          animatePercent = 0.0;
+          break;
+        case MenuState.open:
+          animatePercent = 1.0;
+          break;
+        case MenuState.opening:
+          break;
+        case MenuState.closing:
+          break;
+      }
+      contollerAnimation.sink.add(animatePercent);
+    });
+
+    contollerDragHorizontal.stream.listen((position){
+      _startDrag = true;
+      _actualPositionDrag = position;
+      contollerAnimation.sink.add(position);
+    });
+
+    contollerEndDrag.stream.listen((v){
+      if(_startDrag) {
+        if (_actualPositionDrag > 0.5) {
+          _controller.open(_actualPositionDrag);
+        } else {
+          _controller.close(_actualPositionDrag);
+        }
+        _startDrag = false;
+      }
+    });
 
   }
 
@@ -62,6 +100,8 @@ class HiddenDrawerMenuBloc {
     tittleAppBar.close();
     contollerAnimation.close();
     positionSelected.close();
+    contollerDragHorizontal.close();
+    contollerEndDrag.close();
 
   }
 
