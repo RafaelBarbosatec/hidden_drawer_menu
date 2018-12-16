@@ -50,6 +50,7 @@ class HiddenDrawerMenu extends StatefulWidget {
   /// that allows us to add shadow above menu items
   final bool enableShadowItensMenu;
 
+  /// enable and disable open and close with gesture
   final bool isDraggable;
 
   final Curve curveAnimation;
@@ -79,7 +80,7 @@ class HiddenDrawerMenu extends StatefulWidget {
 class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     with TickerProviderStateMixin {
 
-  final double _weightGestureDetector = 30.0;
+  final double _widthGestureDetector = 30.0;
 
   /// Curves to animations
   Curve _animationCurve;
@@ -89,17 +90,19 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
   @override
   void initState() {
-    _bloc = HiddenDrawerMenuBloc(widget, this);
     _animationCurve = new Interval(0.0, 1.0, curve: widget.curveAnimation);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _bloc = HiddenDrawerMenuBloc(widget, this);
+
     return Stack(
       children: [
         StreamBuilder(
-          stream: _bloc.listItensMenu.stream,
+          stream: _bloc.getItensMenu,
           initialData: new List<ItemHiddenMenu>(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data.length > 0) {
@@ -110,7 +113,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                 initPositionSelected: widget.initPositionSelected,
                 enableShadowItensMenu: widget.enableShadowItensMenu,
                 selectedListern: (position) {
-                  _bloc.positionSelected.sink.add(position);
+                  _bloc.setPositionSelected(position);
                 },
               );
             } else {
@@ -146,7 +149,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
               body: Stack(
                 children: <Widget>[
                   StreamBuilder(
-                      stream: _bloc.screenSelected.stream,
+                      stream: _bloc.getScreenSelected,
                       initialData: 0,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         return widget.screens[snapshot.data].screen;
@@ -159,15 +162,15 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                           globalPosition = 0;
                         }
                         double position = globalPosition / constraints.maxWidth;
-                        _bloc.contollerDragHorizontal.sink.add(position);
+                        _bloc.setDragHorizontal(position);
                       }
                     },
                     onHorizontalDragEnd:(detail){
-                      _bloc.contollerEndDrag.sink.add(detail);
+                      _bloc.setEndDrag(detail);
                     },
                     child: Container(
                       color: Colors.transparent,
-                      width: _weightGestureDetector,
+                      width: _widthGestureDetector,
                     ),
                   )
                 ],
@@ -179,7 +182,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
   animateContent(Widget content) {
     return StreamBuilder(
-        stream: _bloc.contollerAnimation.stream,
+        stream: _bloc.getPercentAnimate,
         initialData: 0.0,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
 
@@ -218,7 +221,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   getTittleAppBar() {
     if (widget.tittleAppBar == null) {
       return StreamBuilder(
-          stream: _bloc.tittleAppBar.stream,
+          stream: _bloc.getTittleAppBar,
           initialData: "",
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return widget.whithAutoTittleName

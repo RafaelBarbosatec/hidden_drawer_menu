@@ -17,25 +17,39 @@ class HiddenDrawerMenuBloc {
   List<ItemHiddenMenu> itensMenu = new List();
 
   /// stream used to control item selected
-  StreamController<int> positionSelected = StreamController<int>();
+  StreamController<int> _positionSelectedController = StreamController<int>();
+  Function(int) get setPositionSelected => _positionSelectedController.sink.add;
+  Stream<int> get getpositionSelected => _positionSelectedController.stream;
 
   /// stream used to control in view itens of the menu
-  StreamController<List<ItemHiddenMenu>> listItensMenu =  StreamController<List<ItemHiddenMenu>>();
+  StreamController<List<ItemHiddenMenu>> _listItensMenuController =  StreamController<List<ItemHiddenMenu>>();
+  Function(List<ItemHiddenMenu>) get setItensMenu => _listItensMenuController.sink.add;
+  Stream<List<ItemHiddenMenu>> get getItensMenu => _listItensMenuController.stream;
 
   /// stream used to control screen selected
-  StreamController<int> screenSelected =  StreamController<int>();
+  StreamController<int> _screenSelectedController =  StreamController<int>();
+  Function(int) get setScreenSelected => _screenSelectedController.sink.add;
+  Stream<int> get getScreenSelected => _screenSelectedController.stream;
 
   /// stream used to control title
-  StreamController<String> tittleAppBar = StreamController<String>();
+  StreamController<String> _tittleAppBarController = StreamController<String>();
+  Function(String) get setTittleAppBar => _tittleAppBarController.sink.add;
+  Stream<String> get getTittleAppBar => _tittleAppBarController.stream;
 
   /// stream used to control animation
-  StreamController<double> contollerAnimation = StreamController<double>();
+  StreamController<double> _percentAnimateController = StreamController<double>();
+  Function(double) get setPercentAnimate => _percentAnimateController.sink.add;
+  Stream<double> get getPercentAnimate => _percentAnimateController.stream;
 
   /// stream used to control drag axisX
-  StreamController<double> contollerDragHorizontal = StreamController<double>();
+  StreamController<double> _dragHorizontalController = StreamController<double>();
+  Function(double) get setDragHorizontal => _dragHorizontalController.sink.add;
+  Stream<double> get getDragHorizontal => _dragHorizontalController.stream;
 
   /// stream used to control endrag
-  StreamController<void> contollerEndDrag = StreamController<void>();
+  StreamController<void> _endDragController = StreamController();
+  Function(void) get setEndDrag => _endDragController.sink.add;
+  Stream get getEndDrag => _endDragController.stream;
 
   double _actualPositionDrag = 0;
   bool _startDrag = false;
@@ -46,12 +60,12 @@ class HiddenDrawerMenuBloc {
       itensMenu.add(item.itemMenu);
     });
 
-    listItensMenu.sink.add(itensMenu);
-    tittleAppBar.sink.add(itensMenu[_hiddenDrawer.initPositionSelected].name);
+    setItensMenu(itensMenu);
+    setTittleAppBar(itensMenu[_hiddenDrawer.initPositionSelected].name);
 
-    positionSelected.stream.listen((position) {
-      tittleAppBar.sink.add(itensMenu[position].name);
-      screenSelected.sink.add(position);
+    getpositionSelected.listen((position) {
+      setTittleAppBar(itensMenu[position].name);
+      setScreenSelected(position);
       toggle();
     });
 
@@ -71,18 +85,18 @@ class HiddenDrawerMenuBloc {
         case MenuState.closing:
           break;
       }
-      contollerAnimation.sink.add(animatePercent);
+      setPercentAnimate(animatePercent);
     });
 
-    contollerDragHorizontal.stream.listen((position){
+    getDragHorizontal.listen((position){
       _startDrag = true;
       _actualPositionDrag = position;
-      contollerAnimation.sink.add(position);
+      setPercentAnimate(position);
     });
 
-    contollerEndDrag.stream.listen((v){
+    getEndDrag.listen((v){
       if(_startDrag) {
-        if (_actualPositionDrag > 0.5) {
+        if (_actualPositionDrag > 0.3) {
           _controller.open(_actualPositionDrag);
         } else {
           _controller.close(_actualPositionDrag);
@@ -94,15 +108,13 @@ class HiddenDrawerMenuBloc {
   }
 
   dispose() {
-
-    listItensMenu.close();
-    screenSelected.close();
-    tittleAppBar.close();
-    contollerAnimation.close();
-    positionSelected.close();
-    contollerDragHorizontal.close();
-    contollerEndDrag.close();
-
+    _listItensMenuController.close();
+    _screenSelectedController.close();
+    _tittleAppBarController.close();
+    _percentAnimateController.close();
+    _positionSelectedController.close();
+    _dragHorizontalController.close();
+    _endDragController.close();
   }
 
   void toggle() {
