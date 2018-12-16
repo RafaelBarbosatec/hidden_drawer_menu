@@ -25,3 +25,8 @@
 * TODO: Remove builder
 * TODO: Remove BlocProvider
 
+## [0.2.0] - TODO: ADD Gesture to open and close.
+
+* TODO: ADD Gesture to open and close
+* TODO: Optimizations in Bloc
+

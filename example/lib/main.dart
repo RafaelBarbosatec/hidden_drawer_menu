@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.cyan,
+//    isDraggable: true,
 //    iconMenuAppBar: Icon(Icons.menu),
 //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
 //    whithAutoTittleName: true,
