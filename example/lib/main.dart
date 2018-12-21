@@ -94,13 +94,8 @@ class _SecondSreenState extends State<SecondSreen> {
         child: Column(
           children: <Widget>[
             RaisedButton(onPressed: () {
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(builder: (BuildContext context) {
-                return new SecondSreen();
-              }));
+              HiddenDrawerMenuProvider.of(context).toggle();
             }),
-            RaisedButton(onPressed: () {
-              HiddenDrawerMenuProvider.of(context).toggle();}),
           ],
         ),
       ),
