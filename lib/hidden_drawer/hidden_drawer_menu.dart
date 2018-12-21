@@ -121,7 +121,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     return Stack(
       children: [
         StreamBuilder(
-          stream: _bloc.getItensMenu,
+          stream: _bloc.controllers.getItensMenu,
           initialData: new List<ItemHiddenMenu>(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data.length > 0) {
@@ -132,7 +132,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                 initPositionSelected: widget.initPositionSelected,
                 enableShadowItensMenu: widget.enableShadowItensMenu,
                 selectedListern: (position) {
-                  _bloc.setPositionSelected(position);
+                  _bloc.controllers.setPositionSelected(position);
                 },
               );
             } else {
@@ -168,7 +168,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
               body: Stack(
                 children: <Widget>[
                   StreamBuilder(
-                      stream: _bloc.getScreenSelected,
+                      stream: _bloc.controllers.getScreenSelected,
                       initialData: 0,
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         return widget.screens[snapshot.data].screen;
@@ -181,11 +181,11 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                           globalPosition = 0;
                         }
                         double position = globalPosition / constraints.maxWidth;
-                        _bloc.setDragHorizontal(position);
+                        _bloc.controllers.setDragHorizontal(position);
                       }
                     },
                     onHorizontalDragEnd:(detail){
-                      _bloc.setEndDrag(detail);
+                      _bloc.controllers.setEndDrag(detail);
                     },
                     child: Container(
                       color: Colors.transparent,
@@ -201,7 +201,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
   animateContent(Widget content) {
     return StreamBuilder(
-        stream: _bloc.getPercentAnimate,
+        stream: _bloc.controllers.getPercentAnimate,
         initialData: 0.0,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
 
@@ -246,7 +246,7 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   getTittleAppBar() {
     if (widget.tittleAppBar == null) {
       return StreamBuilder(
-          stream: _bloc.getTittleAppBar,
+          stream: _bloc.controllers.getTittleAppBar,
           initialData: "",
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return widget.whithAutoTittleName
@@ -272,14 +272,14 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     _controller = new HiddenDrawerController(
       vsync: this,
     )..addListener(() {
-      _bloc.setPercentAnimate(_controller.value);
+      _bloc.controllers.setPercentAnimate(_controller.value);
     });
 
-    _bloc.getActionToggle.listen((d){
+    _bloc.controllers.getActionToggle.listen((d){
       _controller.toggle();
     });
 
-    _bloc.getpositionActualEndDrag.listen((p){
+    _bloc.controllers.getpositionActualEndDrag.listen((p){
       if (p > 0.3) {
         _controller.open(p);
       } else {
