@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
+import 'package:hidden_drawer_menu/provider/HiddenDrawerProvider.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,19 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           colorLineSelected: Colors.orange,
 //         colorTextSelected: Colors.orange,
         ),
-        Container(
-          color: Colors.orange,
-          child: Center(
-            child: RaisedButton(onPressed: (){
-              Navigator.of(context).push(
-                  new MaterialPageRoute(builder: (BuildContext context) {
-                    return SecondSreen();
-                  }
-                  )
-              );
-            }),
-          ),
-        )));
+        SecondSreen()));
 
     super.initState();
   }
@@ -99,11 +88,22 @@ class SecondSreen extends StatefulWidget {
 class _SecondSreenState extends State<SecondSreen> {
   @override
   Widget build(BuildContext context) {
+    print("SecondSreen build");
     return Scaffold(
       body: Center(
-        child: Text("Seconde Screen"),
+        child: Column(
+          children: <Widget>[
+            RaisedButton(onPressed: () {
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(builder: (BuildContext context) {
+                return new SecondSreen();
+              }));
+            }),
+            RaisedButton(onPressed: () {
+              HiddenDrawerMenuProvider.of(context).toggle();}),
+          ],
+        ),
       ),
     );
   }
 }
-

@@ -23,7 +23,7 @@ class HiddenDrawerController extends ChangeNotifier {
   HiddenDrawerController({this.vsync})
       : _animationController = new AnimationController(vsync: vsync) {
     _animationController
-      ..duration = const Duration(milliseconds: 300)
+      ..duration = const Duration(milliseconds: 350)
       ..addListener(() {
         value = _animationController.value;
         notifyListeners();
@@ -38,9 +38,11 @@ class HiddenDrawerController extends ChangeNotifier {
             break;
           case AnimationStatus.completed:
             state = MenuState.open;
+            value = 1.0;
             break;
           case AnimationStatus.dismissed:
             state = MenuState.closed;
+            value = 0.0;
             break;
         }
         notifyListeners();

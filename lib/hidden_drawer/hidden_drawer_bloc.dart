@@ -2,16 +2,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 class HiddenDrawerMenuBloc {
 
   /// builder containing the drawer settings
-  final HiddenDrawerMenu _hiddenDrawer;
-  final TickerProvider vsync;
-
-  /// controller responsible to animation of the drawer
-  HiddenDrawerController _controller;
+  final List<ScreenHiddenDrawer> _screens;
+  final int _initPositionSelected;
 
   /// itens used to list in menu
   List<ItemHiddenMenu> itensMenu = new List();
@@ -51,41 +49,32 @@ class HiddenDrawerMenuBloc {
   Function(void) get setEndDrag => _endDragController.sink.add;
   Stream get getEndDrag => _endDragController.stream;
 
+  /// stream used to control animation
+  StreamController<void> _actionToggleController = StreamController();
+  Function(void) get setActionToggle => _actionToggleController.sink.add;
+  Stream get getActionToggle => _actionToggleController.stream;
+
+  /// stream used to control endrag
+  StreamController<double> _positionActualEndDragController = StreamController();
+  Function(double) get setpositionActualEndDrag => _positionActualEndDragController.sink.add;
+  Stream get getpositionActualEndDrag => _positionActualEndDragController.stream;
+
   double _actualPositionDrag = 0;
   bool _startDrag = false;
 
-  HiddenDrawerMenuBloc(this._hiddenDrawer, this.vsync) {
+  HiddenDrawerMenuBloc(this._screens, this._initPositionSelected) {
 
-    _hiddenDrawer.screens.forEach((item) {
+    _screens.forEach((item) {
       itensMenu.add(item.itemMenu);
     });
 
     setItensMenu(itensMenu);
-    setTittleAppBar(itensMenu[_hiddenDrawer.initPositionSelected].name);
+    setTittleAppBar(itensMenu[_initPositionSelected].name);
 
     getpositionSelected.listen((position) {
       setTittleAppBar(itensMenu[position].name);
       setScreenSelected(position);
       toggle();
-    });
-
-    _controller = new HiddenDrawerController(
-      vsync: vsync,
-    )..addListener(() {
-      var animatePercent = _controller.value;
-      switch (_controller.state) {
-        case MenuState.closed:
-          animatePercent = 0.0;
-          break;
-        case MenuState.open:
-          animatePercent = 1.0;
-          break;
-        case MenuState.opening:
-          break;
-        case MenuState.closing:
-          break;
-      }
-      setPercentAnimate(animatePercent);
     });
 
     getDragHorizontal.listen((position){
@@ -96,11 +85,7 @@ class HiddenDrawerMenuBloc {
 
     getEndDrag.listen((v){
       if(_startDrag) {
-        if (_actualPositionDrag > 0.3) {
-          _controller.open(_actualPositionDrag);
-        } else {
-          _controller.close(_actualPositionDrag);
-        }
+        setpositionActualEndDrag(_actualPositionDrag);
         _startDrag = false;
       }
     });
@@ -115,10 +100,12 @@ class HiddenDrawerMenuBloc {
     _positionSelectedController.close();
     _dragHorizontalController.close();
     _endDragController.close();
+    _actionToggleController.close();
+    _positionActualEndDragController.close();
   }
 
   void toggle() {
-    _controller.toggle();
+    setActionToggle('');
   }
 
 }

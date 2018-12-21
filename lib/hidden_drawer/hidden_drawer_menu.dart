@@ -4,6 +4,8 @@ import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/provider/HiddenDrawerBloc.dart';
+import 'package:hidden_drawer_menu/provider/HiddenDrawerProvider.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
   /// List item menu and respective screens
@@ -53,6 +55,9 @@ class HiddenDrawerMenu extends StatefulWidget {
   /// enable and disable open and close with gesture
   final bool isDraggable;
 
+  /// enable and disable perspective
+  final bool enablePerspective;
+
   final Curve curveAnimation;
 
   HiddenDrawerMenu(
@@ -71,7 +76,8 @@ class HiddenDrawerMenu extends StatefulWidget {
       this.tittleAppBar,
       this.enableShadowItensMenu = false,
       this.curveAnimation = Curves.decelerate,
-        this.isDraggable = true});
+        this.isDraggable = true,
+        this.enablePerspective = false});
 
   @override
   _HiddenDrawerMenuState createState() => _HiddenDrawerMenuState();
@@ -81,6 +87,9 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     with TickerProviderStateMixin {
 
   final double _widthGestureDetector = 30.0;
+
+  /// controller responsible to animation of the drawer
+  HiddenDrawerController _controller;
 
   /// Curves to animations
   Curve _animationCurve;
@@ -97,8 +106,18 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   @override
   Widget build(BuildContext context) {
 
-    _bloc = HiddenDrawerMenuBloc(widget, this);
+    _bloc = HiddenDrawerMenuBloc(widget.screens,widget.initPositionSelected);
 
+    initControllerAnimation();
+
+    return HiddenDrawerMenuProvider(
+      hiddenDrawerMenuBloc: _bloc,
+      child: buildLayout(),
+    );
+
+  }
+
+  Widget buildLayout() {
     return Stack(
       children: [
         StreamBuilder(
@@ -190,13 +209,19 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
 
           final slideAmount = 275.0 * animatePercent;
           final contentScale = 1.0 - (0.2 * animatePercent);
-          final contentPerspective = 0.4 * animatePercent;
+          var contentPerspective = 0.0;
           final cornerRadius = 10.0 * animatePercent;
+
+          if(widget.enablePerspective){
+            contentPerspective = 0.4 * animatePercent;
+          }
+
+
 
           return Transform(
             transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-              //..setEntry(3, 2, 0.001)
-              //..rotateY(contentPerspective)
+              ..setEntry(3, 2, 0.001)
+              ..rotateY(contentPerspective)
               ..scale(contentScale, contentScale),
             alignment: Alignment.centerLeft,
             child: Container(
@@ -241,4 +266,27 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
     _bloc.dispose();
     super.dispose();
   }
+
+  void initControllerAnimation() {
+
+    _controller = new HiddenDrawerController(
+      vsync: this,
+    )..addListener(() {
+      _bloc.setPercentAnimate(_controller.value);
+    });
+
+    _bloc.getActionToggle.listen((d){
+      _controller.toggle();
+    });
+
+    _bloc.getpositionActualEndDrag.listen((p){
+      if (p > 0.3) {
+        _controller.open(p);
+      } else {
+        _controller.close(p);
+      }
+    });
+
+  }
+
 }
