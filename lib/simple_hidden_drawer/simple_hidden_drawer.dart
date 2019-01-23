@@ -73,7 +73,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
 class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProviderStateMixin {
 
-  SimpleHiddenMenuBloc _bloc;
+  SimpleHiddenDrawerBloc _bloc;
 
   final double _widthGestureDetector = 30.0;
 
@@ -93,7 +93,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
   Widget build(BuildContext context) {
 
     if(_bloc == null) {
-      _bloc = SimpleHiddenMenuBloc(widget.initPositionSelected,widget.screenSelectedBuilder, widget.tittleSelectedBuilder);
+      _bloc = SimpleHiddenDrawerBloc(widget.initPositionSelected,widget.screenSelectedBuilder, widget.tittleSelectedBuilder);
       initControllerAnimation();
     }
 

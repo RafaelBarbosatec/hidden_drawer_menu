@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 
 class SimpleHiddenDrawerProvider extends InheritedWidget {
-  final SimpleHiddenMenuBloc hiddenDrawerBloc;
+  final SimpleHiddenDrawerBloc hiddenDrawerBloc;
 
   SimpleHiddenDrawerProvider({
     Key key,
@@ -13,7 +13,7 @@ class SimpleHiddenDrawerProvider extends InheritedWidget {
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
-  static SimpleHiddenMenuBloc of(BuildContext context) =>
+  static SimpleHiddenDrawerBloc of(BuildContext context) =>
       (context.inheritFromWidgetOfExactType(SimpleHiddenDrawerProvider) as SimpleHiddenDrawerProvider)
           .hiddenDrawerBloc;
 }

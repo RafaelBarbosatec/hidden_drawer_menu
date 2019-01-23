@@ -3,7 +3,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/streams/streams_simple_hidden_menu.dart';
 
-class SimpleHiddenMenuBloc {
+class SimpleHiddenDrawerBloc {
 
   /// builder containing the drawer settings
   final int _initPositionSelected;
@@ -16,7 +16,7 @@ class SimpleHiddenMenuBloc {
   bool _startDrag = false;
   int positionStected = 0;
 
-  SimpleHiddenMenuBloc(this._initPositionSelected, this._screenSelectedBuilder, this._tittleSelectedBuilder) {
+  SimpleHiddenDrawerBloc(this._initPositionSelected, this._screenSelectedBuilder, this._tittleSelectedBuilder) {
 
     positionStected = _initPositionSelected;
     _setTittle(_initPositionSelected);
