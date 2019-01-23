@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-import 'package:hidden_drawer_menu/provider/HiddenDrawerProvider.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -62,25 +61,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SimpleHiddenDrawer(
-      whithAutoTittleName: true,
-      menu: SecondSreen(),
-      screenSelectedBuilder: (position){
-        if(position == 0){
-          return Container(
-            color: Colors.red,
-          );
-        }else{
-          return Container(
-            color: Colors.green,
-          );
-        }
-      },
-      tittleSelectedBuilder: (position){
 
-      },
+//    return SimpleHiddenDrawer(
+//      whithAutoTittleName: true,
+//      menu: SecondSreen(),
+//      screenSelectedBuilder: (position){
+//        if(position == 0){
+//          return Container(
+//            color: Colors.red,
+//          );
+//        }else{
+//          return Container(
+//            color: Colors.green,
+//          );
+//        }
+//      },
+//      tittleSelectedBuilder: (position){
+//
+//      },
+//    );
+
+    return HiddenDrawerMenu(
+      backgroundColorMenu: Colors.blueGrey,
+      backgroundColorAppBar: Colors.orange,
+      actionsAppBar: <Widget>[
+        IconButton(icon: Icon(Icons.favorite), onPressed: (){})
+      ],
+      screens: itens,
     );
   }
+
 }
 
 class SecondSreen extends StatefulWidget {
@@ -89,9 +99,10 @@ class SecondSreen extends StatefulWidget {
 }
 
 class _SecondSreenState extends State<SecondSreen> {
+
   @override
   Widget build(BuildContext context) {
-    print("SecondSreen build");
+
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -103,13 +114,13 @@ class _SecondSreenState extends State<SecondSreen> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                SimpleHiddenDrawerProvider.of(context).selectedMenuPosition(0);
+                SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(0);
               },
               child: Text("Menu 1"),
             ),
             RaisedButton(
                 onPressed: () {
-                  SimpleHiddenDrawerProvider.of(context).selectedMenuPosition(1);
+                  SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(1);
                 },
                 child: Text("Menu 2"))
           ],

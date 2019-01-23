@@ -5,7 +5,7 @@ import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 class StreamsSimpleHiddenMenu{
 
   /// stream used to control item selected
-  StreamController<int> _positionSelectedController = StreamController<int>();
+  StreamController<int> _positionSelectedController = StreamController<int>.broadcast();
   Function(int) get setPositionSelected => _positionSelectedController.sink.add;
   Stream<int> get getpositionSelected => _positionSelectedController.stream;
 

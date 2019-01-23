@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/widgets.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/streams/streams_simple_hidden_menu.dart';
 
@@ -14,25 +12,24 @@ class SimpleHiddenDrawerBloc {
 
   double _actualPositionDrag = 0;
   bool _startDrag = false;
+  bool _isFirstPositionSelected = true;
   int positionStected = 0;
 
   SimpleHiddenDrawerBloc(this._initPositionSelected, this._screenSelectedBuilder, this._tittleSelectedBuilder) {
 
-    positionStected = _initPositionSelected;
-    _setTittle(_initPositionSelected);
-    _setScreen(_initPositionSelected);
-
     controllers.getpositionSelected.listen((position) {
 
-      if(position != positionStected) {
+      if(position != positionStected || _isFirstPositionSelected) {
         positionStected = position;
         _setTittle(position);
         _setScreen(position);
 
-        if (!_startDrag) {
+        if (!_startDrag && !_isFirstPositionSelected) {
           toggle();
         }
       }
+
+      _isFirstPositionSelected = false;
 
     });
 
@@ -49,6 +46,8 @@ class SimpleHiddenDrawerBloc {
       }
     });
 
+    controllers.setPositionSelected(_initPositionSelected);
+
   }
 
   dispose() {
@@ -59,12 +58,16 @@ class SimpleHiddenDrawerBloc {
     controllers.setActionToggle(null);
   }
 
-  void selectedMenuPosition(int position){
+  void setSelectedMenuPosition(int position){
     controllers.setPositionSelected(position);
   }
 
   int getPositionSelected(){
     return positionStected;
+  }
+
+  Stream getPositionSelectedListern(){
+    return controllers.getpositionSelected;
   }
 
   _setTittle(int position) {

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
@@ -7,7 +5,7 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_d
 
 class SimpleHiddenDrawer extends StatefulWidget {
 
-  /// position initial item selected in menu( sart in 0)
+  /// position initial item selected in menu( start in 0)
   final int initPositionSelected;
 
   /// Decocator that allows us to add backgroud in the content(color)
@@ -41,10 +39,13 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// enable and disable perspective
   final bool enablePerspective;
 
+  /// curve effect to open and close drawer
   final Curve curveAnimation;
 
+  /// Function of the recive screen to show
   final Widget Function(int position) screenSelectedBuilder;
 
+  /// Function of the recive tittle to show
   final String Function(int position) tittleSelectedBuilder;
 
   final Widget menu;
@@ -66,7 +67,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.tittleSelectedBuilder,
     this.menu,
     this.enablePerspective = false
-  }) : super(key: key);
+  }) : assert(screenSelectedBuilder != null, tittleSelectedBuilder != null), super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
@@ -75,6 +76,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
 
   SimpleHiddenDrawerBloc _bloc;
 
+  /// area access touch gesture in left screnn
   final double _widthGestureDetector = 30.0;
 
   /// controller responsible to animation of the drawer
