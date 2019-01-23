@@ -4,7 +4,6 @@ import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/provider/HiddenDrawerBloc.dart';
 import 'package:hidden_drawer_menu/provider/HiddenDrawerProvider.dart';
 
 class HiddenDrawerMenu extends StatefulWidget {
@@ -20,13 +19,13 @@ class HiddenDrawerMenu extends StatefulWidget {
   /// Decocator that allows us to add backgroud in the content(color)
   final Color backgroundColorContent;
 
+  //AppBar
   /// enable auto title in appbar with menu item name
   final bool whithAutoTittleName;
 
   /// Style of the title in appbar
   final TextStyle styleAutoTittleName;
 
-  //AppBar
   /// change backgroundColor of the AppBar
   final Color backgroundColorAppBar;
 
@@ -106,9 +105,11 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   @override
   Widget build(BuildContext context) {
 
-    _bloc = HiddenDrawerMenuBloc(widget.screens,widget.initPositionSelected);
+    if(_bloc == null) {
+      _bloc = HiddenDrawerMenuBloc(widget.screens, widget.initPositionSelected);
+      initControllerAnimation();
+    }
 
-    initControllerAnimation();
 
     return HiddenDrawerMenuProvider(
       hiddenDrawerMenuBloc: _bloc,
@@ -148,52 +149,47 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
   createContentDisplay() {
     return animateContent(LayoutBuilder(
       builder: (context, constraints) =>
-          Container(
-            decoration: BoxDecoration(
-                image: widget.backgroundContent,
-                color: widget.backgroundColorContent),
-            child: new Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: widget.backgroundColorAppBar,
-                elevation: widget.elevationAppBar,
-                title: getTittleAppBar(),
-                leading: new IconButton(
-                    icon: widget.iconMenuAppBar,
-                    onPressed: () {
-                      _bloc.toggle();
+          new Scaffold(
+            backgroundColor: widget.backgroundColorContent,
+            appBar: AppBar(
+              backgroundColor: widget.backgroundColorAppBar,
+              elevation: widget.elevationAppBar,
+              title: getTittleAppBar(),
+              leading: new IconButton(
+                  icon: widget.iconMenuAppBar,
+                  onPressed: () {
+                    _bloc.toggle();
+                  }),
+              actions: widget.actionsAppBar,
+            ),
+            body: Stack(
+              children: <Widget>[
+                StreamBuilder(
+                    stream: _bloc.controllers.getScreenSelected,
+                    initialData: 0,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      return widget.screens[snapshot.data].screen;
                     }),
-                actions: widget.actionsAppBar,
-              ),
-              body: Stack(
-                children: <Widget>[
-                  StreamBuilder(
-                      stream: _bloc.controllers.getScreenSelected,
-                      initialData: 0,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        return widget.screens[snapshot.data].screen;
-                      }),
-                  GestureDetector(
-                    onHorizontalDragUpdate:(detail){
-                      if(widget.isDraggable) {
-                        var globalPosition = detail.globalPosition.dx;
-                        if (globalPosition < 0) {
-                          globalPosition = 0;
-                        }
-                        double position = globalPosition / constraints.maxWidth;
-                        _bloc.controllers.setDragHorizontal(position);
+                GestureDetector(
+                  onHorizontalDragUpdate:(detail){
+                    if(widget.isDraggable) {
+                      var globalPosition = detail.globalPosition.dx;
+                      if (globalPosition < 0) {
+                        globalPosition = 0;
                       }
-                    },
-                    onHorizontalDragEnd:(detail){
-                      _bloc.controllers.setEndDrag(detail);
-                    },
-                    child: Container(
-                      color: Colors.transparent,
-                      width: _widthGestureDetector,
-                    ),
-                  )
-                ],
-              ),
+                      double position = globalPosition / constraints.maxWidth;
+                      _bloc.controllers.setDragHorizontal(position);
+                    }
+                  },
+                  onHorizontalDragEnd:(detail){
+                    _bloc.controllers.setEndDrag(detail);
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    width: _widthGestureDetector,
+                  ),
+                )
+              ],
             ),
           ),
     ));
@@ -216,8 +212,6 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
             contentPerspective = 0.4 * animatePercent;
           }
 
-
-
           return Transform(
             transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
               ..setEntry(3, 2, 0.001)
@@ -231,12 +225,12 @@ class _HiddenDrawerMenuState extends State<HiddenDrawerMenu>
                     color: const Color(0x44000000),
                     offset: const Offset(0.0, 5.0),
                     blurRadius: 20.0,
-                    spreadRadius: 10.0,
+                    spreadRadius: 5.0,
                   ),
                 ],
               ),
-              child: new ClipRRect(
-                  borderRadius: new BorderRadius.circular(cornerRadius),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(cornerRadius),
                   child: content),
             ),
           );
