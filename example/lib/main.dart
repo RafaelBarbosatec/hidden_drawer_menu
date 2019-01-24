@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-import 'package:hidden_drawer_menu/provider/HiddenDrawerProvider.dart';
 
 void main() => runApp(MyApp());
 
@@ -53,7 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
           colorLineSelected: Colors.orange,
 //         colorTextSelected: Colors.orange,
         ),
-        SecondSreen()));
+        Container(
+          color: Colors.orange,
+          child: Center(
+            child: Text(
+              "Screen 2",
+              style: TextStyle(color: Colors.white, fontSize: 30.0),
+            ),
+          ),
+        )));
 
     super.initState();
   }
@@ -64,41 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.cyan,
-//    isDraggable: true,
-//    iconMenuAppBar: Icon(Icons.menu),
-//    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-//    whithAutoTittleName: true,
-//    styleAutoTittleName: TextStyle(color: Colors.red),
-//    actionsAppBar: <Widget>[],
-//    backgroundColorContent: Colors.blue,
-//    backgroundColorAppBar: Colors.blue,
-//    elevationAppBar: 4.0,
-//    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-//    enableShadowItensMenu: true,
-//    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-    );
-  }
-}
-
-class SecondSreen extends StatefulWidget {
-  @override
-  _SecondSreenState createState() => _SecondSreenState();
-}
-
-class _SecondSreenState extends State<SecondSreen> {
-  @override
-  Widget build(BuildContext context) {
-    print("SecondSreen build");
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(onPressed: () {
-              HiddenDrawerMenuProvider.of(context).toggle();
-            }),
-          ],
-        ),
-      ),
+      //    iconMenuAppBar: Icon(Icons.menu),
+      //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+      //    whithAutoTittleName: true,
+      //    styleAutoTittleName: TextStyle(color: Colors.red),
+      //    actionsAppBar: <Widget>[],
+      //    backgroundColorContent: Colors.blue,
+      //    backgroundColorAppBar: Colors.blue,
+      //    elevationAppBar: 4.0,
+      //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
+      //    enableShadowItensMenu: true,
+      //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }
 }

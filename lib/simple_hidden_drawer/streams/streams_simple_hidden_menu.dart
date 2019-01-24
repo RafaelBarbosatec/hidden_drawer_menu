@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'package:flutter/widgets.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
-class StreamsControllers{
+class StreamsSimpleHiddenMenu{
 
   /// stream used to control item selected
-  StreamController<int> _positionSelectedController = StreamController<int>();
+  StreamController<int> _positionSelectedController = StreamController<int>.broadcast();
   Function(int) get setPositionSelected => _positionSelectedController.sink.add;
   Stream<int> get getpositionSelected => _positionSelectedController.stream;
 
@@ -14,9 +15,9 @@ class StreamsControllers{
   Stream<List<ItemHiddenMenu>> get getItensMenu => _listItensMenuController.stream;
 
   /// stream used to control screen selected
-  StreamController<int> _screenSelectedController =  StreamController<int>();
-  Function(int) get setScreenSelected => _screenSelectedController.sink.add;
-  Stream<int> get getScreenSelected => _screenSelectedController.stream;
+  StreamController<Widget> _screenSelectedController =  StreamController<Widget>();
+  Function(Widget) get setScreenSelected => _screenSelectedController.sink.add;
+  Stream<Widget> get getScreenSelected => _screenSelectedController.stream;
 
   /// stream used to control title
   StreamController<String> _tittleAppBarController = StreamController<String>();
