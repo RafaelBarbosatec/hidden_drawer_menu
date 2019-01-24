@@ -30,3 +30,9 @@
 * TODO: ADD Gesture to open and close
 * TODO: Optimizations in Bloc
 
+## [0.5.0] - TODO: ADD SimpleHiddenDrawer.
+
+* TODO: ADD SimpleHiddenDrawer: This allows great customization of the menu
+* TODO: Optimizations
+* TODO: ADD BlocProvider
+

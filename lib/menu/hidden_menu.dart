@@ -102,7 +102,6 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
   void confListern() {
     SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((position){
-      print(position);
       setState(() {
         _indexSelected = position;
       });
