@@ -69,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 ```
-<br/>
 
 # Use with full customization menu
 
@@ -143,7 +142,6 @@ class _MenuState extends State<SecondSreen> {
   }
 }
 ```
-<br/>
 
 # Actions
 This actions is only accessible by the children of  HiddenDrawerMenu or SimpleHiddenDrawer.
@@ -167,7 +165,6 @@ SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((posi
   print(position);
 });
 ```
-<br/>
 
 # Available settings
 
