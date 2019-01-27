@@ -87,9 +87,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
                       colorTextSelected: widget.itens[index].colorTextSelected,
                       colorTextUnSelected: widget.itens[index].colorTextUnSelected,
                       onTap: () {
-                        if (index != _indexSelected) {
                           SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(index);
-                        }
                       },
                     );
 

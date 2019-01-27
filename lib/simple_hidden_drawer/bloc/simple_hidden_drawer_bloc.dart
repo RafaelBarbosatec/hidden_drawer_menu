@@ -27,6 +27,8 @@ class SimpleHiddenDrawerBloc {
         if (!_startDrag && !_isFirstPositionSelected) {
           toggle();
         }
+      }else{
+        toggle();
       }
 
       _isFirstPositionSelected = false;
