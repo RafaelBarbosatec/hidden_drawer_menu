@@ -20,10 +20,11 @@ class HiddenDrawerController extends ChangeNotifier {
   /// used to control of the state of the drawer
   MenuState state = MenuState.closed;
 
-  HiddenDrawerController({this.vsync})
+  HiddenDrawerController(this.vsync, animationDuration)
       : _animationController = new AnimationController(vsync: vsync) {
     _animationController
-      ..duration = const Duration(milliseconds: 350)
+      // TODO: How to make this animation duration configurable? Defaults to 250, I like it better at 120
+      ..duration = Duration(milliseconds: animationDuration)
       ..addListener(() {
         value = _animationController.value;
         notifyListeners();

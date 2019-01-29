@@ -70,14 +70,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
-      backgroundColorMenu: Colors.cyan,
+      isDraggable: true,
+      enablePerspective: false,
+      backgroundColorMenu: Colors.blue,
+      slideAmount: 315.0, // defaults to 275.0
+      animationDuration: 120, // default to 250
       //    iconMenuAppBar: Icon(Icons.menu),
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
       //    whithAutoTittleName: true,
       //    styleAutoTittleName: TextStyle(color: Colors.red),
       //    actionsAppBar: <Widget>[],
       //    backgroundColorContent: Colors.blue,
-      //    backgroundColorAppBar: Colors.blue,
+      backgroundColorAppBar: Colors.blue,
       //    elevationAppBar: 4.0,
       //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
       //    enableShadowItensMenu: true,

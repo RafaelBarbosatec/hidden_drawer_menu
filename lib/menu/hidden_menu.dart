@@ -63,7 +63,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
         ),
         child: Center(
             child: Container(
-              padding: EdgeInsets.only(top: 40.0,bottom: 40.0),
+              padding: EdgeInsets.only(top: 30.0,bottom: 30.0),
               decoration: BoxDecoration(
                   boxShadow: widget.enableShadowItensMenu ? [
                     new BoxShadow(

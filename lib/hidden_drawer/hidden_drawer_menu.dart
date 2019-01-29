@@ -28,6 +28,12 @@ class HiddenDrawerMenu extends StatelessWidget {
   ///Change elevation of the AppBar
   final double elevationAppBar;
 
+  // change the amout the screen should be slided. Defaults to 275.0
+  final double slideAmount;
+
+  // change the animation duration
+  final int animationDuration;
+
   ///Change iconmenu of the AppBar
   final Widget iconMenuAppBar;
 
@@ -60,6 +66,8 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.initPositionSelected = 0,
     this.backgroundColorAppBar,
     this.elevationAppBar = 4.0,
+    this.slideAmount = 275.0,
+    this.animationDuration = 250,
     this.iconMenuAppBar = const Icon(Icons.menu),
     this.backgroundMenu,
     this.backgroundColorMenu,
@@ -82,6 +90,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       initPositionSelected: initPositionSelected,
       backgroundColorAppBar: backgroundColorAppBar,
       elevationAppBar: elevationAppBar,
+      slideAmount: slideAmount,
+      animationDuration: animationDuration,
       backgroundColorContent: backgroundColorContent,
       whithAutoTittleName:whithAutoTittleName,
       styleAutoTittleName: styleAutoTittleName,

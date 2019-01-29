@@ -24,6 +24,12 @@ class SimpleHiddenDrawer extends StatefulWidget {
   ///Change elevation of the AppBar
   final double elevationAppBar;
 
+  // change the amout the screen should be slided. Defaults to 275.0
+  final double slideAmount;
+
+  // change the animation duration
+  final int animationDuration;
+
   ///Change iconmenu of the AppBar
   final Widget iconMenuAppBar;
 
@@ -58,6 +64,8 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.styleAutoTittleName,
     this.backgroundColorAppBar,
     this.elevationAppBar = 4.0,
+    this.slideAmount = 275.0,
+    this.animationDuration = 250,
     this.iconMenuAppBar = const Icon(Icons.menu),
     this.actionsAppBar,
     this.tittleAppBar,
@@ -171,7 +179,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
 
           var animatePercent = _animationCurve.transform(snapshot.data);
 
-          final slideAmount = 275.0 * animatePercent;
+          final slideAmount = widget.slideAmount * animatePercent;
           final contentScale = 1.0 - (0.2 * animatePercent);
           var contentPerspective = 0.0;
           final cornerRadius = 10.0 * animatePercent;
@@ -226,7 +234,8 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
   void initControllerAnimation() {
 
     _controller = new HiddenDrawerController(
-      vsync: this,
+      this,
+      widget.animationDuration
     )..addListener(() {
       _bloc.controllers.setPercentAnimate(_controller.value);
     });
