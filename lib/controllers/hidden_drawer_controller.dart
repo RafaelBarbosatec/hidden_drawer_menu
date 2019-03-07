@@ -15,17 +15,25 @@ class HiddenDrawerController extends ChangeNotifier {
   /// animationController used to animation of the drawer
   final AnimationController _animationController;
 
+  final Curve animationCurve;
+
+  Curve _animationCurve;
+
   double value = 0.0;
+
+  double _percent = 0.0;
 
   /// used to control of the state of the drawer
   MenuState state = MenuState.closed;
 
-  HiddenDrawerController({this.vsync})
+  HiddenDrawerController({this.vsync,this.animationCurve = Curves.decelerate})
       : _animationController = new AnimationController(vsync: vsync) {
+
+    _animationCurve = new Interval(0.0, 1.0, curve: animationCurve);
     _animationController
       ..duration = const Duration(milliseconds: 350)
       ..addListener(() {
-        value = _animationController.value;
+        value = _animationCurve.transform(_animationController.value);
         notifyListeners();
       })
       ..addStatusListener((AnimationStatus status) {
@@ -68,6 +76,19 @@ class HiddenDrawerController extends ChangeNotifier {
   ///method to close drawer
   close([double percent = 1.0]) {
     _animationController.reverse(from: percent);
+  }
+
+  move(double percent){
+    _percent = percent;
+    value = _animationCurve.transform(percent);
+    notifyListeners();
+  }
+  openOrClose(){
+    if (_percent > 0.3) {
+      open(_percent);
+    } else {
+      close(_percent);
+    }
   }
 
   ///method to change state of the drawer

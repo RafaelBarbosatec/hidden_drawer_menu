@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedContainer.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedDrawerContent.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
@@ -37,9 +37,6 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// enable and disable open and close with gesture
   final bool isDraggable;
 
-  /// enable and disable perspective
-  final bool enablePerspective;
-
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
@@ -66,8 +63,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.curveAnimation = Curves.decelerate,
     this.screenSelectedBuilder,
     this.tittleSelectedBuilder,
-    this.menu,
-    this.enablePerspective = false
+    this.menu
   }) : assert(screenSelectedBuilder != null, tittleSelectedBuilder != null), super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
@@ -77,20 +73,8 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
 
   SimpleHiddenDrawerBloc _bloc;
 
-  /// area access touch gesture in left screnn
-  final double _widthGestureDetector = 30.0;
-
   /// controller responsible to animation of the drawer
   HiddenDrawerController _controller;
-
-  /// Curves to animations
-  Curve _animationCurve;
-
-  @override
-  void initState() {
-    _animationCurve = new Interval(0.0, 1.0, curve: widget.curveAnimation);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +100,9 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
   }
 
   createContentDisplay() {
-    return AnimatedContent(
+    return AnimatedDrawerContent(
       controller:_controller,
+      isDraggable: widget.isDraggable,
       child: Scaffold(
         backgroundColor: widget.backgroundColorContent,
         appBar: AppBar(
@@ -131,125 +116,14 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
               }),
           actions: widget.actionsAppBar,
         ),
-        body: Stack(
-          children: <Widget>[
-            StreamBuilder(
-                stream: _bloc.controllers.getScreenSelected,
-                initialData: Container(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return snapshot.data;
-                }),
-            GestureDetector(
-//              onHorizontalDragUpdate:(detail){
-//                if(widget.isDraggable) {
-//                  var globalPosition = detail.globalPosition.dx;
-//                  if (globalPosition < 0) {
-//                    globalPosition = 0;
-//                  }
-//                  double position = globalPosition / constraints.maxWidth;
-//                  _bloc.controllers.setDragHorizontal(position);
-//                }
-//              },
-//              onHorizontalDragEnd:(detail){
-//                _bloc.controllers.setEndDrag(detail);
-//              },
-              child: Container(
-                color: Colors.transparent,
-                width: _widthGestureDetector,
-              ),
-            )
-          ],
-        ),
+        body: StreamBuilder(
+            stream: _bloc.controllers.getScreenSelected,
+            initialData: Container(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              return snapshot.data;
+            }),
       ),
     );
-    return animateContent(LayoutBuilder(
-      builder: (context, constraints) =>
-      new Scaffold(
-        backgroundColor: widget.backgroundColorContent,
-        appBar: AppBar(
-          backgroundColor: widget.backgroundColorAppBar,
-          elevation: widget.elevationAppBar,
-          title: getTittleAppBar(),
-          leading: new IconButton(
-              icon: widget.iconMenuAppBar,
-              onPressed: () {
-                _bloc.toggle();
-              }),
-          actions: widget.actionsAppBar,
-        ),
-        body: Stack(
-          children: <Widget>[
-            StreamBuilder(
-                stream: _bloc.controllers.getScreenSelected,
-                initialData: Container(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  return snapshot.data;
-                }),
-            GestureDetector(
-              onHorizontalDragUpdate:(detail){
-                if(widget.isDraggable) {
-                  var globalPosition = detail.globalPosition.dx;
-                  if (globalPosition < 0) {
-                    globalPosition = 0;
-                  }
-                  double position = globalPosition / constraints.maxWidth;
-                  _bloc.controllers.setDragHorizontal(position);
-                }
-              },
-              onHorizontalDragEnd:(detail){
-                _bloc.controllers.setEndDrag(detail);
-              },
-              child: Container(
-                color: Colors.transparent,
-                width: _widthGestureDetector,
-              ),
-            )
-          ],
-        ),
-      ),
-    ));
-  }
-
-  animateContent(Widget content) {
-    return StreamBuilder(
-        stream: _bloc.controllers.getPercentAnimate,
-        initialData: 0.0,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-
-          var animatePercent = _animationCurve.transform(snapshot.data);
-
-          final slideAmount = 275.0 * animatePercent;
-          final contentScale = 1.0 - (0.2 * animatePercent);
-          var contentPerspective = 0.0;
-          final cornerRadius = 10.0 * animatePercent;
-
-          if(widget.enablePerspective){
-            contentPerspective = 0.4 * animatePercent;
-          }
-
-          return Transform(
-            transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-              ..setEntry(3, 2, 0.001)
-              ..rotateY(contentPerspective)
-              ..scale(contentScale, contentScale),
-            alignment: Alignment.centerLeft,
-            child: Container(
-              decoration: new BoxDecoration(
-                boxShadow: [
-                  new BoxShadow(
-                    color: const Color(0x44000000),
-                    offset: const Offset(0.0, 5.0),
-                    blurRadius: 20.0,
-                    spreadRadius: 5.0,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(cornerRadius),
-                  child: content),
-            ),
-          );
-        });
   }
 
   getTittleAppBar() {
@@ -274,20 +148,11 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
 
     _controller = new HiddenDrawerController(
       vsync: this,
-    )..addListener(() {
-      _bloc.controllers.setPercentAnimate(_controller.value);
-    });
+      animationCurve: widget.curveAnimation
+    );
 
     _bloc.controllers.getActionToggle.listen((d){
       _controller.toggle();
-    });
-
-    _bloc.controllers.getpositionActualEndDrag.listen((p){
-      if (p > 0.3) {
-        _controller.open(p);
-      } else {
-        _controller.close(p);
-      }
     });
 
   }

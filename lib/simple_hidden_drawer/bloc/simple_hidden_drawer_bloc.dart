@@ -10,7 +10,6 @@ class SimpleHiddenDrawerBloc {
 
   StreamsSimpleHiddenMenu controllers = new StreamsSimpleHiddenMenu();
 
-  double _actualPositionDrag = 0;
   bool _startDrag = false;
   bool _isFirstPositionSelected = true;
   int positionStected = 0;
@@ -33,19 +32,6 @@ class SimpleHiddenDrawerBloc {
 
       _isFirstPositionSelected = false;
 
-    });
-
-    controllers.getDragHorizontal.listen((position){
-      _startDrag = true;
-      _actualPositionDrag = position;
-      controllers.setPercentAnimate(position);
-    });
-
-    controllers.getEndDrag.listen((v){
-      if(_startDrag) {
-        controllers.setpositionActualEndDrag(_actualPositionDrag);
-        _startDrag = false;
-      }
     });
 
     controllers.setPositionSelected(_initPositionSelected);

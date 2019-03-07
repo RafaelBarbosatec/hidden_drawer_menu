@@ -88,7 +88,6 @@ class HiddenDrawerMenu extends StatelessWidget {
       actionsAppBar: actionsAppBar,
       tittleAppBar: tittleAppBar,
       isDraggable: isDraggable,
-      enablePerspective: enablePerspective,
       curveAnimation: curveAnimation,
       menu: buildMenu(),
       screenSelectedBuilder: (position){
