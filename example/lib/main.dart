@@ -70,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
+      enablePerspective: true,
       backgroundColorMenu: Colors.cyan,
       //    iconMenuAppBar: Icon(Icons.menu),
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),

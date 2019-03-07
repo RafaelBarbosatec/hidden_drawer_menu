@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedContainer.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
@@ -115,6 +116,52 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
   }
 
   createContentDisplay() {
+    return AnimatedContent(
+      controller:_controller,
+      child: Scaffold(
+        backgroundColor: widget.backgroundColorContent,
+        appBar: AppBar(
+          backgroundColor: widget.backgroundColorAppBar,
+          elevation: widget.elevationAppBar,
+          title: getTittleAppBar(),
+          leading: new IconButton(
+              icon: widget.iconMenuAppBar,
+              onPressed: () {
+                _bloc.toggle();
+              }),
+          actions: widget.actionsAppBar,
+        ),
+        body: Stack(
+          children: <Widget>[
+            StreamBuilder(
+                stream: _bloc.controllers.getScreenSelected,
+                initialData: Container(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return snapshot.data;
+                }),
+            GestureDetector(
+//              onHorizontalDragUpdate:(detail){
+//                if(widget.isDraggable) {
+//                  var globalPosition = detail.globalPosition.dx;
+//                  if (globalPosition < 0) {
+//                    globalPosition = 0;
+//                  }
+//                  double position = globalPosition / constraints.maxWidth;
+//                  _bloc.controllers.setDragHorizontal(position);
+//                }
+//              },
+//              onHorizontalDragEnd:(detail){
+//                _bloc.controllers.setEndDrag(detail);
+//              },
+              child: Container(
+                color: Colors.transparent,
+                width: _widthGestureDetector,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
     return animateContent(LayoutBuilder(
       builder: (context, constraints) =>
       new Scaffold(
