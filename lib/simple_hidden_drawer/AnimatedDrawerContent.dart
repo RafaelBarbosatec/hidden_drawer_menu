@@ -19,6 +19,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
   double animatePercent = 0.0;
   final double _widthGestureDetector = 30.0;
+  final double _heigthAppBar = 80.0;
 
   @override
   void initState() {
@@ -64,7 +65,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       children: <Widget>[
         widget.child,
         Container(
-          margin: EdgeInsets.only(top: (widget.whiPaddingTop? 80 : 0)),
+          margin: EdgeInsets.only(top: (widget.whiPaddingTop? _heigthAppBar : 0)),
           child: GestureDetector(
             onHorizontalDragUpdate:(detail){
               if(widget.isDraggable) {
