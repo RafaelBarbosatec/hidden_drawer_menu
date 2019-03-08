@@ -9,7 +9,13 @@ class AnimatedDrawerContent extends StatefulWidget {
   final bool isDraggable;
   final bool whiPaddingTop;
 
-  const AnimatedDrawerContent({Key key, this.controller, this.child, this.isDraggable = true, this.whiPaddingTop = true}) : super(key: key);
+  const AnimatedDrawerContent({
+    Key key,
+    this.controller,
+    this.child,
+    this.isDraggable = true,
+    this.whiPaddingTop = true
+  }) :assert(controller != null), super(key: key);
 
   @override
   _AnimatedDrawerContentState createState() => _AnimatedDrawerContentState();
