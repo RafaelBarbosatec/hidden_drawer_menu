@@ -5,8 +5,7 @@ class SimpleHiddenDrawerBloc {
 
   /// builder containing the drawer settings
   final int _initPositionSelected;
-  final Widget Function(int position) _screenSelectedBuilder;
-  final String Function(int position) _tittleSelectedBuilder;
+  final Widget Function(int position , SimpleHiddenDrawerBloc bloc) _screenSelectedBuilder;
 
   StreamsSimpleHiddenMenu controllers = new StreamsSimpleHiddenMenu();
 
@@ -14,18 +13,19 @@ class SimpleHiddenDrawerBloc {
   bool _isFirstPositionSelected = true;
   int positionStected = 0;
 
-  SimpleHiddenDrawerBloc(this._initPositionSelected, this._screenSelectedBuilder, this._tittleSelectedBuilder) {
+  SimpleHiddenDrawerBloc(this._initPositionSelected, this._screenSelectedBuilder) {
 
     controllers.getpositionSelected.listen((position) {
 
       if(position != positionStected || _isFirstPositionSelected) {
+
         positionStected = position;
-        _setTittle(position);
         _setScreen(position);
 
         if (!_startDrag && !_isFirstPositionSelected) {
           toggle();
         }
+
       }else{
         toggle();
       }
@@ -58,15 +58,8 @@ class SimpleHiddenDrawerBloc {
     return controllers.getpositionSelected;
   }
 
-  _setTittle(int position) {
-    String title = _tittleSelectedBuilder(position);
-    if(title != null){
-      controllers.setTittleAppBar(title);
-    }
-  }
-
   _setScreen(int position) {
-    Widget screen = _screenSelectedBuilder(position);
+    Widget screen = _screenSelectedBuilder(position,this);
     if(screen != null){
       controllers.setScreenSelected(screen);
     }
