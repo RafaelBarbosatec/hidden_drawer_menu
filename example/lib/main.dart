@@ -87,4 +87,5 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }
+
 }

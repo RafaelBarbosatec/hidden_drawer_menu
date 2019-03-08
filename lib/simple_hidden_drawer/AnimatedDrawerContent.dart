@@ -23,14 +23,18 @@ class AnimatedDrawerContent extends StatefulWidget {
 }
 
 class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
+
   double animatePercent = 0.0;
-  final double _widthGestureDetector = 30.0;
-  final double _heigthAppBar = 80.0;
+  static const double WIDTH_GESTURE = 30.0;
+  static const double HEIGHT_APPBAR = 80.0;
+  static const double BLUR_SHADOW = 20.0;
   RenderBox _box;
   double width = 0;
+  double height = 0;
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     widget.controller.addListener(() {
       setState(() {
         animatePercent = widget.controller.value;
@@ -41,10 +45,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(_box != null){
-      width = _box.size.width;
-    }
 
     final slideAmount = (width*0.8) * animatePercent;
     final contentScale = 1.0 - (0.2 * animatePercent);
@@ -70,11 +70,10 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       children: <Widget>[
         widget.child,
         Container(
-          margin: EdgeInsets.only(top: (widget.whithPaddingTop ? _heigthAppBar : 0)),
+          margin: EdgeInsets.only(top: (widget.whithPaddingTop ? HEIGHT_APPBAR : 0)),
           child: GestureDetector(
             onHorizontalDragUpdate: (detail) {
               if (widget.isDraggable) {
-                _box = _getBoxRender();
                 var left = _box.globalToLocal(Offset(0.0,0.0)).dx;
                 var globalPosition = detail.globalPosition.dx + left;
                 if (globalPosition < 0) {
@@ -88,20 +87,14 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
               widget.controller.openOrClose();
             },
             child: Container(
+              height: height,
               color: Colors.transparent,
-              width: _widthGestureDetector,
+              width: WIDTH_GESTURE,
             ),
           ),
         )
       ],
     );
-  }
-
-  RenderBox _getBoxRender() {
-    if(_box == null){
-      _box = context.findRenderObject();
-    }
-    return _box;
   }
 
   List<BoxShadow>_getShadow() {
@@ -110,12 +103,21 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         new BoxShadow(
         color: const Color(0x44000000),
         offset: const Offset(0.0, 5.0),
-        blurRadius: 20.0,
+        blurRadius: BLUR_SHADOW,
         spreadRadius: 5.0,
       ),
       ];
     }else{
       return [];
     }
+  }
+
+  void _afterLayout(Duration timeStamp) {
+    _box = context.findRenderObject();
+    width = _box.size.width;
+    height = _box.size.height;
+    setState(() {
+
+    });
   }
 }
