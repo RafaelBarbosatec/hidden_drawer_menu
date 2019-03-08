@@ -64,6 +64,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
 
   createContentDisplay() {
     return AnimatedDrawerContent(
+      whithPaddingTop: true,
       controller:_controller,
       isDraggable: widget.isDraggable,
       child: StreamBuilder(
