@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
-import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 
 class StreamsSimpleHiddenMenu{
 
