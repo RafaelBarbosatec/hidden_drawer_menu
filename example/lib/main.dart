@@ -3,7 +3,7 @@ import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedDrawerContent.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 
 void main() => runApp(MyApp());
 

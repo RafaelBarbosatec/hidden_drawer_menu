@@ -6,7 +6,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f03bb378-8796-4793-90e9-c22997dcefdc" name="Default" comment="" />
+    <list default="true" id="f03bb378-8796-4793-90e9-c22997dcefdc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -80,17 +82,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="83" column="35" lean-forward="true" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -176,6 +168,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -188,7 +181,6 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,9 +254,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1368" height="769" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34772727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.36515152" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -503,16 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/simple_hidden_drawer/AnimatedDrawerContent.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="90" column="40" lean-forward="true" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-716">
@@ -522,8 +503,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        <state relative-caret-position="738">
+          <caret line="72" column="30" lean-forward="true" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -548,6 +529,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="83" column="35" lean-forward="true" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/simple_hidden_drawer/AnimatedDrawerContent.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="41" />
         </state>
       </provider>
     </entry>

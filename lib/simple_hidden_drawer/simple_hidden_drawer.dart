@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedDrawerContent.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
