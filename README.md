@@ -93,13 +93,6 @@ class MyApp extends StatelessWidget {
             case 2 : return Screen3(); break;
           }
         },
-        tittleSelectedBuilder: (position) {
-          switch(position){
-            case 0 : return "Screen1"; break;
-            case 1 : return "Screen2"; break;
-            case 2 : return "Screen3"; break;
-          }
-        },
       ),
     );
   }
@@ -165,6 +158,30 @@ SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((posi
   print(position);
 });
 ```
+## If you want to use only the widget responsible for the animation, it is now available as AnimatedDrawerContent
+
+![Example usage AnimatedDrawerContent](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/develop/imgs/exampleAnimated.gif)
+
+```Dart
+HiddenDrawerController controller = HiddenDrawerController(vsync: this);
+
+return AnimatedDrawerContent(
+  controller: controller,
+  whithPaddingTop: false, (optional) default = false // Add padding top in de gesture equals Heigth of the AppBar
+  whithShadow: false,(optional) default = false
+  isDraggable: true,(optional) default = true
+  child: Screen(),
+);
+```
+You can control actions by controller such as:
+
+```Dart
+controller.toggle() // Open or Close
+controller.open()
+controller.close()
+controller.move(percent) // moves to a specific position from 0 to 1 (0 = fully enclosed, 1 = fully opened)
+```
+
 
 # Available settings
 
