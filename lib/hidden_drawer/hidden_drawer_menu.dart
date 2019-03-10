@@ -78,27 +78,40 @@ class HiddenDrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return SimpleHiddenDrawer(
-      iconMenuAppBar: iconMenuAppBar,
-      initPositionSelected: initPositionSelected,
-      backgroundColorAppBar: backgroundColorAppBar,
-      elevationAppBar: elevationAppBar,
-      backgroundColorContent: backgroundColorContent,
-      whithAutoTittleName:whithAutoTittleName,
-      styleAutoTittleName: styleAutoTittleName,
-      actionsAppBar: actionsAppBar,
-      tittleAppBar: tittleAppBar,
       isDraggable: isDraggable,
-      enablePerspective: enablePerspective,
       curveAnimation: curveAnimation,
       menu: buildMenu(),
-      screenSelectedBuilder: (position){
-        return screens[position].screen;
-      },
-      tittleSelectedBuilder: (position){
-        return screens[position].itemMenu.name;
+      screenSelectedBuilder: (position,bloc){
+        return Scaffold(
+          backgroundColor: backgroundColorContent,
+          appBar: AppBar(
+            backgroundColor: backgroundColorAppBar,
+            elevation: elevationAppBar,
+            title: getTittleAppBar(position),
+            leading: new IconButton(
+                icon: iconMenuAppBar,
+                onPressed: () {
+                  bloc.toggle();
+                }),
+            actions: actionsAppBar,
+          ),
+          body: screens[position].screen,
+        );
       },
     );
 
+  }
+
+  getTittleAppBar(int position) {
+    if (tittleAppBar == null) {
+      return whithAutoTittleName
+          ? Text(screens[position].itemMenu.name,
+          style: styleAutoTittleName,
+      )
+          : Container();
+    } else {
+      return tittleAppBar;
+    }
   }
 
   buildMenu() {

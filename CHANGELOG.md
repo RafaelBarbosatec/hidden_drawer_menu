@@ -36,3 +36,9 @@
 * TODO: Optimizations
 * TODO: ADD BlocProvider
 
+## [1.0.0] - TODO: ADD SimpleHiddenDrawer.
+
+* TODO: Removes perspective effect due to problems with ClipRRect
+* TODO: Optimizations
+* TODO: Separate animation component (AnimatedDrawerContent)
+

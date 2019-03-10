@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedDrawerContent.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +27,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
   List<ScreenHiddenDrawer> itens = new List();
 
   @override
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
+      enablePerspective: true,
       backgroundColorMenu: Colors.cyan,
       //    iconMenuAppBar: Icon(Icons.menu),
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
@@ -84,4 +87,5 @@ class _MyHomePageState extends State<MyHomePage> {
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }
+
 }
