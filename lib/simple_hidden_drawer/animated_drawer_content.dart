@@ -6,6 +6,8 @@ class AnimatedDrawerContent extends StatefulWidget {
   final Widget child;
   final bool isDraggable;
   final double slidePercent;
+  final double verticalScalePercent;
+  final double contentCornerRadius;
   final bool whithPaddingTop;
   final bool whithShadow;
 
@@ -14,7 +16,9 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.controller,
       this.child,
       this.isDraggable = true,
-      this.slidePercent = 80.0,
+      this.slidePercent,
+      this.verticalScalePercent,
+      this.contentCornerRadius,
       this.whithPaddingTop = false,
         this.whithShadow = true})
       : assert(controller != null),
@@ -49,8 +53,8 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   Widget build(BuildContext context) {
 
     final slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
-    final contentScale = 1.0 - (0.2 * animatePercent);
-    final cornerRadius = 10.0 * animatePercent;
+    final contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
+    final cornerRadius = widget.contentCornerRadius * animatePercent;
 
     return Transform(
       transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)

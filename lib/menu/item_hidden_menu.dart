@@ -10,14 +10,13 @@ class ItemHiddenMenu extends StatelessWidget {
   /// callback to recibe action click in item
   final Function onTap;
 
-  /// color used for selected item in line
   final Color colorLineSelected;
 
-  /// color used in text for selected item
-  final Color colorTextSelected;
+  /// Base style of the text-item.
+  final TextStyle baseStyle;
 
-  /// color used in text for unselected item
-  final Color colorTextUnSelected;
+   /// style to apply to text when item is selected
+   final TextStyle selectedStyle;
 
   final bool selected;
 
@@ -27,8 +26,9 @@ class ItemHiddenMenu extends StatelessWidget {
         this.selected = false,
         this.onTap,
         this.colorLineSelected = Colors.blue,
-        this.colorTextSelected = Colors.white,
-        this.colorTextUnSelected = Colors.grey})
+        this.baseStyle,
+        this.selectedStyle,
+        })
       : super(key: key);
 
   @override
@@ -48,17 +48,14 @@ class ItemHiddenMenu extends StatelessWidget {
                 width: 5.0,
               ),
             ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(left: 20.0),
-                child: Text(
-                  name,
-                  style: TextStyle(
-                      color: selected ? colorTextSelected : colorTextUnSelected,
-                      fontSize: 25.0),
-                ),
-              ),
-            )
+             Expanded(
+               child: Container(
+                 margin: EdgeInsets.only(left: 20.0),
+                 child: Text( name,
+                     style: (this.baseStyle ?? TextStyle(color: Colors.grey, fontSize: 25.0)).merge(this.selected ? this.selectedStyle ?? TextStyle(color: Colors.white): null),
+                 )
+               ),
+             ),
           ],
         ),
       ),

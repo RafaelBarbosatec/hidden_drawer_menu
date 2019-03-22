@@ -15,6 +15,12 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// percent the container should be slided to the side
   final double slidePercent;
 
+  /// percent the content should scale vertically
+  final double verticalScalePercent;
+
+  /// radius applied to the content when active
+  final double contentCornerRadius;
+
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
@@ -27,7 +33,9 @@ class SimpleHiddenDrawer extends StatefulWidget {
     Key key,
     this.initPositionSelected = 0,
     this.isDraggable = true,
-    this.slidePercent = 80.0,
+    this.slidePercent,
+    this.verticalScalePercent,
+    this.contentCornerRadius,
     this.curveAnimation = Curves.decelerate,
     this.screenSelectedBuilder,
     this.menu
@@ -72,6 +80,8 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       controller:_controller,
       isDraggable: widget.isDraggable,
       slidePercent: widget.slidePercent,
+      verticalScalePercent: widget.verticalScalePercent,
+      contentCornerRadius: widget.contentCornerRadius,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),

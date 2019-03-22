@@ -55,8 +55,13 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   final Curve curveAnimation;
 
-  /// percent the container should be slided to the side
   final double slidePercent;
+
+  /// percent the content should scale vertically
+  final double verticalScalePercent;
+
+  /// radius applied to the content when active
+  final double contentCornerRadius;
 
   HiddenDrawerMenu({
     this.screens,
@@ -76,6 +81,8 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.isDraggable = true,
     this.enablePerspective = false,
     this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
   });
 
   @override
@@ -85,6 +92,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       isDraggable: isDraggable,
       curveAnimation: curveAnimation,
       slidePercent: slidePercent,
+      verticalScalePercent: verticalScalePercent,
+      contentCornerRadius: contentCornerRadius,
       menu: buildMenu(),
       screenSelectedBuilder: (position,bloc){
         return Scaffold(
