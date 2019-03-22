@@ -55,6 +55,9 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   final Curve curveAnimation;
 
+  /// percent the container should be slided to the side
+  final double slidePercent;
+
   HiddenDrawerMenu({
     this.screens,
     this.initPositionSelected = 0,
@@ -71,7 +74,8 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.enableShadowItensMenu = false,
     this.curveAnimation = Curves.decelerate,
     this.isDraggable = true,
-    this.enablePerspective = false
+    this.enablePerspective = false,
+    this.slidePercent = 80.0,
   });
 
   @override
@@ -80,6 +84,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     return SimpleHiddenDrawer(
       isDraggable: isDraggable,
       curveAnimation: curveAnimation,
+      slidePercent: slidePercent,
       menu: buildMenu(),
       screenSelectedBuilder: (position,bloc){
         return Scaffold(

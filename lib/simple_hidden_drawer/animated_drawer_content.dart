@@ -5,6 +5,7 @@ class AnimatedDrawerContent extends StatefulWidget {
   final HiddenDrawerController controller;
   final Widget child;
   final bool isDraggable;
+  final double slidePercent;
   final bool whithPaddingTop;
   final bool whithShadow;
 
@@ -13,6 +14,7 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.controller,
       this.child,
       this.isDraggable = true,
+      this.slidePercent = 80.0,
       this.whithPaddingTop = false,
         this.whithShadow = true})
       : assert(controller != null),
@@ -46,7 +48,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   @override
   Widget build(BuildContext context) {
 
-    final slideAmount = (width*0.8) * animatePercent;
+    final slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
     final contentScale = 1.0 - (0.2 * animatePercent);
     final cornerRadius = 10.0 * animatePercent;
 

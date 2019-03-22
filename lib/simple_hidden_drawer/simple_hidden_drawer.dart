@@ -12,6 +12,9 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// enable and disable open and close with gesture
   final bool isDraggable;
 
+  /// percent the container should be slided to the side
+  final double slidePercent;
+
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
@@ -24,6 +27,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
     Key key,
     this.initPositionSelected = 0,
     this.isDraggable = true,
+    this.slidePercent = 80.0,
     this.curveAnimation = Curves.decelerate,
     this.screenSelectedBuilder,
     this.menu
@@ -67,6 +71,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       whithPaddingTop: true,
       controller:_controller,
       isDraggable: widget.isDraggable,
+      slidePercent: widget.slidePercent,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),
