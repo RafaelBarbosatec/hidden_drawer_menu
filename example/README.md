@@ -36,9 +36,9 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Screen 1",
-          colorTextUnSelected: Colors.white.withOpacity(0.5),
           colorLineSelected: Colors.teal,
-//        colorTextSelected: Colors.teal,
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
+          selectedStyle: TextStyle(color: Colors.teal),
         ),
         Container(
           color: Colors.teal,
@@ -51,9 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Screen 2",
-          colorTextUnSelected: Colors.white.withOpacity(0.5),
           colorLineSelected: Colors.orange,
-//         colorTextSelected: Colors.orange,
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
+          selectedStyle: TextStyle(color: Colors.orange),
         ),
         Container(
           color: Colors.orange,
@@ -74,6 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
           initPositionSelected: 0,
           screens: itens,
           backgroundColorMenu: Colors.cyan,
+    //    slidePercent: 80.0,
+    //    verticalScalePercent: 80.0,
+    //    contentCornerRadius: 10.0,
     //    iconMenuAppBar: Icon(Icons.menu),
     //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     //    whithAutoTittleName: true,
