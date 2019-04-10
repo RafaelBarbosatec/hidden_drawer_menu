@@ -30,7 +30,6 @@ class AnimatedDrawerContent extends StatefulWidget {
 
 class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
-  double animatePercent = 0.0;
   static const double WIDTH_GESTURE = 30.0;
   static const double HEIGHT_APPBAR = 80.0;
   static const double BLUR_SHADOW = 20.0;
@@ -41,33 +40,37 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
-    widget.controller.addListener(() {
-      setState(() {
-        animatePercent = widget.controller.value;
-      });
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    final slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
-    final contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
-    final cornerRadius = widget.contentCornerRadius * animatePercent;
+    return AnimatedBuilder(
+      animation: widget.controller,
+      builder: (_,child){
 
-    return Transform(
-      transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-        ..scale(contentScale, contentScale),
-      alignment: Alignment.centerLeft,
-      child: Container(
-        decoration: new BoxDecoration(
-          boxShadow: _getShadow(),
-        ),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(cornerRadius),
-            child: _buildContet()),
-      ),
+        var animatePercent = widget.controller.value;
+        final slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
+        final contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
+        final cornerRadius = widget.contentCornerRadius * animatePercent;
+
+        return Transform(
+          transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
+            ..scale(contentScale, contentScale),
+          alignment: Alignment.centerLeft,
+          child: Container(
+            decoration: new BoxDecoration(
+              boxShadow: _getShadow(),
+            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(cornerRadius),
+                child: child),
+          ),
+        );
+
+      },
+      child: _buildContet(),
     );
   }
 
@@ -119,11 +122,10 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   void _afterLayout(Duration timeStamp) {
-    _box = context.findRenderObject();
-    width = _box.size.width;
-    height = _box.size.height;
     setState(() {
-
+      _box = context.findRenderObject();
+      width = _box.size.width;
+      height = _box.size.height;
     });
   }
 }

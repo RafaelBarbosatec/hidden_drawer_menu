@@ -42,3 +42,9 @@
 * TODO: Optimizations
 * TODO: Separate animation component (AnimatedDrawerContent)
 
+## [1.0.1] - TODO: ADD SimpleHiddenDrawer.
+
+* TODO: Added configurable slidePercent
+* TODO: Added verticalScalePercent and contentCornerRadius and styles
+* TODO: Optimizations in animations
+
