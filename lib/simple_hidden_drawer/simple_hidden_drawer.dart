@@ -24,6 +24,12 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
+  /// anable animation Scale
+  final bool enableScaleAnimin;
+
+  /// anable animation borderRadius
+  final bool enableCornerAnimin;
+
   /// Function of the recive screen to show
   final Widget Function(int position, SimpleHiddenDrawerBloc bloc) screenSelectedBuilder;
 
@@ -33,12 +39,14 @@ class SimpleHiddenDrawer extends StatefulWidget {
     Key key,
     this.initPositionSelected = 0,
     this.isDraggable = true,
-    this.slidePercent,
-    this.verticalScalePercent,
-    this.contentCornerRadius,
+    this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
     this.curveAnimation = Curves.decelerate,
     this.screenSelectedBuilder,
-    this.menu
+    this.menu,
+    this.enableScaleAnimin = true,
+    this.enableCornerAnimin = true,
   }) : assert(screenSelectedBuilder != null), super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
@@ -82,6 +90,8 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       slidePercent: widget.slidePercent,
       verticalScalePercent: widget.verticalScalePercent,
       contentCornerRadius: widget.contentCornerRadius,
+      enableScaleAnimin: widget.enableScaleAnimin,
+      enableCornerAnimin: widget.enableCornerAnimin,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),

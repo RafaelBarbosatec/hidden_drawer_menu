@@ -1,3 +1,15 @@
+library hidden_drawer_menu;
+
+export 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
+export 'package:hidden_drawer_menu/menu/hidden_menu.dart';
+export 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+export 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+
+
+
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
@@ -50,9 +62,6 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// enable and disable open and close with gesture
   final bool isDraggable;
 
-  /// enable and disable perspective
-  final bool enablePerspective;
-
   final Curve curveAnimation;
 
   final double slidePercent;
@@ -62,6 +71,12 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   /// radius applied to the content when active
   final double contentCornerRadius;
+
+  /// anable animation Scale
+  final bool enableScaleAnimin;
+
+  /// anable animation borderRadius
+  final bool enableCornerAnimin;
 
   HiddenDrawerMenu({
     this.screens,
@@ -79,10 +94,11 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.enableShadowItensMenu = false,
     this.curveAnimation = Curves.decelerate,
     this.isDraggable = true,
-    this.enablePerspective = false,
     this.slidePercent = 80.0,
     this.verticalScalePercent = 80.0,
     this.contentCornerRadius = 10.0,
+    this.enableScaleAnimin = true,
+    this.enableCornerAnimin = true,
   });
 
   @override
@@ -94,6 +110,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       slidePercent: slidePercent,
       verticalScalePercent: verticalScalePercent,
       contentCornerRadius: contentCornerRadius,
+      enableCornerAnimin: enableCornerAnimin,
+      enableScaleAnimin: enableScaleAnimin,
       menu: buildMenu(),
       screenSelectedBuilder: (position,bloc){
         return Scaffold(

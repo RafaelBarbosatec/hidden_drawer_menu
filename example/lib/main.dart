@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
         new ItemHiddenMenu(
           name: "Screen 1",
           colorLineSelected: Colors.teal,
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.teal),
         ),
         Container(
@@ -51,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
         new ItemHiddenMenu(
           name: "Screen 2",
           colorLineSelected: Colors.orange,
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.5), fontSize: 25.0 ),
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.orange),
         ),
         Container(
@@ -72,8 +68,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
     return HiddenDrawerMenu(
       initPositionSelected: 0,
       screens: itens,
-      enablePerspective: true,
       backgroundColorMenu: Colors.cyan,
+      //    enableScaleAnimin: true,
+      //    enableCornerAnimin: true,
       //    slidePercent: 80.0,
       //    verticalScalePercent: 80.0,
       //    contentCornerRadius: 10.0,

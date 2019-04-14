@@ -10,6 +10,8 @@ class AnimatedDrawerContent extends StatefulWidget {
   final double contentCornerRadius;
   final bool whithPaddingTop;
   final bool whithShadow;
+  final bool enableScaleAnimin;
+  final bool enableCornerAnimin;
 
   const AnimatedDrawerContent(
       {Key key,
@@ -20,7 +22,9 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.verticalScalePercent,
       this.contentCornerRadius,
       this.whithPaddingTop = false,
-        this.whithShadow = true})
+        this.whithShadow = true,
+        this.enableScaleAnimin = true,
+        this.enableCornerAnimin = true})
       : assert(controller != null),
         super(key: key);
 
@@ -36,6 +40,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   RenderBox _box;
   double width = 0;
   double height = 0;
+  double slideAmount = 0.0;
+  double contentScale = 1.0;
+  double cornerRadius = 0.0;
 
   @override
   void initState() {
@@ -51,9 +58,13 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       builder: (_,child){
 
         var animatePercent = widget.controller.value;
-        final slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
-        final contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
-        final cornerRadius = widget.contentCornerRadius * animatePercent;
+        slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
+
+        if(widget.enableScaleAnimin)
+        contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
+
+        if(widget.enableCornerAnimin)
+        cornerRadius = widget.contentCornerRadius * animatePercent;
 
         return Transform(
           transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
