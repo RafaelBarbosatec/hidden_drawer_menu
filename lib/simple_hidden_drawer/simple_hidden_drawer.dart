@@ -47,7 +47,8 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.menu,
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
-  }) : assert(screenSelectedBuilder != null), super(key: key);
+  }) :  assert(screenSelectedBuilder != null),
+        assert(menu != null),super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
