@@ -67,9 +67,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         cornerRadius = widget.contentCornerRadius * animatePercent;
 
         return Transform(
-          transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
+          transform: new Matrix4.translationValues(-1*slideAmount, 0.0, 0.0)
             ..scale(contentScale, contentScale),
-          alignment: Alignment.centerLeft,
+          alignment: Alignment.centerRight,
           child: Container(
             decoration: new BoxDecoration(
               boxShadow: _getShadow(),

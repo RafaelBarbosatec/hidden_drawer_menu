@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/menu/item_hidden_menu_right.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 class HiddenMenu extends StatefulWidget {
@@ -80,7 +81,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
                   itemCount: widget.itens.length,
                   itemBuilder: (context, index) {
 
-                    return new ItemHiddenMenu(
+                    return ItemHiddenMenuRight(
                       name: widget.itens[index].name,
                       selected: index == _indexSelected,
                       colorLineSelected: widget.itens[index].colorLineSelected,
