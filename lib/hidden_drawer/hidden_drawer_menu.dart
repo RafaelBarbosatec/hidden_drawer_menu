@@ -49,6 +49,9 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// Set custom widget in tittleAppBar
   final Widget tittleAppBar;
 
+  /// Decide whether title is centered or not
+  final bool isTitleCentered;
+
   //Menu
   /// Decocator that allows us to add backgroud in the menu(img)
   final DecorationImage backgroundMenu;
@@ -91,6 +94,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.styleAutoTittleName,
     this.actionsAppBar,
     this.tittleAppBar,
+    this.isTitleCentered,
     this.enableShadowItensMenu = false,
     this.curveAnimation = Curves.decelerate,
     this.isDraggable = true,
@@ -120,6 +124,7 @@ class HiddenDrawerMenu extends StatelessWidget {
             backgroundColor: backgroundColorAppBar,
             elevation: elevationAppBar,
             title: getTittleAppBar(position),
+            centerTitle: isTitleCentered,
             leading: new IconButton(
                 icon: iconMenuAppBar,
                 onPressed: () {
