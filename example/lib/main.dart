@@ -69,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.cyan,
+      //    typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,
       //    slidePercent: 80.0,

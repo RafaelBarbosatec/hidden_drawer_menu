@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 
+
+enum TypeOpen{
+  FROM_LEFT,
+  FROM_RIGHT
+}
+
 class AnimatedDrawerContent extends StatefulWidget {
   final HiddenDrawerController controller;
   final Widget child;
@@ -12,6 +18,7 @@ class AnimatedDrawerContent extends StatefulWidget {
   final bool whithShadow;
   final bool enableScaleAnimin;
   final bool enableCornerAnimin;
+  final TypeOpen typeOpen;
 
   const AnimatedDrawerContent(
       {Key key,
@@ -24,7 +31,8 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.whithPaddingTop = false,
         this.whithShadow = true,
         this.enableScaleAnimin = true,
-        this.enableCornerAnimin = true})
+        this.enableCornerAnimin = true,
+        this.typeOpen = TypeOpen.FROM_LEFT})
       : assert(controller != null),
         super(key: key);
 
@@ -66,10 +74,12 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         if(widget.enableCornerAnimin)
         cornerRadius = widget.contentCornerRadius * animatePercent;
 
+        slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT ? slideAmount : (-1*slideAmount);
+
         return Transform(
-          transform: new Matrix4.translationValues(-1*slideAmount, 0.0, 0.0)
+          transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
             ..scale(contentScale, contentScale),
-          alignment: Alignment.centerRight,
+          alignment: widget.typeOpen == TypeOpen.FROM_LEFT ? Alignment.centerLeft : Alignment.centerRight,
           child: Container(
             decoration: new BoxDecoration(
               boxShadow: _getShadow(),
@@ -100,16 +110,20 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
                   globalPosition = 0;
                 }
                 double position = globalPosition / (MediaQuery.of(context).size.width+left);
-                widget.controller.move(position);
+                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1-position);
+                widget.controller.move(realPosition);
               }
             },
             onHorizontalDragEnd: (detail) {
               widget.controller.openOrClose();
             },
-            child: Container(
-              height: height,
-              color: Colors.transparent,
-              width: WIDTH_GESTURE,
+            child: Align(
+              alignment: widget.typeOpen == TypeOpen.FROM_LEFT ? Alignment.centerLeft : Alignment.centerRight,
+              child: Container(
+                height: height,
+                color: Colors.transparent,
+                width: WIDTH_GESTURE,
+              ),
             ),
           ),
         )

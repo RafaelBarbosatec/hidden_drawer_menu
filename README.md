@@ -84,14 +84,29 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SimpleHiddenDrawer(
-        whithAutoTittleName: true,
         menu: Menu(),
         screenSelectedBuilder: (position,bloc) {
+          
+          Widget screenCurrent;
+          
           switch(position){
-            case 0 : return Screen1(); break;
-            case 1 : return Screen2(); break;
-            case 2 : return Screen3(); break;
+            case 0 : screenCurrent = Screen1(); break;
+            case 1 : screenCurrent = Screen2(); break;
+            case 2 : screenCurrent = Screen3(); break;
           }
+          
+          return Scaffold(
+            backgroundColor: backgroundColorContent,
+            appBar: AppBar(
+              leading: IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    bloc.toggle();
+                  }),
+            ),
+            body: screenCurrent,
+          );
+          
         },
       ),
     );

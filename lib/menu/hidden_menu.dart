@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu_right.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 class HiddenMenu extends StatefulWidget {
@@ -23,6 +24,8 @@ class HiddenMenu extends StatefulWidget {
   /// position to set initial item selected in menu
   final int initPositionSelected;
 
+  final TypeOpen typeOpen;
+
   HiddenMenu(
       {Key key,
       this.background,
@@ -30,7 +33,8 @@ class HiddenMenu extends StatefulWidget {
       this.selectedListern,
       this.initPositionSelected,
       this.backgroundColorMenu,
-        this.enableShadowItensMenu = false})
+        this.enableShadowItensMenu = false,
+        this.typeOpen = TypeOpen.FROM_LEFT})
       : super(key: key);
 
   @override
@@ -75,24 +79,46 @@ class _HiddenMenuState extends State<HiddenMenu> {
                     ),
                   ]: []
               ),
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.all(0.0),
-                  itemCount: widget.itens.length,
-                  itemBuilder: (context, index) {
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (scroll) {
+                  scroll.disallowGlow();
+                },
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.all(0.0),
+                    itemCount: widget.itens.length,
+                    itemBuilder: (context, index) {
 
-                    return ItemHiddenMenuRight(
-                      name: widget.itens[index].name,
-                      selected: index == _indexSelected,
-                      colorLineSelected: widget.itens[index].colorLineSelected,
-                      baseStyle: widget.itens[index].baseStyle,
-                      selectedStyle: widget.itens[index].selectedStyle,
-                      onTap: () {
-                          SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(index);
-                      },
-                    );
+                      if(widget.typeOpen == TypeOpen.FROM_LEFT){
 
-                  }),
+                        return ItemHiddenMenu(
+                          name: widget.itens[index].name,
+                          selected: index == _indexSelected,
+                          colorLineSelected: widget.itens[index].colorLineSelected,
+                          baseStyle: widget.itens[index].baseStyle,
+                          selectedStyle: widget.itens[index].selectedStyle,
+                          onTap: () {
+                            SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(index);
+                          },
+                        );
+
+                      }else{
+
+                        return ItemHiddenMenuRight(
+                          name: widget.itens[index].name,
+                          selected: index == _indexSelected,
+                          colorLineSelected: widget.itens[index].colorLineSelected,
+                          baseStyle: widget.itens[index].baseStyle,
+                          selectedStyle: widget.itens[index].selectedStyle,
+                          onTap: () {
+                            SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(index);
+                          },
+                        );
+
+                      }
+
+                    }),
+              ),
             ),
           ),
         ),

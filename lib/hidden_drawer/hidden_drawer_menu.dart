@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
@@ -81,6 +82,8 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// anable animation borderRadius
   final bool enableCornerAnimin;
 
+  final TypeOpen typeOpen;
+
   HiddenDrawerMenu({
     this.screens,
     this.initPositionSelected = 0,
@@ -103,6 +106,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.contentCornerRadius = 10.0,
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
   });
 
   @override
@@ -117,6 +121,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       enableCornerAnimin: enableCornerAnimin,
       enableScaleAnimin: enableScaleAnimin,
       menu: buildMenu(),
+      typeOpen: typeOpen,
+      initPositionSelected: initPositionSelected,
       screenSelectedBuilder: (position,bloc){
         return Scaffold(
           backgroundColor: backgroundColorContent,
@@ -125,7 +131,7 @@ class HiddenDrawerMenu extends StatelessWidget {
             elevation: elevationAppBar,
             title: getTittleAppBar(position),
             centerTitle: isTitleCentered,
-            leading: new IconButton(
+            leading: IconButton(
                 icon: iconMenuAppBar,
                 onPressed: () {
                   bloc.toggle();
@@ -165,6 +171,7 @@ class HiddenDrawerMenu extends StatelessWidget {
       backgroundColorMenu: backgroundColorMenu,
       initPositionSelected: initPositionSelected,
       enableShadowItensMenu: enableShadowItensMenu,
+      typeOpen: typeOpen,
     );
   }
 
