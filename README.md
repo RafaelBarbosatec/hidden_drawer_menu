@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
       home: SimpleHiddenDrawer(
         whithAutoTittleName: true,
         menu: Menu(),
-        screenSelectedBuilder: (position) {
+        screenSelectedBuilder: (position,bloc) {
           switch(position){
             case 0 : return Screen1(); break;
             case 1 : return Screen2(); break;
@@ -167,9 +167,9 @@ HiddenDrawerController controller = HiddenDrawerController(vsync: this);
 
 return AnimatedDrawerContent(
   controller: controller,
-  whithPaddingTop: false, (optional) default = false // Add padding top in de gesture equals Heigth of the AppBar
-  whithShadow: false,(optional) default = false
-  isDraggable: true,(optional) default = true
+  whithPaddingTop: false, //(optional) default = false // Add padding top in de gesture equals Heigth of the AppBar
+  whithShadow: false, //(optional) default = false
+  isDraggable: true, //(optional) default = true
   child: Screen(),
 );
 ```
