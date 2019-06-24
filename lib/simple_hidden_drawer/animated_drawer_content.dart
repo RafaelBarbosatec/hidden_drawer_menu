@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 
-
-enum TypeOpen{
-  FROM_LEFT,
-  FROM_RIGHT
-}
+enum TypeOpen { FROM_LEFT, FROM_RIGHT }
 
 class AnimatedDrawerContent extends StatefulWidget {
   final HiddenDrawerController controller;
@@ -29,10 +25,10 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.verticalScalePercent,
       this.contentCornerRadius,
       this.whithPaddingTop = false,
-        this.whithShadow = true,
-        this.enableScaleAnimin = true,
-        this.enableCornerAnimin = true,
-        this.typeOpen = TypeOpen.FROM_LEFT})
+      this.whithShadow = true,
+      this.enableScaleAnimin = true,
+      this.enableCornerAnimin = true,
+      this.typeOpen = TypeOpen.FROM_LEFT})
       : assert(controller != null),
         super(key: key);
 
@@ -41,7 +37,6 @@ class AnimatedDrawerContent extends StatefulWidget {
 }
 
 class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
-
   static const double WIDTH_GESTURE = 30.0;
   static const double HEIGHT_APPBAR = 80.0;
   static const double BLUR_SHADOW = 20.0;
@@ -60,26 +55,29 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
   @override
   Widget build(BuildContext context) {
-
     return AnimatedBuilder(
       animation: widget.controller,
-      builder: (_,child){
-
+      builder: (_, child) {
         var animatePercent = widget.controller.value;
-        slideAmount = ((width)/100*widget.slidePercent) * animatePercent;
+        slideAmount = ((width) / 100 * widget.slidePercent) * animatePercent;
 
-        if(widget.enableScaleAnimin)
-        contentScale = 1.0 - (((100 - widget.verticalScalePercent)/100) * animatePercent);
+        if (widget.enableScaleAnimin)
+          contentScale = 1.0 -
+              (((100 - widget.verticalScalePercent) / 100) * animatePercent);
 
-        if(widget.enableCornerAnimin)
-        cornerRadius = widget.contentCornerRadius * animatePercent;
+        if (widget.enableCornerAnimin)
+          cornerRadius = widget.contentCornerRadius * animatePercent;
 
-        slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT ? slideAmount : (-1*slideAmount);
+        slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
+            ? slideAmount
+            : (-1 * slideAmount);
 
         return Transform(
           transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
             ..scale(contentScale, contentScale),
-          alignment: widget.typeOpen == TypeOpen.FROM_LEFT ? Alignment.centerLeft : Alignment.centerRight,
+          alignment: widget.typeOpen == TypeOpen.FROM_LEFT
+              ? Alignment.centerLeft
+              : Alignment.centerRight,
           child: Container(
             decoration: new BoxDecoration(
               boxShadow: _getShadow(),
@@ -89,7 +87,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
                 child: child),
           ),
         );
-
       },
       child: _buildContet(),
     );
@@ -100,17 +97,21 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       children: <Widget>[
         widget.child,
         Container(
-          margin: EdgeInsets.only(top: (widget.whithPaddingTop ? HEIGHT_APPBAR : 0)),
+          margin: EdgeInsets.only(
+              top: (widget.whithPaddingTop ? HEIGHT_APPBAR : 0)),
           child: GestureDetector(
             onHorizontalDragUpdate: (detail) {
               if (widget.isDraggable) {
-                var left = _box.globalToLocal(Offset(0.0,0.0)).dx;
+                var left = _box.globalToLocal(Offset(0.0, 0.0)).dx;
                 var globalPosition = detail.globalPosition.dx + left;
                 if (globalPosition < 0) {
                   globalPosition = 0;
                 }
-                double position = globalPosition / (MediaQuery.of(context).size.width+left);
-                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1-position);
+                double position =
+                    globalPosition / (MediaQuery.of(context).size.width + left);
+                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT
+                    ? position
+                    : (1 - position);
                 widget.controller.move(realPosition);
               }
             },
@@ -118,7 +119,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
               widget.controller.openOrClose();
             },
             child: Align(
-              alignment: widget.typeOpen == TypeOpen.FROM_LEFT ? Alignment.centerLeft : Alignment.centerRight,
+              alignment: widget.typeOpen == TypeOpen.FROM_LEFT
+                  ? Alignment.centerLeft
+                  : Alignment.centerRight,
               child: Container(
                 height: height,
                 color: Colors.transparent,
@@ -131,17 +134,17 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
     );
   }
 
-  List<BoxShadow>_getShadow() {
-    if(widget.whithShadow) {
+  List<BoxShadow> _getShadow() {
+    if (widget.whithShadow) {
       return [
         new BoxShadow(
-        color: const Color(0x44000000),
-        offset: const Offset(0.0, 5.0),
-        blurRadius: BLUR_SHADOW,
-        spreadRadius: 5.0,
-      ),
+          color: const Color(0x44000000),
+          offset: const Offset(0.0, 5.0),
+          blurRadius: BLUR_SHADOW,
+          spreadRadius: 5.0,
+        ),
       ];
-    }else{
+    } else {
       return [];
     }
   }

@@ -9,8 +9,6 @@ export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.
 export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
-
-
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
@@ -20,7 +18,6 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawe
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
-
   /// List item menu and respective screens
   final List<ScreenHiddenDrawer> screens;
 
@@ -113,7 +110,6 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SimpleHiddenDrawer(
       isDraggable: isDraggable,
       curveAnimation: curveAnimation,
@@ -125,11 +121,10 @@ class HiddenDrawerMenu extends StatelessWidget {
       menu: buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
-      screenSelectedBuilder: (position,bloc){
-
+      screenSelectedBuilder: (position, bloc) {
         List<Widget> actions = List();
 
-        if(typeOpen == TypeOpen.FROM_RIGHT){
+        if (typeOpen == TypeOpen.FROM_RIGHT) {
           actions.add(IconButton(
               icon: iconMenuAppBar,
               onPressed: () {
@@ -137,7 +132,7 @@ class HiddenDrawerMenu extends StatelessWidget {
               }));
         }
 
-        if(actionsAppBar != null){
+        if (actionsAppBar != null) {
           actions.addAll(actionsAppBar);
         }
 
@@ -155,15 +150,15 @@ class HiddenDrawerMenu extends StatelessWidget {
         );
       },
     );
-
   }
 
   getTittleAppBar(int position) {
     if (tittleAppBar == null) {
       return whithAutoTittleName
-          ? Text(screens[position].itemMenu.name,
-          style: styleAutoTittleName,
-      )
+          ? Text(
+              screens[position].itemMenu.name,
+              style: styleAutoTittleName,
+            )
           : Container();
     } else {
       return tittleAppBar;
@@ -171,7 +166,6 @@ class HiddenDrawerMenu extends StatelessWidget {
   }
 
   buildMenu() {
-
     List<ItemHiddenMenu> _itensMenu = new List();
 
     screens.forEach((item) {
@@ -189,15 +183,14 @@ class HiddenDrawerMenu extends StatelessWidget {
   }
 
   Widget _buildLeading(SimpleHiddenDrawerBloc bloc) {
-    if(typeOpen == TypeOpen.FROM_LEFT){
+    if (typeOpen == TypeOpen.FROM_LEFT) {
       return IconButton(
           icon: iconMenuAppBar,
           onPressed: () {
             bloc.toggle();
           });
-    }else{
+    } else {
       return null;
     }
   }
-
 }

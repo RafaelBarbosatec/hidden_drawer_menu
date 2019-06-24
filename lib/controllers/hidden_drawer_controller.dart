@@ -8,7 +8,6 @@ enum MenuState {
 }
 
 class HiddenDrawerController extends ChangeNotifier {
-
   /// provider used to animation
   final TickerProvider vsync;
 
@@ -26,9 +25,8 @@ class HiddenDrawerController extends ChangeNotifier {
   /// used to control of the state of the drawer
   MenuState state = MenuState.closed;
 
-  HiddenDrawerController({this.vsync,this.animationCurve = Curves.decelerate})
+  HiddenDrawerController({this.vsync, this.animationCurve = Curves.decelerate})
       : _animationController = new AnimationController(vsync: vsync) {
-
     _animationCurve = new Interval(0.0, 1.0, curve: animationCurve);
     _animationController
       ..duration = const Duration(milliseconds: 350)
@@ -78,12 +76,13 @@ class HiddenDrawerController extends ChangeNotifier {
     _animationController.reverse(from: percent);
   }
 
-  move(double percent){
+  move(double percent) {
     _percent = percent;
     value = _animationCurve.transform(percent);
     notifyListeners();
   }
-  openOrClose(){
+
+  openOrClose() {
     if (_percent > 0.3) {
       open(_percent);
     } else {

@@ -14,6 +14,7 @@ class SimpleHiddenDrawerProvider extends InheritedWidget {
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static SimpleHiddenDrawerBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(SimpleHiddenDrawerProvider) as SimpleHiddenDrawerProvider)
+      (context.inheritFromWidgetOfExactType(SimpleHiddenDrawerProvider)
+              as SimpleHiddenDrawerProvider)
           .hiddenDrawerBloc;
 }
