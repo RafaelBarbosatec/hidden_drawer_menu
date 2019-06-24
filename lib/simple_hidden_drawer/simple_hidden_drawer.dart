@@ -35,6 +35,8 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
   final Widget menu;
 
+  final TypeOpen typeOpen;
+
   const SimpleHiddenDrawer({
     Key key,
     this.initPositionSelected = 0,
@@ -47,6 +49,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.menu,
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
   }) :  assert(screenSelectedBuilder != null),
         assert(menu != null),super(key: key);
   @override
@@ -93,6 +96,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       contentCornerRadius: widget.contentCornerRadius,
       enableScaleAnimin: widget.enableScaleAnimin,
       enableCornerAnimin: widget.enableCornerAnimin,
+      typeOpen: widget.typeOpen,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),
@@ -108,6 +112,10 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       vsync: this,
       animationCurve: widget.curveAnimation
     );
+
+    _controller.addListener((){
+      _bloc.controllers.setMenuState(_controller.state);
+    });
 
     _bloc.controllers.getActionToggle.listen((d){
       _controller.toggle();

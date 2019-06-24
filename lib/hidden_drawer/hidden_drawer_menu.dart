@@ -7,6 +7,7 @@ export 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 
 
@@ -14,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
@@ -81,6 +84,8 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// anable animation borderRadius
   final bool enableCornerAnimin;
 
+  final TypeOpen typeOpen;
+
   HiddenDrawerMenu({
     this.screens,
     this.initPositionSelected = 0,
@@ -103,6 +108,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.contentCornerRadius = 10.0,
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
   });
 
   @override
@@ -117,7 +123,24 @@ class HiddenDrawerMenu extends StatelessWidget {
       enableCornerAnimin: enableCornerAnimin,
       enableScaleAnimin: enableScaleAnimin,
       menu: buildMenu(),
+      typeOpen: typeOpen,
+      initPositionSelected: initPositionSelected,
       screenSelectedBuilder: (position,bloc){
+
+        List<Widget> actions = List();
+
+        if(typeOpen == TypeOpen.FROM_RIGHT){
+          actions.add(IconButton(
+              icon: iconMenuAppBar,
+              onPressed: () {
+                bloc.toggle();
+              }));
+        }
+
+        if(actionsAppBar != null){
+          actions.addAll(actionsAppBar);
+        }
+
         return Scaffold(
           backgroundColor: backgroundColorContent,
           appBar: AppBar(
@@ -125,12 +148,8 @@ class HiddenDrawerMenu extends StatelessWidget {
             elevation: elevationAppBar,
             title: getTittleAppBar(position),
             centerTitle: isTitleCentered,
-            leading: new IconButton(
-                icon: iconMenuAppBar,
-                onPressed: () {
-                  bloc.toggle();
-                }),
-            actions: actionsAppBar,
+            leading: _buildLeading(bloc),
+            actions: actions,
           ),
           body: screens[position].screen,
         );
@@ -165,7 +184,20 @@ class HiddenDrawerMenu extends StatelessWidget {
       backgroundColorMenu: backgroundColorMenu,
       initPositionSelected: initPositionSelected,
       enableShadowItensMenu: enableShadowItensMenu,
+      typeOpen: typeOpen,
     );
+  }
+
+  Widget _buildLeading(SimpleHiddenDrawerBloc bloc) {
+    if(typeOpen == TypeOpen.FROM_LEFT){
+      return IconButton(
+          icon: iconMenuAppBar,
+          onPressed: () {
+            bloc.toggle();
+          });
+    }else{
+      return null;
+    }
   }
 
 }

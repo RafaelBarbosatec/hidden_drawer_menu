@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu_demo/exampleCustomMenu/ExampleCustomMenu.dart';
+import 'package:hidden_drawer_menu_demo/exampleHiddenDrawer/example_hidden_drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,67 +25,64 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
-  List<ScreenHiddenDrawer> itens = new List();
 
-  @override
-  void initState() {
-    itens.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
-          name: "Screen 1",
-          colorLineSelected: Colors.teal,
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
-          selectedStyle: TextStyle(color: Colors.teal),
-        ),
-        Container(
-          color: Colors.teal,
-          child: Center(
-            child: Text("Screen 1",
-                style: TextStyle(color: Colors.white, fontSize: 30.0)),
-          ),
-        )));
-
-    itens.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
-          name: "Screen 2",
-          colorLineSelected: Colors.orange,
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
-          selectedStyle: TextStyle(color: Colors.orange),
-        ),
-        Container(
-          color: Colors.orange,
-          child: Center(
-            child: Text(
-              "Screen 2",
-              style: TextStyle(color: Colors.white, fontSize: 30.0),
-            ),
-          ),
-        )));
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return HiddenDrawerMenu(
-      initPositionSelected: 0,
-      screens: itens,
-      backgroundColorMenu: Colors.cyan,
-      //    enableScaleAnimin: true,
-      //    enableCornerAnimin: true,
-      //    slidePercent: 80.0,
-      //    verticalScalePercent: 80.0,
-      //    contentCornerRadius: 10.0,
-      //    iconMenuAppBar: Icon(Icons.menu),
-      //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-      //    whithAutoTittleName: true,
-      //    styleAutoTittleName: TextStyle(color: Colors.red),
-      //    actionsAppBar: <Widget>[],
-      //    backgroundColorContent: Colors.blue,
-      //    backgroundColorAppBar: Colors.blue,
-      //    elevationAppBar: 4.0,
-      //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-      //    enableShadowItensMenu: true,
-      //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              width: 200.0,
+              child: RaisedButton(
+                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(20.0)
+                    )
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ExampleHiddenDrawer()),
+                  );
+                },
+                child: Text(
+                  "Default Example",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 200.0,
+              child: RaisedButton(
+                  color: Colors.orange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(20.0)
+                      )
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExampleCustomMenu()),
+                    );
+                  },
+                  child: Text(
+                    "Custom Menu Drawer",
+                    style: TextStyle(
+                        color: Colors.white
+                    ),
+                  )),
+            )
+          ],
+        ),
+      ),
     );
   }
 
