@@ -189,6 +189,15 @@ SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((posi
   print(position);
 });
 ```
+
+## Listern state menu (closed,opening,open,closing)
+
+```Dart
+SimpleHiddenDrawerProvider.of(context).getMenuStateListern().listen((state){
+  print(state);
+});
+```
+
 ## If you want to use only the widget responsible for the animation, it is now available as AnimatedDrawerContent
 
 ![Example usage AnimatedDrawerContent](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/develop/imgs/exampleAnimated.gif)
