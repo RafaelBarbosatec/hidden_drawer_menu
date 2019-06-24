@@ -185,7 +185,7 @@ SimpleHiddenDrawerProvider.of(context).toggle();
 ## Listen selected position
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((position){
+SimpleHiddenDrawerProvider.of(context).getPositionSelectedListener().listen((position){
   print(position);
 });
 ```
@@ -193,7 +193,7 @@ SimpleHiddenDrawerProvider.of(context).getPositionSelectedListern().listen((posi
 ## Listen to menu status (closed,opening,open,closing)
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).getMenuStateListern().listen((state){
+SimpleHiddenDrawerProvider.of(context).getMenuStateListener().listen((state){
   print(state);
 });
 ```

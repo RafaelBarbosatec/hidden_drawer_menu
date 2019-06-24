@@ -56,11 +56,11 @@ class SimpleHiddenDrawerBloc {
     return positionStected;
   }
 
-  Stream<int> getPositionSelectedListern(){
+  Stream<int> getPositionSelectedListener(){
     return controllers.getpositionSelected;
   }
 
-  Stream<MenuState> getMenuStateListern(){
+  Stream<MenuState> getMenuStateListener(){
     return controllers.getMenuState;
   }
 
