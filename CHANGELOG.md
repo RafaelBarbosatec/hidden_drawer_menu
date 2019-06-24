@@ -1,3 +1,8 @@
+## [1.1.0] - 
+
+* Added open from right
+* Added menu states listener
+
 ## [1.0.1] - TODO: ADD SimpleHiddenDrawer.
 
 * Added configurable slidePercent
