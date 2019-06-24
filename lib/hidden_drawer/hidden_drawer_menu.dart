@@ -15,6 +15,7 @@ import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
 import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
@@ -124,6 +125,21 @@ class HiddenDrawerMenu extends StatelessWidget {
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
       screenSelectedBuilder: (position,bloc){
+
+        List<Widget> actions = List();
+
+        if(typeOpen == TypeOpen.FROM_RIGHT){
+          actions.add(IconButton(
+              icon: iconMenuAppBar,
+              onPressed: () {
+                bloc.toggle();
+              }));
+        }
+
+        if(actionsAppBar != null){
+          actions.addAll(actionsAppBar);
+        }
+
         return Scaffold(
           backgroundColor: backgroundColorContent,
           appBar: AppBar(
@@ -131,12 +147,8 @@ class HiddenDrawerMenu extends StatelessWidget {
             elevation: elevationAppBar,
             title: getTittleAppBar(position),
             centerTitle: isTitleCentered,
-            leading: IconButton(
-                icon: iconMenuAppBar,
-                onPressed: () {
-                  bloc.toggle();
-                }),
-            actions: actionsAppBar,
+            leading: _buildLeading(bloc),
+            actions: actions,
           ),
           body: screens[position].screen,
         );
@@ -173,6 +185,18 @@ class HiddenDrawerMenu extends StatelessWidget {
       enableShadowItensMenu: enableShadowItensMenu,
       typeOpen: typeOpen,
     );
+  }
+
+  Widget _buildLeading(SimpleHiddenDrawerBloc bloc) {
+    if(typeOpen == TypeOpen.FROM_LEFT){
+      return IconButton(
+          icon: iconMenuAppBar,
+          onPressed: () {
+            bloc.toggle();
+          });
+    }else{
+      return null;
+    }
   }
 
 }
