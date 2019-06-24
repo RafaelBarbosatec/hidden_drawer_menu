@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
       ),
       home: SimpleHiddenDrawer(
         menu: Menu(),
-        screenSelectedBuilder: (position,bloc) {
+        screenSelectedBuilder: (position,controller) {
           
           Widget screenCurrent;
           
@@ -117,7 +117,7 @@ class MyApp extends StatelessWidget {
               leading: IconButton(
                   icon: Icon(Icons.menu),
                   onPressed: () {
-                    bloc.toggle();
+                    controller.toggle();
                   }),
             ),
             body: screenCurrent,

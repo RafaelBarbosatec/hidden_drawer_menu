@@ -113,6 +113,10 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProv
       animationCurve: widget.curveAnimation
     );
 
+    _controller.addListener((){
+      _bloc.controllers.setMenuState(_controller.state);
+    });
+
     _bloc.controllers.getActionToggle.listen((d){
       _controller.toggle();
     });

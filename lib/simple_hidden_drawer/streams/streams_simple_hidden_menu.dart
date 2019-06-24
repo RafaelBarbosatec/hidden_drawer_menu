@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 
 class StreamsSimpleHiddenMenu{
 
@@ -18,10 +19,16 @@ class StreamsSimpleHiddenMenu{
   Function(void) get setActionToggle => _actionToggleController.sink.add;
   Stream get getActionToggle => _actionToggleController.stream;
 
+  /// stream used to control animation
+  StreamController<MenuState> _menuStateController = StreamController();
+  Function(MenuState) get setMenuState => _menuStateController.sink.add;
+  Stream get getMenuState => _menuStateController.stream;
+
   dispose() {
     _screenSelectedController.close();
     _positionSelectedController.close();
     _actionToggleController.close();
+    _menuStateController.close();
   }
 
 }

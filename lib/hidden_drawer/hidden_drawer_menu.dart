@@ -7,6 +7,7 @@ export 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 
 
