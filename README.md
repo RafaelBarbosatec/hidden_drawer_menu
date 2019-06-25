@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Screen 1",
-          colorTextUnSelected: Colors.white.withOpacity(0.5),
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
           colorLineSelected: Colors.teal,
         ),
         FirstSreen()));
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Screen 2",
-          colorTextUnSelected: Colors.white.withOpacity(0.5),
+          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
           colorLineSelected: Colors.orange,
         ),
         SecondSreen()));
