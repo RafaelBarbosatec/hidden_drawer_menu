@@ -138,8 +138,8 @@ class HiddenDrawerMenu extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: backgroundColorContent,
-          appBar: AppBar(
-            backgroundColor: backgroundColorAppBar,
+            appBar:screens[position].itemMenu.hideAppBar ? null :  AppBar(
+            backgroundColor: screens[position].itemMenu.appBarColor != null ? screens[position].itemMenu.appBarColor : backgroundColorAppBar,
             elevation: elevationAppBar,
             title: getTittleAppBar(position),
             centerTitle: isTitleCentered,

@@ -25,6 +25,8 @@ class HiddenMenu extends StatefulWidget {
 
   final TypeOpen typeOpen;
 
+  
+
   HiddenMenu(
       {Key key,
       this.background,
