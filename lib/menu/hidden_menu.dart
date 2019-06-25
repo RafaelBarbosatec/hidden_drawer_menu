@@ -90,6 +90,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
                   itemBuilder: (context, index) {
                     if (widget.typeOpen == TypeOpen.FROM_LEFT) {
                       return ItemHiddenMenu(
+                        menuIcon: widget.itens[index].menuIcon,
                         name: widget.itens[index].name,
                         selected: index == _indexSelected,
                         colorLineSelected:

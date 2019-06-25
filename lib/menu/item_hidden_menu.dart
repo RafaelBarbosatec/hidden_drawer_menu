@@ -26,6 +26,21 @@ class ItemHiddenMenu extends StatelessWidget {
   //A diferent color for a specific appbar
   final Color appBarColor;
 
+  _getMenuIcon() {
+    if (menuIcon != null) {
+      return Row(
+        children: <Widget>[
+          SizedBox(width: 5),
+          Icon(
+            menuIcon,
+            color:
+                this.selected ? this.selectedStyle.color : this.baseStyle.color,
+          ),
+        ],
+      );
+    }
+  }
+
   ItemHiddenMenu(
       {Key key,
       this.name,
@@ -58,6 +73,7 @@ class ItemHiddenMenu extends StatelessWidget {
                 width: 5.0,
               ),
             ),
+            _getMenuIcon(),
             Expanded(
               child: Container(
                   margin: EdgeInsets.only(left: 20.0),
