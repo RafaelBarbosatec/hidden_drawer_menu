@@ -39,6 +39,8 @@ class ItemHiddenMenu extends StatelessWidget {
         ],
       );
     }
+
+    return Row();
   }
 
   ItemHiddenMenu(
