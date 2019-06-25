@@ -15,6 +15,9 @@ You can use a pre-defined menu or make a fully customized menu.
 # Use with default menu
 
 ```Dart
+
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -93,6 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
 # Use with full customization menu
 
 ```Dart
+
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
           initPositionSelected: 0,
           screens: itens,
           backgroundColorMenu: Colors.cyan,
+    //    typeOpen: TypeOpen.FROM_RIGHT,
     //    slidePercent: 80.0,
     //    verticalScalePercent: 80.0,
     //    contentCornerRadius: 10.0,
