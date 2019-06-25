@@ -6,7 +6,7 @@ Hidden Drawer Menu is a library for adding a beautiful drawer mode menu feature 
 
 You can use a pre-defined menu or make a fully customized menu.
 
-![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/app2.gif)
+![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/example.gif)
 
 
 [Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/hidden_drawer.apk)
