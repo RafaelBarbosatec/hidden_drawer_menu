@@ -82,6 +82,9 @@ class HiddenDrawerMenu extends StatelessWidget {
   final bool enableCornerAnimin;
 
   final TypeOpen typeOpen;
+  
+  // Let the user decide whether he wants to use the default plugin appbar or no
+  final bool useDefaultAppbar;
 
   HiddenDrawerMenu({
     this.screens,
@@ -106,6 +109,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
+    this.useDefaultAppbar = true
   });
 
   @override
@@ -136,18 +140,25 @@ class HiddenDrawerMenu extends StatelessWidget {
           actions.addAll(actionsAppBar);
         }
 
-        return Scaffold(
-          backgroundColor: backgroundColorContent,
-          appBar: AppBar(
-            backgroundColor: backgroundColorAppBar,
-            elevation: elevationAppBar,
-            title: getTittleAppBar(position),
-            centerTitle: isTitleCentered,
-            leading: _buildLeading(bloc),
-            actions: actions,
-          ),
-          body: screens[position].screen,
-        );
+        if(this.useDefaultAppbar) {
+          return Scaffold(
+            backgroundColor: backgroundColorContent,
+            appBar: AppBar(
+              backgroundColor: backgroundColorAppBar,
+              elevation: elevationAppBar,
+              title: getTittleAppBar(position),
+              centerTitle: isTitleCentered,
+              leading: _buildLeading(bloc),
+              actions: actions,
+            ),
+            body: screens[position].screen,
+          );  
+        } else {
+          return Scaffold(
+            backgroundColor: backgroundColorContent,
+            body: screens[position].screen,
+          );
+        }
       },
     );
   }
