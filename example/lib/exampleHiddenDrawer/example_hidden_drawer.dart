@@ -33,6 +33,13 @@ class ExampleHiddenDrawer extends StatelessWidget {
       initPositionSelected: 0,
       screens: itens,
       backgroundColorMenu: Colors.cyan,
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text("Titulo Legal", style: TextStyle(color: Colors.white , fontSize: 50), textAlign: TextAlign.center,),
+        ],
+      )
       //    typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,
@@ -47,7 +54,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
       //    backgroundColorContent: Colors.blue,
       //    backgroundColorAppBar: Colors.blue,
       //    elevationAppBar: 4.0,
-      //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
+     //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
       //    enableShadowItensMenu: true,
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );

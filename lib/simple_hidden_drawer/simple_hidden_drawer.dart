@@ -29,6 +29,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// anable animation borderRadius
   final bool enableCornerAnimin;
 
+  final Widget title;
   /// Function of the recive screen to show
   final Widget Function(int position, SimpleHiddenDrawerBloc bloc)
       screenSelectedBuilder;
@@ -49,7 +50,8 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.menu,
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
-    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.typeOpen = TypeOpen.FROM_LEFT, 
+    this.title,
   })  : assert(screenSelectedBuilder != null),
         assert(menu != null),
         super(key: key);
