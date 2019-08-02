@@ -26,11 +26,14 @@ class ItemHiddenMenu extends StatelessWidget {
   //A diferent color for a specific appbar
   final Color appBarColor;
 
+  final Icon icon;
+
   _getMenuIcon() {
     if (menuIcon != null) {
       return Row(
         children: <Widget>[
           SizedBox(width: 5),
+          icon ?? 
           Icon(
             menuIcon,
             color:
@@ -53,7 +56,8 @@ class ItemHiddenMenu extends StatelessWidget {
       this.selectedStyle,
       this.hideAppBar = false,
       this.menuIcon,
-      this.appBarColor})
+      this.appBarColor,
+      this.icon})
       : super(key: key);
 
   @override
