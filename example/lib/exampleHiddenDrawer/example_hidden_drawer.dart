@@ -13,6 +13,8 @@ class ExampleHiddenDrawer extends StatelessWidget {
           colorLineSelected: Colors.teal,
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.teal),
+          icon: Icon(Icons.home),
+         
         ),
         Screen1()
     ),
@@ -22,6 +24,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
           colorLineSelected: Colors.orange,
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.orange),
+           menuIcon: Icons.school,
         ),
         Screen2()
     )

@@ -28,8 +28,9 @@ class ItemHiddenMenu extends StatelessWidget {
 
   final Icon icon;
 
-  _getMenuIcon() {
-    if (menuIcon != null) {
+  _getMenuIcon() {   
+    print("Icon: ${icon}"); 
+    if (menuIcon != null || icon != null) {
       return Row(
         children: <Widget>[
           SizedBox(width: 5),
@@ -47,6 +48,7 @@ class ItemHiddenMenu extends StatelessWidget {
   }
 
   ItemHiddenMenu(
+     
       {Key key,
       this.name,
       this.selected = false,
@@ -57,8 +59,11 @@ class ItemHiddenMenu extends StatelessWidget {
       this.hideAppBar = false,
       this.menuIcon,
       this.appBarColor,
-      this.icon})
-      : super(key: key);
+      this.icon,
+     })
+      : super(key: key){
+        print("casa ${icon}");
+      }
 
   @override
   Widget build(BuildContext context) {

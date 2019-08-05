@@ -24,6 +24,7 @@ class HiddenMenu extends StatefulWidget {
   final int initPositionSelected;
 
   final TypeOpen typeOpen;
+
   final Widget title;
 
   HiddenMenu(
@@ -34,7 +35,8 @@ class HiddenMenu extends StatefulWidget {
       this.initPositionSelected,
       this.backgroundColorMenu,
       this.enableShadowItensMenu = false,
-      this.typeOpen = TypeOpen.FROM_LEFT, this.title})
+      this.typeOpen = TypeOpen.FROM_LEFT,
+      this.title})
       : super(key: key);
 
   @override
@@ -68,8 +70,8 @@ class _HiddenMenuState extends State<HiddenMenu> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(             
-              child: Container(                               
+            Expanded(
+              child: Container(
                 alignment: Alignment.center,
                 child: widget.title,
               ),
@@ -110,6 +112,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
                               SimpleHiddenDrawerProvider.of(context)
                                   .setSelectedMenuPosition(index);
                             },
+                            icon: widget.itens[index].icon,
                           );
                         } else {
                           return ItemHiddenMenuRight(
