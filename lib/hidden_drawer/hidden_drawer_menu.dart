@@ -83,6 +83,8 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   final TypeOpen typeOpen;
 
+  final Widget title;
+
   HiddenDrawerMenu({
     this.screens,
     this.initPositionSelected = 0,
@@ -106,6 +108,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
+    this.title,
   });
 
   @override
@@ -121,15 +124,20 @@ class HiddenDrawerMenu extends StatelessWidget {
       menu: buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
+      title: title,
       screenSelectedBuilder: (position, bloc) {
         List<Widget> actions = List();
 
-        if (typeOpen == TypeOpen.FROM_RIGHT) {
-          actions.add(IconButton(
+        if (typeOpen == TypeOpen.FROM_RIGHT) 
+        {
+          actions.add(
+            IconButton(
               icon: iconMenuAppBar,
               onPressed: () {
                 bloc.toggle();
-              }));
+              },
+            ),
+          );
         }
 
         if (actionsAppBar != null) {
@@ -138,14 +146,19 @@ class HiddenDrawerMenu extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: backgroundColorContent,
-          appBar: AppBar(
-            backgroundColor: backgroundColorAppBar,
-            elevation: elevationAppBar,
-            title: getTittleAppBar(position),
-            centerTitle: isTitleCentered,
-            leading: _buildLeading(bloc),
-            actions: actions,
-          ),
+          appBar: screens[position].itemMenu.hideAppBar
+              ? null
+              : AppBar(
+                  backgroundColor:
+                      screens[position].itemMenu.appBarColor != null
+                          ? screens[position].itemMenu.appBarColor
+                          : backgroundColorAppBar,
+                  elevation: elevationAppBar,
+                  title: getTittleAppBar(position),
+                  centerTitle: isTitleCentered,
+                  leading: _buildLeading(bloc),
+                  actions: actions,
+                ),
           body: screens[position].screen,
         );
       },
@@ -179,6 +192,7 @@ class HiddenDrawerMenu extends StatelessWidget {
       initPositionSelected: initPositionSelected,
       enableShadowItensMenu: enableShadowItensMenu,
       typeOpen: typeOpen,
+      title: title,
     );
   }
 

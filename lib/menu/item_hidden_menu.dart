@@ -17,15 +17,53 @@ class ItemHiddenMenu extends StatelessWidget {
 
   final bool selected;
 
-  ItemHiddenMenu({
-    Key key,
-    this.name,
-    this.selected = false,
-    this.onTap,
-    this.colorLineSelected = Colors.blue,
-    this.baseStyle,
-    this.selectedStyle,
-  }) : super(key: key);
+  //You need hide the app bar, in some cases like Slives
+  final bool hideAppBar;
+
+  //Menu Icon
+  final IconData menuIcon;
+
+  //A diferent color for a specific appbar
+  final Color appBarColor;
+
+  final Icon icon;
+
+  _getMenuIcon() {   
+    print("Icon: ${icon}"); 
+    if (menuIcon != null || icon != null) {
+      return Row(
+        children: <Widget>[
+          SizedBox(width: 5),
+          icon ?? 
+          Icon(
+            menuIcon,
+            color:
+                this.selected ? this.selectedStyle.color : this.baseStyle.color,
+          ),
+        ],
+      );
+    }
+
+    return Row();
+  }
+
+  ItemHiddenMenu(
+     
+      {Key key,
+      this.name,
+      this.selected = false,
+      this.onTap,
+      this.colorLineSelected = Colors.blue,
+      this.baseStyle,
+      this.selectedStyle,
+      this.hideAppBar = false,
+      this.menuIcon,
+      this.appBarColor,
+      this.icon,
+     })
+      : super(key: key){
+        print("casa ${icon}");
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +84,7 @@ class ItemHiddenMenu extends StatelessWidget {
                 width: 5.0,
               ),
             ),
+            _getMenuIcon(),
             Expanded(
               child: Container(
                   margin: EdgeInsets.only(left: 20.0),
