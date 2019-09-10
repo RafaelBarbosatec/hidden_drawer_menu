@@ -80,6 +80,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
             child: NotificationListener<OverscrollIndicatorNotification>(
               onNotification: (scroll) {
                 scroll.disallowGlow();
+                return false;
               },
               child: ListView.builder(
                   shrinkWrap: true,
@@ -95,6 +96,9 @@ class _HiddenMenuState extends State<HiddenMenu> {
                         baseStyle: widget.itens[index].baseStyle,
                         selectedStyle: widget.itens[index].selectedStyle,
                         onTap: () {
+                          if(widget.itens[index].onTap != null){
+                            widget.itens[index].onTap();
+                          }
                           SimpleHiddenDrawerProvider.of(context)
                               .setSelectedMenuPosition(index);
                         },

@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu_demo/screen1.dart';
-import 'package:hidden_drawer_menu_demo/screen2.dart';
+
+import '../screen1.dart';
+import '../screen2.dart';
 
 class ExampleHiddenDrawer extends StatelessWidget {
 
@@ -22,6 +23,9 @@ class ExampleHiddenDrawer extends StatelessWidget {
           colorLineSelected: Colors.orange,
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.orange),
+          onTap: (){
+            print("gfdgfdgdf dg gd df dfg dfg");
+          },
         ),
         Screen2()
     )
