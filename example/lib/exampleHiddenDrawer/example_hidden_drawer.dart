@@ -24,7 +24,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
           baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 25.0 ),
           selectedStyle: TextStyle(color: Colors.orange),
           onTap: (){
-            print("gfdgfdgdf dg gd df dfg dfg");
+            print("Click item");
           },
         ),
         Screen2()
