@@ -21,7 +21,7 @@ class StreamsSimpleHiddenMenu {
   Stream get getActionToggle => _actionToggleController.stream;
 
   /// stream used to control animation
-  StreamController<MenuState> _menuStateController = StreamController();
+  StreamController<MenuState> _menuStateController = StreamController.broadcast();
   Function(MenuState) get setMenuState => _menuStateController.sink.add;
   Stream get getMenuState => _menuStateController.stream;
 
