@@ -111,6 +111,7 @@ class HiddenDrawerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
+      disableCurrentScreenOnMenuOpened: true,
       isDraggable: isDraggable,
       curveAnimation: curveAnimation,
       slidePercent: slidePercent,

@@ -7,6 +7,7 @@ class ExampleCustomMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
+      disableCurrentScreenOnMenuOpened: true,
       menu: Menu(),
       screenSelectedBuilder: (position,controller) {
         Widget screenCurrent;
