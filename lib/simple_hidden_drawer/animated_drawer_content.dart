@@ -46,6 +46,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   double slideAmount = 0.0;
   double contentScale = 1.0;
   double cornerRadius = 0.0;
+  bool dragging = false;
 
   @override
   void initState() {
@@ -93,44 +94,45 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   _buildContet() {
-    return Stack(
-      children: <Widget>[
-        widget.child,
-        Container(
-          margin: EdgeInsets.only(
-              top: (widget.whithPaddingTop ? HEIGHT_APPBAR : 0)),
-          child: GestureDetector(
-            onHorizontalDragUpdate: (detail) {
-              if (widget.isDraggable) {
-                var left = _box.globalToLocal(Offset(0.0, 0.0)).dx;
-                var globalPosition = detail.globalPosition.dx + left;
-                if (globalPosition < 0) {
-                  globalPosition = 0;
-                }
-                double position =
-                    globalPosition / (MediaQuery.of(context).size.width + left);
-                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT
-                    ? position
-                    : (1 - position);
-                widget.controller.move(realPosition);
-              }
-            },
-            onHorizontalDragEnd: (detail) {
-              widget.controller.openOrClose();
-            },
-            child: Align(
-              alignment: widget.typeOpen == TypeOpen.FROM_LEFT
-                  ? Alignment.centerLeft
-                  : Alignment.centerRight,
-              child: Container(
-                height: height,
-                color: Colors.transparent,
-                width: WIDTH_GESTURE,
-              ),
-            ),
-          ),
-        )
-      ],
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+
+      onHorizontalDragStart: (detail) {
+        if (widget.isDraggable && detail.localPosition.dx <= 30) {
+          this.setState(() {
+            dragging = true;
+          });
+        }
+      },
+
+      onHorizontalDragUpdate: (detail) {
+        if (dragging) {
+          var left = _box.globalToLocal(Offset(0.0, 0.0)).dx;
+          var globalPosition = detail.globalPosition.dx + left;
+          if (globalPosition < 0) {
+            globalPosition = 0;
+          }
+          double position = globalPosition / (MediaQuery.of(context).size.width + left);
+          var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
+          widget.controller.move(realPosition);
+        }
+      },
+
+      onHorizontalDragEnd: (detail) {
+        if (dragging) {
+          widget.controller.openOrClose();
+          setState(() {
+            dragging = false;
+          });
+        }
+      },
+
+      onTap: () {
+        if (widget.controller.state == MenuState.open) {
+          widget.controller.close();
+        }
+      },
+      child: widget.child,
     );
   }
 
