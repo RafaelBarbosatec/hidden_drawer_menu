@@ -98,7 +98,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       behavior: HitTestBehavior.translucent,
 
       onHorizontalDragStart: (detail) {
-        if (widget.isDraggable && detail.localPosition.dx <= 30) {
+        if (widget.isDraggable && detail.localPosition.dx <= WIDTH_GESTURE && detail.localPosition.dy >= HEIGHT_APPBAR) {
           this.setState(() {
             dragging = true;
           });
