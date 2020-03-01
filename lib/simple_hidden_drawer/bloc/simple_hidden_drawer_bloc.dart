@@ -13,18 +13,21 @@ class SimpleHiddenDrawerBloc {
 
   bool _startDrag = false;
   bool _isFirstPositionSelected = true;
-  int positionStected = 0;
+  int positionSelected = 0;
+  bool shouldToggle = true;
 
   SimpleHiddenDrawerBloc(
       this._initPositionSelected, this._screenSelectedBuilder) {
     controllers.getpositionSelected.listen((position) {
-      if (position != positionStected || _isFirstPositionSelected) {
-        positionStected = position;
+      if (position != positionSelected || _isFirstPositionSelected) {
+        positionSelected = position;
         _setScreen(position);
-
-        if (!_startDrag && !_isFirstPositionSelected) {
-          toggle();
+        if (shouldToggle) {
+          if (!_startDrag && !_isFirstPositionSelected) {
+            toggle();
+          }
         }
+        shouldToggle=true;
       } else {
         toggle();
       }
@@ -48,7 +51,7 @@ class SimpleHiddenDrawerBloc {
   }
 
   int getPositionSelected() {
-    return positionStected;
+    return positionSelected;
   }
 
   Stream<int> getPositionSelectedListener() {
@@ -57,6 +60,11 @@ class SimpleHiddenDrawerBloc {
 
   Stream<MenuState> getMenuStateListener() {
     return controllers.getMenuState;
+  }
+  setScreenByIndex(int position,bool openDrawer) {
+    shouldToggle=openDrawer;
+    _setScreen(position);
+    controllers.setPositionSelected(position);
   }
 
   _setScreen(int position) {
