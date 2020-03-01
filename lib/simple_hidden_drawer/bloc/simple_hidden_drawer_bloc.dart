@@ -50,6 +50,11 @@ class SimpleHiddenDrawerBloc {
     controllers.setPositionSelected(position);
   }
 
+  void setScreenByIndex(int position, bool openDrawer) {
+    shouldToggle=openDrawer;
+    _setScreen(position);
+    controllers.setPositionSelected(position);
+  }
   int getPositionSelected() {
     return positionSelected;
   }
@@ -60,11 +65,6 @@ class SimpleHiddenDrawerBloc {
 
   Stream<MenuState> getMenuStateListener() {
     return controllers.getMenuState;
-  }
-  setScreenByIndex(int position,bool openDrawer) {
-    shouldToggle=openDrawer;
-    _setScreen(position);
-    controllers.setPositionSelected(position);
   }
 
   _setScreen(int position) {
