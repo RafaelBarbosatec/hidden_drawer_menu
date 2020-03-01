@@ -7,9 +7,9 @@ class StreamsSimpleHiddenMenu {
   StreamController<int> _positionSelectedController =
       StreamController<int>.broadcast();
   Function(int) get setPositionSelected => _positionSelectedController.sink.add;
-  Stream<int> get getpositionSelected => _positionSelectedController.stream;
+  Stream<int> get getPositionSelected => _positionSelectedController.stream;
 
-  Function(int) get setScreenByIndex => _positionSelectedController.sink.add;
+
 
   /// stream used to control screen selected
   StreamController<Widget> _screenSelectedController =

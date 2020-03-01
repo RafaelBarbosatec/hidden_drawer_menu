@@ -18,7 +18,7 @@ class SimpleHiddenDrawerBloc {
 
   SimpleHiddenDrawerBloc(
       this._initPositionSelected, this._screenSelectedBuilder) {
-    controllers.getpositionSelected.listen((position) {
+    controllers.getPositionSelected.listen((position) {
       if (position != positionSelected || _isFirstPositionSelected) {
         positionSelected = position;
         _setScreen(position);
@@ -60,7 +60,7 @@ class SimpleHiddenDrawerBloc {
   }
 
   Stream<int> getPositionSelectedListener() {
-    return controllers.getpositionSelected;
+    return controllers.getPositionSelected;
   }
 
   Stream<MenuState> getMenuStateListener() {
