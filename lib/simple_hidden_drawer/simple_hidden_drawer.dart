@@ -37,6 +37,10 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
   final TypeOpen typeOpen;
 
+  //adding the ability to disable the current screen when menu is opened
+  // and instead when clicked on current screen menu will be toggled
+  final bool disableCurrentScreenOnMenuOpened;
+
   const SimpleHiddenDrawer({
     Key key,
     this.initPositionSelected = 0,
@@ -50,8 +54,10 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.enableScaleAnimin = true,
     this.enableCornerAnimin = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
+    @required this.disableCurrentScreenOnMenuOpened,
   })  : assert(screenSelectedBuilder != null),
         assert(menu != null),
+        assert(disableCurrentScreenOnMenuOpened != null),
         super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
@@ -95,7 +101,44 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       enableScaleAnimin: widget.enableScaleAnimin,
       enableCornerAnimin: widget.enableCornerAnimin,
       typeOpen: widget.typeOpen,
-      child: StreamBuilder(
+      child: widget.disableCurrentScreenOnMenuOpened
+          ? StreamBuilder(
+          stream: _bloc.controllers.getMenuState,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Stack(
+              alignment: Alignment.center,
+              fit: StackFit.expand,
+              children: <Widget>[
+                FractionallySizedBox(
+                  alignment: Alignment.center,
+                  widthFactor: 1,
+                  heightFactor: 1,
+                  child: StreamBuilder(
+                    stream: _bloc.controllers.getScreenSelected,
+                    initialData: Container(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot snapshot) {
+                      return snapshot.data;
+                    },
+                  ),
+                ),
+                FractionallySizedBox(
+                  alignment: snapshot.data == MenuState.closed
+                      ? Alignment.topRight
+                      : Alignment.center,
+                  widthFactor: snapshot.data == MenuState.closed ? 0 : 1,
+                  heightFactor: snapshot.data == MenuState.closed ? 0 : 1,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                      _controller.toggle();
+                    },
+                  ),
+                ),
+              ],
+            );
+          })
+          : StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
