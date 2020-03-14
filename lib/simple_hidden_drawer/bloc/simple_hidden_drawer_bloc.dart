@@ -52,6 +52,7 @@ class SimpleHiddenDrawerBloc {
 
   void setScreenByIndex(int position, bool openDrawer) {
     shouldToggle=openDrawer;
+    _setScreen(position);
     controllers.setPositionSelected(position);
   }
   int getPositionSelected() {
