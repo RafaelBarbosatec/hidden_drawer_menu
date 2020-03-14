@@ -31,7 +31,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
   /// Function of the recive screen to show
   final Widget Function(int position, SimpleHiddenDrawerBloc bloc)
-      screenSelectedBuilder;
+  screenSelectedBuilder;
 
   final Widget menu;
 
@@ -126,8 +126,8 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
                   alignment: snapshot.data == MenuState.closed
                       ? Alignment.topRight
                       : Alignment.center,
-                  widthFactor: snapshot.data == MenuState.closed ? 0 : 1,
-                  heightFactor: snapshot.data == MenuState.closed ? 0 : 1,
+                  widthFactor: getFactor(snapshot.data),
+                  heightFactor: getFactor(snapshot.data),
                   child: GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: () {
@@ -146,7 +146,14 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
           }),
     );
   }
-
+  double getFactor(data){
+    if(data != null){
+      return data == MenuState.closed ? 0.0 : 1.0;
+    }
+    else{
+      return 0.0;
+    }
+  }
   void initControllerAnimation() {
     _controller = new HiddenDrawerController(
         vsync: this, animationCurve: widget.curveAnimation);
