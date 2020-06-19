@@ -1,3 +1,9 @@
+## [1.1.4] - 19/062020
+
+* Migrate Example to AndroidX
+* Add PR #26
+* Add PR #38
+
 ## [1.1.2] -
 
 * Fiz bug issue #22
