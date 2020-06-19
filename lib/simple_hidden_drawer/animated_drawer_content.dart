@@ -10,10 +10,10 @@ class AnimatedDrawerContent extends StatefulWidget {
   final double slidePercent;
   final double verticalScalePercent;
   final double contentCornerRadius;
-  final bool whithPaddingTop;
-  final bool whithShadow;
-  final bool enableScaleAnimin;
-  final bool enableCornerAnimin;
+  final bool withPaddingTop;
+  final bool withShadow;
+  final bool enableScaleAnimation;
+  final bool enableCornerAnimation;
   final TypeOpen typeOpen;
 
   const AnimatedDrawerContent(
@@ -24,10 +24,10 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.slidePercent,
       this.verticalScalePercent,
       this.contentCornerRadius,
-      this.whithPaddingTop = false,
-      this.whithShadow = true,
-      this.enableScaleAnimin = true,
-      this.enableCornerAnimin = true,
+      this.withPaddingTop = false,
+      this.withShadow = true,
+      this.enableScaleAnimation = true,
+      this.enableCornerAnimation = true,
       this.typeOpen = TypeOpen.FROM_LEFT})
       : assert(controller != null),
         super(key: key);
@@ -61,11 +61,11 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         var animatePercent = widget.controller.value;
         slideAmount = ((width) / 100 * widget.slidePercent) * animatePercent;
 
-        if (widget.enableScaleAnimin)
+        if (widget.enableScaleAnimation)
           contentScale = 1.0 -
               (((100 - widget.verticalScalePercent) / 100) * animatePercent);
 
-        if (widget.enableCornerAnimin)
+        if (widget.enableCornerAnimation)
           cornerRadius = widget.contentCornerRadius * animatePercent;
 
         slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
@@ -98,7 +98,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         widget.child,
         Container(
           margin: EdgeInsets.only(
-              top: (widget.whithPaddingTop ? HEIGHT_APPBAR : 0)),
+              top: (widget.withPaddingTop ? HEIGHT_APPBAR : 0)),
           child: GestureDetector(
             onHorizontalDragUpdate: (detail) {
               if (widget.isDraggable) {
@@ -135,7 +135,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   List<BoxShadow> _getShadow() {
-    if (widget.whithShadow) {
+    if (widget.withShadow) {
       return [
         new BoxShadow(
           color: const Color(0x44000000),
