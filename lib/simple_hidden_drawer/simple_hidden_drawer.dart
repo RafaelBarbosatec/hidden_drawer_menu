@@ -29,13 +29,16 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// enable animation borderRadius
   final bool enableCornerAnimation;
 
-  /// Function of the recive screen to show
+  /// Function of the receive screen to show
   final Widget Function(int position, SimpleHiddenDrawerBloc bloc)
       screenSelectedBuilder;
 
   final Widget menu;
 
   final TypeOpen typeOpen;
+
+  /// display shadow on the edge of the drawer
+  final bool withShadow;
 
   const SimpleHiddenDrawer({
     Key key,
@@ -50,6 +53,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.enableScaleAnimation = true,
     this.enableCornerAnimation = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
+    this.withShadow = true
   })  : assert(screenSelectedBuilder != null),
         assert(menu != null),
         super(key: key);
@@ -86,7 +90,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
 
   createContentDisplay() {
     return AnimatedDrawerContent(
-      whithPaddingTop: true,
+      withPaddingTop: true,
       controller: _controller,
       isDraggable: widget.isDraggable,
       slidePercent: widget.slidePercent,
@@ -95,6 +99,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       enableScaleAnimation: widget.enableScaleAnimation,
       enableCornerAnimation: widget.enableCornerAnimation,
       typeOpen: widget.typeOpen,
+      withShadow: widget.withShadow,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),
