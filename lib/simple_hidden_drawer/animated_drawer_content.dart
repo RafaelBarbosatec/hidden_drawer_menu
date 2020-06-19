@@ -40,60 +40,54 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   static const double WIDTH_GESTURE = 50.0;
   static const double HEIGHT_APPBAR = 80.0;
   static const double BLUR_SHADOW = 20.0;
-  RenderBox _box;
-  double width = 0;
-  double height = 0;
   double slideAmount = 0.0;
   double contentScale = 1.0;
   double cornerRadius = 0.0;
   bool dragging = false;
 
   @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: widget.controller,
-      builder: (_, child) {
-        var animatePercent = widget.controller.value;
-        slideAmount = ((width) / 100 * widget.slidePercent) * animatePercent;
+    return LayoutBuilder(builder: (context, constraints) {
+      return AnimatedBuilder(
+        animation: widget.controller,
+        builder: (_, child) {
+          var animatePercent = widget.controller.value;
+          slideAmount = ((constraints.maxWidth) / 100 * widget.slidePercent) *
+              animatePercent;
 
-        if (widget.enableScaleAnimation)
-          contentScale = 1.0 -
-              (((100 - widget.verticalScalePercent) / 100) * animatePercent);
+          if (widget.enableScaleAnimation)
+            contentScale = 1.0 -
+                (((100 - widget.verticalScalePercent) / 100) * animatePercent);
 
-        if (widget.enableCornerAnimation)
-          cornerRadius = widget.contentCornerRadius * animatePercent;
+          if (widget.enableCornerAnimation)
+            cornerRadius = widget.contentCornerRadius * animatePercent;
 
-        slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
-            ? slideAmount
-            : (-1 * slideAmount);
+          slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
+              ? slideAmount
+              : (-1 * slideAmount);
 
-        return Transform(
-          transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-            ..scale(contentScale, contentScale),
-          alignment: widget.typeOpen == TypeOpen.FROM_LEFT
-              ? Alignment.centerLeft
-              : Alignment.centerRight,
-          child: Container(
-            decoration: new BoxDecoration(
-              boxShadow: _getShadow(),
+          return Transform(
+            transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
+              ..scale(contentScale, contentScale),
+            alignment: widget.typeOpen == TypeOpen.FROM_LEFT
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
+            child: Container(
+              decoration: new BoxDecoration(
+                boxShadow: _getShadow(),
+              ),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(cornerRadius),
+                  child: child),
             ),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(cornerRadius),
-                child: child),
-          ),
-        );
-      },
-      child: _buildContet(),
-    );
+          );
+        },
+        child: _buildContet(constraints),
+      );
+    });
   }
 
-  _buildContet() {
+  _buildContet(BoxConstraints constraints) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onHorizontalDragStart: (detail) {
@@ -109,13 +103,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       },
       onHorizontalDragUpdate: (detail) {
         if (dragging) {
-          var left = _box.globalToLocal(Offset(0.0, 0.0)).dx;
-          var globalPosition = detail.globalPosition.dx + left;
-          if (globalPosition < 0) {
-            globalPosition = 0;
-          }
-          double position =
-              globalPosition / (MediaQuery.of(context).size.width + left);
+          var globalPosition = detail.globalPosition.dx;
+          globalPosition = globalPosition < 0 ? 0 : globalPosition;
+          double position = globalPosition / constraints.maxWidth;
           var realPosition =
               widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
           widget.controller.move(realPosition);
@@ -151,13 +141,5 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
     } else {
       return [];
     }
-  }
-
-  void _afterLayout(Duration timeStamp) {
-    setState(() {
-      _box = context.findRenderObject();
-      width = _box.size.width;
-      height = _box.size.height;
-    });
   }
 }

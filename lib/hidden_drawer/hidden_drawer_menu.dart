@@ -1,14 +1,5 @@
 library hidden_drawer_menu;
 
-export 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
-export 'package:hidden_drawer_menu/menu/hidden_menu.dart';
-export 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
-export 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
-export 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
-export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
-export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
-export 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu.dart';
@@ -16,6 +7,15 @@ import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
+
+export 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+export 'package:hidden_drawer_menu/hidden_drawer/screen_hidden_drawer.dart';
+export 'package:hidden_drawer_menu/menu/hidden_menu.dart';
+export 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
+export 'package:hidden_drawer_menu/simple_hidden_drawer/simple_hidden_drawer.dart';
 
 class HiddenDrawerMenu extends StatelessWidget {
   /// List item menu and respective screens
@@ -40,8 +40,8 @@ class HiddenDrawerMenu extends StatelessWidget {
   ///Change elevation of the AppBar
   final double elevationAppBar;
 
-  ///Change iconmenu of the AppBar
-  final Widget iconMenuAppBar;
+  ///Change leading of the AppBar
+  final Widget leadingAppBar;
 
   /// Add actions in the AppBar
   final List<Widget> actionsAppBar;
@@ -88,7 +88,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.initPositionSelected = 0,
     this.backgroundColorAppBar,
     this.elevationAppBar = 4.0,
-    this.iconMenuAppBar = const Icon(Icons.menu),
+    this.leadingAppBar = const Icon(Icons.menu),
     this.backgroundMenu,
     this.backgroundColorMenu,
     this.backgroundColorContent = Colors.white,
@@ -126,7 +126,7 @@ class HiddenDrawerMenu extends StatelessWidget {
 
         if (typeOpen == TypeOpen.FROM_RIGHT) {
           actions.add(IconButton(
-              icon: iconMenuAppBar,
+              icon: leadingAppBar,
               onPressed: () {
                 bloc.toggle();
               }));
@@ -184,13 +184,9 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   Widget _buildLeading(SimpleHiddenDrawerBloc bloc) {
     if (typeOpen == TypeOpen.FROM_LEFT) {
-      return IconButton(
-          icon: iconMenuAppBar,
-          onPressed: () {
-            bloc.toggle();
-          });
+      return IconButton(icon: leadingAppBar, onPressed: () => bloc.toggle());
     } else {
-      return null;
+      return SizedBox.shrink();
     }
   }
 }

@@ -8,11 +8,15 @@ class ExampleCustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
       menu: Menu(),
-      screenSelectedBuilder: (position,controller) {
+      screenSelectedBuilder: (position, controller) {
         Widget screenCurrent;
-        switch(position){
-          case 0 : screenCurrent = Screen1(); break;
-          case 1 : screenCurrent = Screen2(); break;
+        switch (position) {
+          case 0:
+            screenCurrent = Screen1();
+            break;
+          case 1:
+            screenCurrent = Screen2();
+            break;
         }
 
         return Scaffold(
@@ -35,22 +39,34 @@ class Menu extends StatefulWidget {
   _MenuState createState() => _MenuState();
 }
 
-class _MenuState extends State<Menu> with TickerProviderStateMixin{
-
+class _MenuState extends State<Menu> with TickerProviderStateMixin {
   AnimationController _animationController;
-  bool initConfigState = false;
 
   @override
   void initState() {
-    _animationController = AnimationController(vsync: this,duration: Duration(milliseconds: 300));
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     super.initState();
   }
 
   @override
+  void didChangeDependencies() {
+    SimpleHiddenDrawerProvider.of(context)
+        .getMenuStateListener()
+        .listen((state) {
+      if (state == MenuState.open) {
+        _animationController.forward();
+      }
+
+      if (state == MenuState.closing) {
+        _animationController.reverse();
+      }
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    confListenerState(context);
-
     return Container(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -80,40 +96,32 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin{
                       child: RaisedButton(
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20.0)
-                          )
-                        ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
                         onPressed: () {
                           SimpleHiddenDrawerProvider.of(context)
                               .setSelectedMenuPosition(0);
                         },
                         child: Text(
-                            "Menu 1",
-                          style: TextStyle(
-                            color: Colors.white
-                          ),
+                          "Menu 1",
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
                     SizedBox(
                       width: 200.0,
                       child: RaisedButton(
-                        color: Colors.orange,
+                          color: Colors.orange,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0)
-                              )
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
                           onPressed: () {
                             SimpleHiddenDrawerProvider.of(context)
                                 .setSelectedMenuPosition(1);
                           },
                           child: Text(
-                              "Menu 2",
-                            style: TextStyle(
-                                color: Colors.white
-                            ),
+                            "Menu 2",
+                            style: TextStyle(color: Colors.white),
                           )),
                     )
                   ],
@@ -125,23 +133,4 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin{
       ),
     );
   }
-
-  void confListenerState(BuildContext context) {
-    if(!initConfigState){
-      initConfigState = true;
-      SimpleHiddenDrawerProvider.of(context).getMenuStateListener().listen((state){
-
-        if(state == MenuState.open){
-          _animationController.forward();
-        }
-
-        if(state == MenuState.closing){
-          _animationController.reverse();
-        }
-      });
-    }
-  }
-
-
 }
-

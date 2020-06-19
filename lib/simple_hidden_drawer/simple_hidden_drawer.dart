@@ -40,21 +40,21 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// display shadow on the edge of the drawer
   final bool withShadow;
 
-  const SimpleHiddenDrawer({
-    Key key,
-    this.initPositionSelected = 0,
-    this.isDraggable = true,
-    this.slidePercent = 80.0,
-    this.verticalScalePercent = 80.0,
-    this.contentCornerRadius = 10.0,
-    this.curveAnimation = Curves.decelerate,
-    this.screenSelectedBuilder,
-    this.menu,
-    this.enableScaleAnimation = true,
-    this.enableCornerAnimation = true,
-    this.typeOpen = TypeOpen.FROM_LEFT,
-    this.withShadow = true
-  })  : assert(screenSelectedBuilder != null),
+  const SimpleHiddenDrawer(
+      {Key key,
+      this.initPositionSelected = 0,
+      this.isDraggable = true,
+      this.slidePercent = 80.0,
+      this.verticalScalePercent = 80.0,
+      this.contentCornerRadius = 10.0,
+      this.curveAnimation = Curves.decelerate,
+      this.screenSelectedBuilder,
+      this.menu,
+      this.enableScaleAnimation = true,
+      this.enableCornerAnimation = true,
+      this.typeOpen = TypeOpen.FROM_LEFT,
+      this.withShadow = true})
+      : assert(screenSelectedBuilder != null),
         assert(menu != null),
         super(key: key);
   @override
@@ -69,26 +69,38 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
   HiddenDrawerController _controller;
 
   @override
-  Widget build(BuildContext context) {
-    if (_bloc == null) {
-      _bloc = SimpleHiddenDrawerBloc(
-          widget.initPositionSelected, widget.screenSelectedBuilder);
-      initControllerAnimation();
-    }
+  void initState() {
+    _bloc = SimpleHiddenDrawerBloc(
+      widget.initPositionSelected,
+      widget.screenSelectedBuilder,
+    );
 
+    _controller = new HiddenDrawerController(
+      vsync: this,
+      animationCurve: widget.curveAnimation,
+    );
+
+    _controller.addListener(() {
+      _bloc.controllers.setMenuState(_controller.state);
+    });
+
+    _bloc.controllers.getActionToggle.listen((d) {
+      _controller.toggle();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SimpleHiddenDrawerProvider(
       hiddenDrawerBloc: _bloc,
-      child: buildLayout(),
+      child: Stack(
+        children: [widget.menu, _createContentDisplay()],
+      ),
     );
   }
 
-  Widget buildLayout() {
-    return Stack(
-      children: [widget.menu, createContentDisplay()],
-    );
-  }
-
-  createContentDisplay() {
+  Widget _createContentDisplay() {
     return AnimatedDrawerContent(
       withPaddingTop: true,
       controller: _controller,
@@ -101,25 +113,13 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       typeOpen: widget.typeOpen,
       withShadow: widget.withShadow,
       child: StreamBuilder(
-          stream: _bloc.controllers.getScreenSelected,
-          initialData: Container(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return snapshot.data;
-          }),
+        stream: _bloc.controllers.getScreenSelected,
+        initialData: SizedBox.shrink(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return snapshot.data;
+        },
+      ),
     );
-  }
-
-  void initControllerAnimation() {
-    _controller = new HiddenDrawerController(
-        vsync: this, animationCurve: widget.curveAnimation);
-
-    _controller.addListener(() {
-      _bloc.controllers.setMenuState(_controller.state);
-    });
-
-    _bloc.controllers.getActionToggle.listen((d) {
-      _controller.toggle();
-    });
   }
 
   @override
