@@ -75,11 +75,11 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// radius applied to the content when active
   final double contentCornerRadius;
 
-  /// anable animation Scale
-  final bool enableScaleAnimin;
+  /// enable animation Scale
+  final bool enableScaleAnimation;
 
-  /// anable animation borderRadius
-  final bool enableCornerAnimin;
+  /// enable animation borderRadius
+  final bool enableCornerAnimation;
 
   final TypeOpen typeOpen;
 
@@ -103,8 +103,8 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.slidePercent = 80.0,
     this.verticalScalePercent = 80.0,
     this.contentCornerRadius = 10.0,
-    this.enableScaleAnimin = true,
-    this.enableCornerAnimin = true,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
   });
 
@@ -116,8 +116,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       slidePercent: slidePercent,
       verticalScalePercent: verticalScalePercent,
       contentCornerRadius: contentCornerRadius,
-      enableCornerAnimin: enableCornerAnimin,
-      enableScaleAnimin: enableScaleAnimin,
+      enableCornerAnimation: enableCornerAnimation,
+      enableScaleAnimation: enableScaleAnimation,
       menu: buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,

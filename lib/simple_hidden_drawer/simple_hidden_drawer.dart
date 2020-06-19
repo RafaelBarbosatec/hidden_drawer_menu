@@ -23,19 +23,22 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
-  /// anable animation Scale
-  final bool enableScaleAnimin;
+  /// enable animation Scale
+  final bool enableScaleAnimation;
 
-  /// anable animation borderRadius
-  final bool enableCornerAnimin;
+  /// enable animation borderRadius
+  final bool enableCornerAnimation;
 
-  /// Function of the recive screen to show
+  /// Function of the receive screen to show
   final Widget Function(int position, SimpleHiddenDrawerBloc bloc)
       screenSelectedBuilder;
 
   final Widget menu;
 
   final TypeOpen typeOpen;
+
+  /// display shadow on the edge of the drawer
+  final bool withShadow;
 
   const SimpleHiddenDrawer({
     Key key,
@@ -47,9 +50,10 @@ class SimpleHiddenDrawer extends StatefulWidget {
     this.curveAnimation = Curves.decelerate,
     this.screenSelectedBuilder,
     this.menu,
-    this.enableScaleAnimin = true,
-    this.enableCornerAnimin = true,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
     this.typeOpen = TypeOpen.FROM_LEFT,
+    this.withShadow = true
   })  : assert(screenSelectedBuilder != null),
         assert(menu != null),
         super(key: key);
@@ -86,15 +90,16 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
 
   createContentDisplay() {
     return AnimatedDrawerContent(
-      whithPaddingTop: true,
+      withPaddingTop: true,
       controller: _controller,
       isDraggable: widget.isDraggable,
       slidePercent: widget.slidePercent,
       verticalScalePercent: widget.verticalScalePercent,
       contentCornerRadius: widget.contentCornerRadius,
-      enableScaleAnimin: widget.enableScaleAnimin,
-      enableCornerAnimin: widget.enableCornerAnimin,
+      enableScaleAnimation: widget.enableScaleAnimation,
+      enableCornerAnimation: widget.enableCornerAnimation,
       typeOpen: widget.typeOpen,
+      withShadow: widget.withShadow,
       child: StreamBuilder(
           stream: _bloc.controllers.getScreenSelected,
           initialData: Container(),
