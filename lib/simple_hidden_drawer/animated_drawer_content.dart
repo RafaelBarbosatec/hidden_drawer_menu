@@ -12,8 +12,8 @@ class AnimatedDrawerContent extends StatefulWidget {
   final double contentCornerRadius;
   final bool whithPaddingTop;
   final bool whithShadow;
-  final bool enableScaleAnimin;
-  final bool enableCornerAnimin;
+  final bool enableScaleAnimation;
+  final bool enableCornerAnimation;
   final TypeOpen typeOpen;
 
   const AnimatedDrawerContent(
@@ -26,8 +26,8 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.contentCornerRadius,
       this.whithPaddingTop = false,
       this.whithShadow = true,
-      this.enableScaleAnimin = true,
-      this.enableCornerAnimin = true,
+      this.enableScaleAnimation = true,
+      this.enableCornerAnimation = true,
       this.typeOpen = TypeOpen.FROM_LEFT})
       : assert(controller != null),
         super(key: key);
@@ -61,11 +61,11 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         var animatePercent = widget.controller.value;
         slideAmount = ((width) / 100 * widget.slidePercent) * animatePercent;
 
-        if (widget.enableScaleAnimin)
+        if (widget.enableScaleAnimation)
           contentScale = 1.0 -
               (((100 - widget.verticalScalePercent) / 100) * animatePercent);
 
-        if (widget.enableCornerAnimin)
+        if (widget.enableCornerAnimation)
           cornerRadius = widget.contentCornerRadius * animatePercent;
 
         slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
