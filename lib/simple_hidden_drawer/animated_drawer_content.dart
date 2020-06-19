@@ -37,7 +37,7 @@ class AnimatedDrawerContent extends StatefulWidget {
 }
 
 class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
-  static const double WIDTH_GESTURE = 30.0;
+  static const double WIDTH_GESTURE = 50.0;
   static const double HEIGHT_APPBAR = 80.0;
   static const double BLUR_SHADOW = 20.0;
   RenderBox _box;
@@ -96,10 +96,10 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   _buildContet() {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-
       onHorizontalDragStart: (detail) {
         if (widget.isDraggable && detail.localPosition.dx <= WIDTH_GESTURE) {
-          if (widget.whithPaddingTop && detail.localPosition.dy <= HEIGHT_APPBAR) {
+          if (widget.withPaddingTop &&
+              detail.localPosition.dy <= HEIGHT_APPBAR) {
             return;
           }
           this.setState(() {
@@ -107,7 +107,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
           });
         }
       },
-
       onHorizontalDragUpdate: (detail) {
         if (dragging) {
           var left = _box.globalToLocal(Offset(0.0, 0.0)).dx;
@@ -115,12 +114,13 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
           if (globalPosition < 0) {
             globalPosition = 0;
           }
-          double position = globalPosition / (MediaQuery.of(context).size.width + left);
-          var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
+          double position =
+              globalPosition / (MediaQuery.of(context).size.width + left);
+          var realPosition =
+              widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
           widget.controller.move(realPosition);
         }
       },
-
       onHorizontalDragEnd: (detail) {
         if (dragging) {
           widget.controller.openOrClose();
@@ -129,7 +129,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
           });
         }
       },
-
       onTap: () {
         if (widget.controller.state == MenuState.open) {
           widget.controller.close();
