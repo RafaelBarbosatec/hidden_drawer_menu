@@ -88,44 +88,47 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   _buildContet(BoxConstraints constraints) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onHorizontalDragStart: (detail) {
-        if (widget.isDraggable && detail.localPosition.dx <= WIDTH_GESTURE) {
-          if (widget.withPaddingTop &&
-              detail.localPosition.dy <= HEIGHT_APPBAR) {
-            return;
-          }
-          this.setState(() {
-            dragging = true;
-          });
-        }
-      },
-      onHorizontalDragUpdate: (detail) {
-        if (dragging) {
-          var globalPosition = detail.globalPosition.dx;
-          globalPosition = globalPosition < 0 ? 0 : globalPosition;
-          double position = globalPosition / constraints.maxWidth;
-          var realPosition =
-              widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
-          widget.controller.move(realPosition);
-        }
-      },
-      onHorizontalDragEnd: (detail) {
-        if (dragging) {
-          widget.controller.openOrClose();
-          setState(() {
-            dragging = false;
-          });
-        }
-      },
-      onTap: () {
-        if (widget.controller.state == MenuState.open) {
-          widget.controller.close();
-        }
-      },
-      child: widget.child,
-    );
+    return widget.isDraggable
+        ? GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onHorizontalDragStart: (detail) {
+              if (detail.localPosition.dx <= WIDTH_GESTURE) {
+                if (widget.withPaddingTop &&
+                    detail.localPosition.dy <= HEIGHT_APPBAR) {
+                  return;
+                }
+                this.setState(() {
+                  dragging = true;
+                });
+              }
+            },
+            onHorizontalDragUpdate: (detail) {
+              if (dragging) {
+                var globalPosition = detail.globalPosition.dx;
+                globalPosition = globalPosition < 0 ? 0 : globalPosition;
+                double position = globalPosition / constraints.maxWidth;
+                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT
+                    ? position
+                    : (1 - position);
+                widget.controller.move(realPosition);
+              }
+            },
+            onHorizontalDragEnd: (detail) {
+              if (dragging) {
+                widget.controller.openOrClose();
+                setState(() {
+                  dragging = false;
+                });
+              }
+            },
+            onTap: () {
+              if (widget.controller.state == MenuState.open) {
+                widget.controller.close();
+              }
+            },
+            child: widget.child,
+          )
+        : widget.child;
   }
 
   List<BoxShadow> _getShadow() {
