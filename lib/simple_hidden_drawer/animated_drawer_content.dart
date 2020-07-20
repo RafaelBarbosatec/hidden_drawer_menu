@@ -88,11 +88,12 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   _buildContet(BoxConstraints constraints) {
-    return widget.isDraggable
-        ? GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onHorizontalDragStart: (detail) {
-              if (detail.localPosition.dx <= WIDTH_GESTURE) {
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onHorizontalDragStart: widget.isDraggable
+          ? (detail) {
+              if (widget.isDraggable &&
+                  detail.localPosition.dx <= WIDTH_GESTURE) {
                 if (widget.withPaddingTop &&
                     detail.localPosition.dy <= HEIGHT_APPBAR) {
                   return;
@@ -101,8 +102,10 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
                   dragging = true;
                 });
               }
-            },
-            onHorizontalDragUpdate: (detail) {
+            }
+          : null,
+      onHorizontalDragUpdate: widget.isDraggable
+          ? (detail) {
               if (dragging) {
                 var globalPosition = detail.globalPosition.dx;
                 globalPosition = globalPosition < 0 ? 0 : globalPosition;
@@ -112,23 +115,30 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
                     : (1 - position);
                 widget.controller.move(realPosition);
               }
-            },
-            onHorizontalDragEnd: (detail) {
+            }
+          : null,
+      onHorizontalDragEnd: widget.isDraggable
+          ? (detail) {
               if (dragging) {
                 widget.controller.openOrClose();
                 setState(() {
                   dragging = false;
                 });
               }
-            },
-            onTap: () {
+            }
+          : null,
+      onTap: widget.isDraggable
+          ? () {
               if (widget.controller.state == MenuState.open) {
                 widget.controller.close();
               }
-            },
-            child: widget.child,
-          )
-        : widget.child;
+            }
+          : null,
+      child: AbsorbPointer(
+        absorbing: widget.controller.state == MenuState.open,
+        child: widget.child,
+      ),
+    );
   }
 
   List<BoxShadow> _getShadow() {
