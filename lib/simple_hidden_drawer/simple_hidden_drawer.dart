@@ -95,7 +95,10 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
     return SimpleHiddenDrawerProvider(
       hiddenDrawerBloc: _bloc,
       child: Stack(
-        children: [widget.menu, _createContentDisplay()],
+        children: [
+          widget.menu,
+          _createContentDisplay(),
+        ],
       ),
     );
   }
@@ -112,7 +115,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       enableCornerAnimation: widget.enableCornerAnimation,
       typeOpen: widget.typeOpen,
       withShadow: widget.withShadow,
-      child: StreamBuilder(
+      child: StreamBuilder<Widget>(
         stream: _bloc.controllers.getScreenSelected,
         initialData: SizedBox.shrink(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {

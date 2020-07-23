@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/streams/streams_simple_hidden_menu.dart';
@@ -13,13 +14,13 @@ class SimpleHiddenDrawerBloc {
 
   bool _startDrag = false;
   bool _isFirstPositionSelected = true;
-  int positionStected = 0;
+  int positionSelected = 0;
 
   SimpleHiddenDrawerBloc(
       this._initPositionSelected, this._screenSelectedBuilder) {
-    controllers.getpositionSelected.listen((position) {
-      if (position != positionStected || _isFirstPositionSelected) {
-        positionStected = position;
+    controllers.getPositionSelected.listen((position) {
+      if (position != positionSelected || _isFirstPositionSelected) {
+        positionSelected = position;
         _setScreen(position);
 
         if (!_startDrag && !_isFirstPositionSelected) {
@@ -48,11 +49,11 @@ class SimpleHiddenDrawerBloc {
   }
 
   int getPositionSelected() {
-    return positionStected;
+    return positionSelected;
   }
 
   Stream<int> getPositionSelectedListener() {
-    return controllers.getpositionSelected;
+    return controllers.getPositionSelected;
   }
 
   Stream<MenuState> getMenuStateListener() {

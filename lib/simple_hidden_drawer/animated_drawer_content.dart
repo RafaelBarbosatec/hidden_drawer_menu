@@ -77,67 +77,28 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
                 boxShadow: _getShadow(),
               ),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(cornerRadius),
-                  child: child),
+                borderRadius: BorderRadius.circular(cornerRadius),
+                child: child,
+              ),
             ),
           );
         },
-        child: _buildContet(constraints),
+        child: _buildContent(constraints),
       );
     });
   }
 
-  _buildContet(BoxConstraints constraints) {
+  Widget _buildContent(BoxConstraints constraints) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onHorizontalDragStart: widget.isDraggable
-          ? (detail) {
-              if (widget.isDraggable &&
-                  detail.localPosition.dx <= WIDTH_GESTURE) {
-                if (widget.withPaddingTop &&
-                    detail.localPosition.dy <= HEIGHT_APPBAR) {
-                  return;
-                }
-                this.setState(() {
-                  dragging = true;
-                });
-              }
-            }
-          : null,
-      onHorizontalDragUpdate: widget.isDraggable
-          ? (detail) {
-              if (dragging) {
-                var globalPosition = detail.globalPosition.dx;
-                globalPosition = globalPosition < 0 ? 0 : globalPosition;
-                double position = globalPosition / constraints.maxWidth;
-                var realPosition = widget.typeOpen == TypeOpen.FROM_LEFT
-                    ? position
-                    : (1 - position);
-                widget.controller.move(realPosition);
-              }
-            }
-          : null,
-      onHorizontalDragEnd: widget.isDraggable
-          ? (detail) {
-              if (dragging) {
-                widget.controller.openOrClose();
-                setState(() {
-                  dragging = false;
-                });
-              }
-            }
-          : null,
-      onTap: widget.isDraggable
-          ? () {
-              if (widget.controller.state == MenuState.open) {
-                widget.controller.close();
-              }
-            }
-          : null,
-      child: AbsorbPointer(
-        absorbing: widget.controller.state == MenuState.open,
-        child: widget.child,
+      onHorizontalDragStart: _myOnHorizontalDragStart,
+      onHorizontalDragUpdate: (detail) => _myOnHorizontalDragUpdate(
+        detail,
+        constraints,
       ),
+      onHorizontalDragEnd: _myOnHorizontalDragEnd,
+      onTap: _myOnTap,
+      child: widget.child,
     );
   }
 
@@ -153,6 +114,48 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
       ];
     } else {
       return [];
+    }
+  }
+
+  void _myOnHorizontalDragStart(DragStartDetails detail) {
+    if (!widget.isDraggable) return;
+    if (detail.localPosition.dx <= WIDTH_GESTURE &&
+        !(widget.withPaddingTop && detail.localPosition.dy <= HEIGHT_APPBAR)) {
+      this.setState(() {
+        dragging = true;
+      });
+    }
+  }
+
+  void _myOnHorizontalDragUpdate(
+    DragUpdateDetails detail,
+    BoxConstraints constraints,
+  ) {
+    if (!widget.isDraggable) return;
+    if (dragging) {
+      var globalPosition = detail.globalPosition.dx;
+      globalPosition = globalPosition < 0 ? 0 : globalPosition;
+      double position = globalPosition / constraints.maxWidth;
+      var realPosition =
+          widget.typeOpen == TypeOpen.FROM_LEFT ? position : (1 - position);
+      widget.controller.move(realPosition);
+    }
+  }
+
+  void _myOnHorizontalDragEnd(DragEndDetails detail) {
+    if (!widget.isDraggable) return;
+    if (dragging) {
+      widget.controller.openOrClose();
+      setState(() {
+        dragging = false;
+      });
+    }
+  }
+
+  void _myOnTap() {
+    if (!widget.isDraggable) return;
+    if (widget.controller.state == MenuState.open) {
+      widget.controller.close();
     }
   }
 }

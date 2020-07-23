@@ -118,18 +118,21 @@ class HiddenDrawerMenu extends StatelessWidget {
       contentCornerRadius: contentCornerRadius,
       enableCornerAnimation: enableCornerAnimation,
       enableScaleAnimation: enableScaleAnimation,
-      menu: buildMenu(),
+      menu: _buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
       screenSelectedBuilder: (position, bloc) {
         List<Widget> actions = List();
 
         if (typeOpen == TypeOpen.FROM_RIGHT) {
-          actions.add(IconButton(
+          actions.add(
+            IconButton(
               icon: leadingAppBar,
               onPressed: () {
                 bloc.toggle();
-              }));
+              },
+            ),
+          );
         }
 
         if (actionsAppBar != null) {
@@ -152,7 +155,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     );
   }
 
-  getTittleAppBar(int position) {
+  Widget getTittleAppBar(int position) {
     if (tittleAppBar == null) {
       return whithAutoTittleName
           ? Text(
@@ -165,7 +168,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     }
   }
 
-  buildMenu() {
+  Widget _buildMenu() {
     List<ItemHiddenMenu> _itensMenu = new List();
 
     screens.forEach((item) {
