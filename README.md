@@ -158,14 +158,14 @@ class _MenuState extends State<SecondSreen> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                SimpleHiddenDrawerProvider.of(context)
+                SimpleHiddenDrawerController.of(context)
                     .setSelectedMenuPosition(0);
               },
               child: Text("Menu 1"),
             ),
             RaisedButton(
                 onPressed: () {
-                  SimpleHiddenDrawerProvider.of(context)
+                  SimpleHiddenDrawerController.of(context)
                       .setSelectedMenuPosition(1);
                 },
                 child: Text("Menu 2"))
@@ -183,19 +183,19 @@ This actions is only accessible by the children of  HiddenDrawerMenu or SimpleHi
 ## Select item menu
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).setSelectedMenuPosition(0);
+SimpleHiddenDrawerController.of(context).setSelectedMenuPosition(0);
 ```
 
 ## Toggle menu (if opened will close, if closed will open)
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).toggle();
+SimpleHiddenDrawerController.of(context).toggle();
 ```
 
 ## Listen selected position
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).getPositionSelectedListener().listen((position){
+SimpleHiddenDrawerController.of(context).getPositionSelectedListener().listen((position){
   print(position);
 });
 ```
@@ -203,7 +203,7 @@ SimpleHiddenDrawerProvider.of(context).getPositionSelectedListener().listen((pos
 ## Listen to menu status (closed,opening,open,closing)
 
 ```Dart
-SimpleHiddenDrawerProvider.of(context).getMenuStateListener().listen((state){
+SimpleHiddenDrawerController.of(context).getMenuStateListener().listen((state){
   print(state);
 });
 ```
@@ -213,7 +213,7 @@ SimpleHiddenDrawerProvider.of(context).getMenuStateListener().listen((state){
 ![Example usage AnimatedDrawerContent](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/develop/imgs/exampleAnimated.gif)
 
 ```Dart
-HiddenDrawerController controller = HiddenDrawerController(vsync: this);
+AnimatedDrawerController controller = AnimatedDrawerController(vsync: this,animationCurve:Curves.decelerate,duration:const Duration(milliseconds: 350));
 
 return AnimatedDrawerContent(
   controller: controller,
