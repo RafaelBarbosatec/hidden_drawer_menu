@@ -5,6 +5,7 @@
 * BREAKING CHANGES: SimpleHiddenDrawerProvider to SimpleHiddenDrawerController.
 * Add PR #41.
 * Disable interaction with screen when the menu is open.
+* add param `disableAppBarDefault` in HiddenDrawerMenu.
 
 ## [1.1.4] - 19/062020
 

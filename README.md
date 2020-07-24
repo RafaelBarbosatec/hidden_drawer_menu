@@ -71,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColorAppBar: Colors.cyan,
       screens: itens,
         //    typeOpen: TypeOpen.FROM_RIGHT,
+        //    disableAppBarDefault: false,
         //    enableScaleAnimin: true,
         //    enableCornerAnimin: true,
         //    slidePercent: 80.0,

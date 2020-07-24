@@ -82,6 +82,8 @@ class HiddenDrawerMenu extends StatelessWidget {
   /// enable animation borderRadius
   final bool enableCornerAnimation;
 
+  final bool disableAppBarDefault;
+
   final TypeOpen typeOpen;
 
   HiddenDrawerMenu({
@@ -106,6 +108,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.contentCornerRadius = 10.0,
     this.enableScaleAnimation = true,
     this.enableCornerAnimation = true,
+    this.disableAppBarDefault = false,
     this.typeOpen = TypeOpen.FROM_LEFT,
   });
 
@@ -123,33 +126,9 @@ class HiddenDrawerMenu extends StatelessWidget {
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
       screenSelectedBuilder: (position, bloc) {
-        List<Widget> actions = List();
-
-        if (typeOpen == TypeOpen.FROM_RIGHT) {
-          actions.add(
-            IconButton(
-              icon: leadingAppBar,
-              onPressed: () {
-                bloc.toggle();
-              },
-            ),
-          );
-        }
-
-        if (actionsAppBar != null) {
-          actions.addAll(actionsAppBar);
-        }
-
         return Scaffold(
           backgroundColor: backgroundColorContent,
-          appBar: AppBar(
-            backgroundColor: backgroundColorAppBar,
-            elevation: elevationAppBar,
-            title: getTittleAppBar(position),
-            centerTitle: isTitleCentered,
-            leading: _buildLeading(bloc),
-            actions: actions,
-          ),
+          appBar: _getAppbar(position, bloc),
           body: screens[position].screen,
         );
       },
@@ -192,5 +171,38 @@ class HiddenDrawerMenu extends StatelessWidget {
     } else {
       return SizedBox.shrink();
     }
+  }
+
+  PreferredSizeWidget _getAppbar(
+    int position,
+    SimpleHiddenDrawerController bloc,
+  ) {
+    if (disableAppBarDefault) return null;
+
+    List<Widget> actions = List();
+
+    if (typeOpen == TypeOpen.FROM_RIGHT) {
+      actions.add(
+        IconButton(
+          icon: leadingAppBar,
+          onPressed: () {
+            bloc.toggle();
+          },
+        ),
+      );
+    }
+
+    if (actionsAppBar != null) {
+      actions.addAll(actionsAppBar);
+    }
+
+    return AppBar(
+      backgroundColor: backgroundColorAppBar,
+      elevation: elevationAppBar,
+      title: getTittleAppBar(position),
+      centerTitle: isTitleCentered,
+      leading: _buildLeading(bloc),
+      actions: actions,
+    );
   }
 }
