@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/controllers/animated_drawer_controller.dart';
 
 enum TypeOpen { FROM_LEFT, FROM_RIGHT }
 
 class AnimatedDrawerContent extends StatefulWidget {
-  final HiddenDrawerController controller;
+  final AnimatedDrawerController controller;
   final Widget child;
   final bool isDraggable;
   final double slidePercent;

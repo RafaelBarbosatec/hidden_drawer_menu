@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 
 class Screen1 extends StatelessWidget {
   @override

@@ -9,14 +9,14 @@ You can use a pre-defined menu or make a fully customized menu.
 ![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/example.gif)
 
 
-[Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/hidden_drawer.apk)
+[Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/model.apk)
 
 
 # Use with default menu
 
 ```Dart
 
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu/model/hidden_drawer_menu.dart';
 
 void main() => runApp(MyApp());
 
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```Dart
 
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu/model/hidden_drawer_menu.dart';
 
 void main() => runApp(MyApp());
 

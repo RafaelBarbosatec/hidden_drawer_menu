@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-
-import '../screen1.dart';
-import '../screen2.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu_demo/screens/screen1.dart';
+import 'package:hidden_drawer_menu_demo/screens/screen2.dart';
 
 class ExampleHiddenDrawer extends StatelessWidget {
   final List<ScreenHiddenDrawer> itens = [
     ScreenHiddenDrawer(
-        ItemHiddenMenu(
-          name: "Screen 1",
-          colorLineSelected: Colors.teal,
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 25.0),
-          selectedStyle: TextStyle(color: Colors.teal),
-        ),
-        Screen1()),
+      ItemHiddenMenu(
+        name: "Screen 1",
+        colorLineSelected: Colors.teal,
+        baseStyle:
+            TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 25.0),
+        selectedStyle: TextStyle(color: Colors.teal),
+      ),
+      Screen1(),
+    ),
     ScreenHiddenDrawer(
-        ItemHiddenMenu(
-          name: "Screen 2",
-          colorLineSelected: Colors.orange,
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 25.0),
-          selectedStyle: TextStyle(color: Colors.orange),
-          onTap: () {
-            print("Click item");
-          },
-        ),
-        Screen2())
+      ItemHiddenMenu(
+        name: "Screen 2",
+        colorLineSelected: Colors.orange,
+        baseStyle:
+            TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 25.0),
+        selectedStyle: TextStyle(color: Colors.orange),
+        onTap: () {
+          print("Click item");
+        },
+      ),
+      Screen2(),
+    )
   ];
 
   @override

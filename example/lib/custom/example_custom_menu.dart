@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu_demo/screen1.dart';
-import 'package:hidden_drawer_menu_demo/screen2.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:hidden_drawer_menu_demo/screens/screen1.dart';
+import 'package:hidden_drawer_menu_demo/screens/screen2.dart';
 
 class ExampleCustomMenu extends StatelessWidget {
   @override
@@ -41,6 +41,7 @@ class Menu extends StatefulWidget {
 
 class _MenuState extends State<Menu> with TickerProviderStateMixin {
   AnimationController _animationController;
+  SimpleHiddenDrawerController _controller;
 
   @override
   void initState() {
@@ -51,14 +52,13 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    SimpleHiddenDrawerProvider.of(context)
-        .getMenuStateListener()
-        .listen((state) {
-      if (state == MenuState.open) {
+    _controller = SimpleHiddenDrawerProvider.of(context);
+    _controller.addListener(() {
+      if (_controller.state == MenuState.open) {
         _animationController.forward();
       }
 
-      if (state == MenuState.closing) {
+      if (_controller.state == MenuState.closing) {
         _animationController.reverse();
       }
     });
@@ -99,8 +99,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20.0))),
                         onPressed: () {
-                          SimpleHiddenDrawerProvider.of(context)
-                              .setSelectedMenuPosition(0);
+                          _controller.setSelectedMenuPosition(0);
                         },
                         child: Text(
                           "Menu 1",
@@ -116,8 +115,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),
                           onPressed: () {
-                            SimpleHiddenDrawerProvider.of(context)
-                                .setSelectedMenuPosition(1);
+                            _controller.setSelectedMenuPosition(1);
                           },
                           child: Text(
                             "Menu 2",

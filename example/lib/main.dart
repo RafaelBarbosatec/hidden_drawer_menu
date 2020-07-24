@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu_demo/exampleCustomMenu/ExampleCustomMenu.dart';
-import 'package:hidden_drawer_menu_demo/exampleHiddenDrawer/example_hidden_drawer.dart';
+import 'package:hidden_drawer_menu_demo/custom/example_custom_menu.dart';
+import 'package:hidden_drawer_menu_demo/simple/example_hidden_drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,9 +24,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
-
-
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,21 +38,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
               child: RaisedButton(
                 color: Colors.blue,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(20.0)
-                    )
-                ),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ExampleHiddenDrawer()),
+                    MaterialPageRoute(
+                      builder: (context) => ExampleHiddenDrawer(),
+                    ),
                   );
                 },
                 child: Text(
                   "Default Example",
-                  style: TextStyle(
-                      color: Colors.white
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -63,21 +58,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
               child: RaisedButton(
                   color: Colors.orange,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(20.0)
-                      )
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ExampleCustomMenu()),
+                      MaterialPageRoute(
+                          builder: (context) => ExampleCustomMenu()),
                     );
                   },
                   child: Text(
                     "Custom Menu Drawer",
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
+                    style: TextStyle(color: Colors.white),
                   )),
             )
           ],
@@ -85,5 +76,4 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
       ),
     );
   }
-
 }
