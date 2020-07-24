@@ -84,7 +84,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
 
   @override
   Widget build(BuildContext context) {
-    return SimpleHiddenDrawerProvider(
+    return MyProvider(
       controller: _simpleHiddenDrawerController,
       child: Stack(
         children: [
@@ -110,9 +110,12 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       child: ChangeNotifierConsumer<SimpleHiddenDrawerController>(
         changeNotifier: _simpleHiddenDrawerController,
         builder: (context, model) {
-          return widget.screenSelectedBuilder(
-            model.position,
-            model,
+          return IgnorePointer(
+            ignoring: model.state == MenuState.open,
+            child: widget.screenSelectedBuilder(
+              model.position,
+              model,
+            ),
           );
         },
       ),

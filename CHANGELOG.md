@@ -1,3 +1,9 @@
+## [2.0.0] - 24/07/2020
+
+* Migrate controller Streams to ChangeNotifier
+* BREAKING CHANGES:
+* Add PR #38
+
 ## [1.1.4] - 19/062020
 
 * Migrate Example to AndroidX

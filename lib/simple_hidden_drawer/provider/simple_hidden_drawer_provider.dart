@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 
-class SimpleHiddenDrawerProvider extends InheritedWidget {
+class MyProvider extends InheritedWidget {
   final SimpleHiddenDrawerController controller;
 
-  SimpleHiddenDrawerProvider({
+  MyProvider({
     Key key,
     @required this.controller,
     Widget child,
@@ -12,10 +12,4 @@ class SimpleHiddenDrawerProvider extends InheritedWidget {
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
-
-  static SimpleHiddenDrawerController of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<SimpleHiddenDrawerProvider>()
-        .controller;
-  }
 }

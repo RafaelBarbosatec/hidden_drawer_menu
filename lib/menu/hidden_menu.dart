@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:hidden_drawer_menu/menu/hidden_menu_widget.dart';
-import 'package:hidden_drawer_menu/menu/item_hidden_menu.dart';
+import 'package:hidden_drawer_menu/model/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 class HiddenMenu extends StatefulWidget {
   /// Decocator that allows us to add backgroud in the menu(img)
@@ -53,7 +52,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
   @override
   void didChangeDependencies() {
-    controller = MyProvider.of(context);
+    controller = SimpleHiddenDrawerController.of(context);
     controller.addListener(_listenerController);
     super.didChangeDependencies();
   }

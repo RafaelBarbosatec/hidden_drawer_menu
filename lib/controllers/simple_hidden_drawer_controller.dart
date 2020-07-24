@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hidden_drawer_menu/controllers/animated_drawer_controller.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 
 typedef AsyncScreenBuilder<T> = Widget Function(
   int position,
@@ -36,5 +37,9 @@ class SimpleHiddenDrawerController extends ChangeNotifier {
 
   int getPositionSelected() {
     return position;
+  }
+
+  static SimpleHiddenDrawerController of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<MyProvider>().controller;
   }
 }
