@@ -146,6 +146,15 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<SecondSreen> {
+
+  SimpleHiddenDrawerController controller;
+
+  @override
+  void didChangeDependencies() {
+    controller = SimpleHiddenDrawerController.of(context);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -159,17 +168,16 @@ class _MenuState extends State<SecondSreen> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                SimpleHiddenDrawerController.of(context)
-                    .setSelectedMenuPosition(0);
+                controller.setSelectedMenuPosition(0);
               },
               child: Text("Menu 1"),
             ),
             RaisedButton(
-                onPressed: () {
-                  SimpleHiddenDrawerController.of(context)
-                      .setSelectedMenuPosition(1);
-                },
-                child: Text("Menu 2"))
+              onPressed: () {
+                controller.setSelectedMenuPosition(1);
+              },
+              child: Text("Menu 2"),
+            )
           ],
         ),
       ),
@@ -193,19 +201,33 @@ SimpleHiddenDrawerController.of(context).setSelectedMenuPosition(0);
 SimpleHiddenDrawerController.of(context).toggle();
 ```
 
+## Open
+
+```Dart
+SimpleHiddenDrawerController.of(context).open();
+```
+
+## Close
+
+```Dart
+SimpleHiddenDrawerController.of(context).close();
+```
+
 ## Listen selected position
 
 ```Dart
-SimpleHiddenDrawerController.of(context).getPositionSelectedListener().listen((position){
-  print(position);
+final controller = SimpleHiddenDrawerController.of(context);
+controller.addListener((){
+  print(controller.position);
 });
 ```
 
 ## Listen to menu status (closed,opening,open,closing)
 
 ```Dart
-SimpleHiddenDrawerController.of(context).getMenuStateListener().listen((state){
-  print(state);
+final controller = SimpleHiddenDrawerController.of(context);
+controller.addListener((){
+  print(controller.state);
 });
 ```
 
@@ -214,7 +236,11 @@ SimpleHiddenDrawerController.of(context).getMenuStateListener().listen((state){
 ![Example usage AnimatedDrawerContent](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/develop/imgs/exampleAnimated.gif)
 
 ```Dart
-AnimatedDrawerController controller = AnimatedDrawerController(vsync: this,animationCurve:Curves.decelerate,duration:const Duration(milliseconds: 350));
+AnimatedDrawerController controller = AnimatedDrawerController(
+  vsync: this,
+  animationCurve:Curves.decelerate,
+  duration:const Duration(milliseconds: 350,
+);
 
 return AnimatedDrawerContent(
   controller: controller,
