@@ -53,7 +53,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
 
   @override
   void didChangeDependencies() {
-    controller = SimpleHiddenDrawerProvider.of(context);
+    controller = MyProvider.of(context);
     controller.addListener(_listenerController);
     super.didChangeDependencies();
   }

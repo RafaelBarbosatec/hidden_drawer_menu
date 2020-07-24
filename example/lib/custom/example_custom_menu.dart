@@ -52,7 +52,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    _controller = SimpleHiddenDrawerProvider.of(context);
+    _controller = SimpleHiddenDrawerController.of(context);
     _controller.addListener(() {
       if (_controller.state == MenuState.open) {
         _animationController.forward();
