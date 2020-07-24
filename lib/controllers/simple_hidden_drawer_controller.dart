@@ -29,6 +29,18 @@ class SimpleHiddenDrawerController extends ChangeNotifier {
     _animatedDrawerController.toggle();
   }
 
+  void open() {
+    if (state != MenuState.open) {
+      _animatedDrawerController.open();
+    }
+  }
+
+  void close() {
+    if (state != MenuState.closed) {
+      _animatedDrawerController.close();
+    }
+  }
+
   void setSelectedMenuPosition(int position) {
     this.position = position;
     toggle();
