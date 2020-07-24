@@ -41,9 +41,11 @@ class SimpleHiddenDrawerController extends ChangeNotifier {
     }
   }
 
-  void setSelectedMenuPosition(int position) {
+  void setSelectedMenuPosition(int position, {bool openMenu = true}) {
     this.position = position;
-    toggle();
+    if (openMenu) {
+      toggle();
+    }
     notifyListeners();
   }
 

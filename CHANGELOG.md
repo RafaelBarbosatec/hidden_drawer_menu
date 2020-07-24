@@ -1,3 +1,7 @@
+## [2.0.1] - 24/07/2020
+
+* add optional param `openMenu` in 'setSelectedMenuPosition'
+
 ## [2.0.0] - 24/07/2020
 
 * Migrate controller Streams to ChangeNotifier
