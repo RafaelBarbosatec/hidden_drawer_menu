@@ -3,7 +3,8 @@
 * Migrate controller Streams to ChangeNotifier
 * BREAKING CHANGES: AnimatedDrawerController to AnimatedDrawerController.
 * BREAKING CHANGES: SimpleHiddenDrawerProvider to SimpleHiddenDrawerController.
-* Add PR #41
+* Add PR #41.
+* Disable interaction with screen when the menu is open.
 
 ## [1.1.4] - 19/062020
 
