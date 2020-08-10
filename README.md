@@ -1,4 +1,5 @@
 [![pub package](https://img.shields.io/pub/v/hidden_drawer_menu.svg)](https://pub.dartlang.org/packages/hidden_drawer_menu)
+[![buymeacoffee](https://i.imgur.com/aV6DDA7.png)](https://www.buymeacoffee.com/rafaelbarbosa)
 
 # Hidden Drawer Menu
 
