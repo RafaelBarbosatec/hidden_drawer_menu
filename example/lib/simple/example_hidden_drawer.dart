@@ -52,7 +52,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
       //    backgroundColorAppBar: Colors.blue,
       //    elevationAppBar: 4.0,
       //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-      //    enableShadowItensMenu: true,
+      //    enableShadowItemsMenu: true,
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
   }

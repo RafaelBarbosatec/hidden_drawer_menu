@@ -61,7 +61,7 @@ class HiddenDrawerMenu extends StatelessWidget {
   final Color backgroundColorMenu;
 
   /// that allows us to add shadow above menu items
-  final bool enableShadowItensMenu;
+  final bool enableShadowItemsMenu;
 
   /// enable and disable open and close with gesture
   final bool isDraggable;
@@ -100,7 +100,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.actionsAppBar,
     this.tittleAppBar,
     this.isTitleCentered,
-    this.enableShadowItensMenu = false,
+    this.enableShadowItemsMenu = false,
     this.curveAnimation = Curves.decelerate,
     this.isDraggable = true,
     this.slidePercent = 80.0,
@@ -160,7 +160,7 @@ class HiddenDrawerMenu extends StatelessWidget {
       background: backgroundMenu,
       backgroundColorMenu: backgroundColorMenu,
       initPositionSelected: initPositionSelected,
-      enableShadowItensMenu: enableShadowItensMenu,
+      enableShadowItemsMenu: enableShadowItemsMenu,
       typeOpen: typeOpen,
     );
   }

@@ -9,7 +9,7 @@ class HiddenMenu extends StatefulWidget {
   final DecorationImage background;
 
   /// that allows us to add shadow above menu items
-  final bool enableShadowItensMenu;
+  final bool enableShadowItemsMenu;
 
   /// that allows us to add backgroud in the menu(color)
   final Color backgroundColorMenu;
@@ -32,7 +32,7 @@ class HiddenMenu extends StatefulWidget {
       this.selectedListern,
       this.initPositionSelected,
       this.backgroundColorMenu,
-      this.enableShadowItensMenu = false,
+      this.enableShadowItemsMenu = false,
       this.typeOpen = TypeOpen.FROM_LEFT})
       : super(key: key);
 
@@ -75,7 +75,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
           child: Container(
             padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
             decoration: BoxDecoration(
-              boxShadow: widget.enableShadowItensMenu
+              boxShadow: widget.enableShadowItemsMenu
                   ? [
                       new BoxShadow(
                         color: const Color(0x44000000),

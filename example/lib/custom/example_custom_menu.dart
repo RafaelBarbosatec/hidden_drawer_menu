@@ -8,6 +8,13 @@ class ExampleCustomMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
       menu: Menu(),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.white54,
+          blurRadius: 25,
+          offset: Offset(-8, 0),
+        )
+      ],
       screenSelectedBuilder: (position, controller) {
         Widget screenCurrent;
         switch (position) {

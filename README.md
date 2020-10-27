@@ -9,9 +9,7 @@ You can use a pre-defined menu or make a fully customized menu.
 
 ![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/example.gif)
 
-
 [Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/model.apk)
-
 
 # Use with default menu
 
@@ -86,10 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
         //    backgroundColorContent: Colors.blue,
         //    elevationAppBar: 4.0,
         //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
-        //    enableShadowItensMenu: true,
+        //    enableShadowItemsMenu: true,
         //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
     );
-    
+
   }
 }
 
@@ -114,15 +112,15 @@ class MyApp extends StatelessWidget {
       home: SimpleHiddenDrawer(
         menu: Menu(),
         screenSelectedBuilder: (position,controller) {
-          
+
           Widget screenCurrent;
-          
+
           switch(position){
             case 0 : screenCurrent = Screen1(); break;
             case 1 : screenCurrent = Screen2(); break;
             case 2 : screenCurrent = Screen3(); break;
           }
-          
+
           return Scaffold(
             backgroundColor: backgroundColorContent,
             appBar: AppBar(
@@ -134,7 +132,7 @@ class MyApp extends StatelessWidget {
             ),
             body: screenCurrent,
           );
-          
+
         },
       ),
     );
@@ -188,7 +186,8 @@ class _MenuState extends State<SecondSreen> {
 ```
 
 # Actions
-This actions is only accessible by the children of  HiddenDrawerMenu or SimpleHiddenDrawer.
+
+This actions is only accessible by the children of HiddenDrawerMenu or SimpleHiddenDrawer.
 
 ## Select item menu
 
@@ -251,6 +250,7 @@ return AnimatedDrawerContent(
   child: Screen(),
 );
 ```
+
 You can control actions by controller such as:
 
 ```Dart
@@ -260,28 +260,31 @@ controller.close()
 controller.move(percent) // moves to a specific position from 0 to 1 (0 = fully enclosed, 1 = fully opened)
 ```
 
-
 # Available settings
 
 ## Menu
-* change BackgroundColor
-* set DecorationImage backgroud
-* enable Shadow above itens
+
+- change BackgroundColor
+- set DecorationImage backgroud
+- enable Shadow above itens
 
 ## Itens Menu
-* change colorText when selected
-* change colorText when unselected
-* change color lineleft selected
+
+- change colorText when selected
+- change colorText when unselected
+- change color lineleft selected
 
 ## AppBar
-* change menu icon
-* change elavation
-* change BackgroundColor
-* set AutoTittleName
-* set actions
-* set widget in tittleAppBar
+
+- change menu icon
+- change elavation
+- change BackgroundColor
+- set AutoTittleName
+- set actions
+- set widget in tittleAppBar
 
 ## Content
-* change BackgroundColor
-* enable dragable
-* change curve animation
+
+- change BackgroundColor
+- enable dragable
+- change curve animation
