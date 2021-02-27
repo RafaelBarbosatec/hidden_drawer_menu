@@ -50,7 +50,6 @@ class SimpleHiddenDrawer extends StatefulWidget {
   final bool? closeOnTap;
 
 
-
   /// shadow properties on the edge of the drawer
   final List<BoxShadow>? boxShadow;
 
