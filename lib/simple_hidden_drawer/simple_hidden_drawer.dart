@@ -42,12 +42,13 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
   /// display shadow on the edge of the drawer
   final bool withShadow;
+  
+  final bool menuTranslate;
 
   final AnimatedBackgroundBuilder? animatedBackgroundBuilder;
   final MatrixBuilder? matrixBuilder;
   final bool? closeOnTap;
 
-  final bool menuTranslate;
 
 
   /// shadow properties on the edge of the drawer

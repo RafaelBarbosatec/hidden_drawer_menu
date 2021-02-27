@@ -19,6 +19,8 @@ class AnimatedDrawerContent extends StatefulWidget {
   final MatrixBuilder? matrixBuilder;
   final bool closeOnTap;
   final List<BoxShadow>? boxShadow;
+  final MatrixBuilder? matrixBuilder;
+  final bool closeOnTap;
 
   const AnimatedDrawerContent({
     Key? key,
