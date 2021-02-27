@@ -16,26 +16,27 @@ class AnimatedDrawerContent extends StatefulWidget {
   final bool enableScaleAnimation;
   final bool enableCornerAnimation;
   final TypeOpen typeOpen;
-  final MatrixBuilder matrixBuilder;
+  final MatrixBuilder? matrixBuilder;
   final bool closeOnTap;
+  final List<BoxShadow>? boxShadow;
 
-  const AnimatedDrawerContent(
-      {Key key,
-      this.controller,
-      this.child,
-      this.isDraggable = true,
-      this.closeOnTap = true,
-      this.slidePercent,
-      this.verticalScalePercent,
-      this.contentCornerRadius,
-      this.withPaddingTop = false,
-      this.withShadow = true,
-      this.enableScaleAnimation = true,
-      this.enableCornerAnimation = true,
-      this.typeOpen = TypeOpen.FROM_LEFT,
-      this.matrixBuilder})
-      : assert(controller != null),
-        super(key: key);
+  const AnimatedDrawerContent({
+    Key? key,
+    required this.controller,
+    required this.child,
+    this.isDraggable = true,
+    required this.slidePercent,
+    required this.verticalScalePercent,
+    required this.contentCornerRadius,
+    this.withPaddingTop = false,
+    this.withShadow = true,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.boxShadow,
+    this.matrixBuilder,
+    this.closeOnTap = true,
+  }) : super(key: key);
 
   @override
   _AnimatedDrawerContentState createState() => _AnimatedDrawerContentState();
@@ -57,8 +58,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         animation: widget.controller,
         builder: (_, child) {
           var animatePercent = widget.controller.value;
-          Matrix4 matrix;
-          if (widget.matrixBuilder == null) {
+          var matrixBuilder = widget.matrixBuilder;
+          Matrix4? matrix;
+          if (matrixBuilder == null) {
             slideAmount = ((constraints.maxWidth) / 100 * widget.slidePercent) *
                 animatePercent;
 
@@ -76,9 +78,8 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
           if (widget.enableCornerAnimation)
             cornerRadius = widget.contentCornerRadius * animatePercent;
           return Transform(
-            transform: widget.matrixBuilder != null
-                ? widget.matrixBuilder(animatePercent)
-                : matrix,
+            transform:
+                matrixBuilder != null ? matrixBuilder(animatePercent) : matrix!,
             alignment: widget.typeOpen == TypeOpen.FROM_LEFT
                 ? Alignment.centerLeft
                 : Alignment.centerRight,

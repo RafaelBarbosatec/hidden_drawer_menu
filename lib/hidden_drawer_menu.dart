@@ -85,36 +85,56 @@ class HiddenDrawerMenu extends StatelessWidget {
   final bool disableAppBarDefault;
 
   final TypeOpen typeOpen;
-  final MatrixBuilder matrixBuilder;
-  final AnimatedBagroundBuilder animatedBagroundBuilder;
-  final bool closeOnTap;
-  HiddenDrawerMenu(
-      {this.screens,
-      this.initPositionSelected = 0,
-      this.backgroundColorAppBar,
-      this.elevationAppBar = 4.0,
-      this.leadingAppBar = const Icon(Icons.menu),
-      this.backgroundMenu,
-      this.backgroundColorMenu,
-      this.backgroundColorContent = Colors.white,
-      this.whithAutoTittleName = true,
-      this.styleAutoTittleName,
-      this.actionsAppBar,
-      this.tittleAppBar,
-      this.isTitleCentered,
-      this.enableShadowItensMenu = false,
-      this.curveAnimation = Curves.decelerate,
-      this.isDraggable = true,
-      this.slidePercent = 80.0,
-      this.verticalScalePercent = 80.0,
-      this.contentCornerRadius = 10.0,
-      this.enableScaleAnimation = true,
-      this.enableCornerAnimation = true,
-      this.disableAppBarDefault = false,
-      this.typeOpen = TypeOpen.FROM_LEFT,
-      this.matrixBuilder,
-      this.animatedBagroundBuilder,
-      this.closeOnTap});
+
+  ///custom matrix transformation for the drawer
+  final MatrixBuilder? matrixBuilder;
+
+  ///An animated builder for the drawer background
+  final AnimatedBackgroundBuilder? animatedBackgroundBuilder;
+
+  ///Close on tap on the screen
+  final bool? closeOnTap;
+
+  ///wether to translate menu or not
+  final bool menuTranslate;
+
+  /// display shadow on the edge of the drawer
+  final bool withShadow;
+
+  /// shadow properties on the edge of the drawer
+  final List<BoxShadow>? boxShadow;
+
+  HiddenDrawerMenu({
+    required this.screens,
+    this.initPositionSelected = 0,
+    this.backgroundColorAppBar,
+    this.elevationAppBar = 4.0,
+    this.leadingAppBar = const Icon(Icons.menu),
+    this.backgroundMenu,
+    required this.backgroundColorMenu,
+    this.backgroundColorContent = Colors.white,
+    this.withAutoTittleName = true,
+    this.styleAutoTittleName,
+    this.actionsAppBar,
+    this.tittleAppBar,
+    this.isTitleCentered,
+    this.enableShadowItensMenu = false,
+    this.curveAnimation = Curves.decelerate,
+    this.isDraggable = true,
+    this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.disableAppBarDefault = false,
+    this.withShadow = true,
+    this.boxShadow,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.matrixBuilder,
+    this.animatedBackgroundBuilder,
+    this.closeOnTap,
+    this.menuTranslate = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -127,11 +147,14 @@ class HiddenDrawerMenu extends StatelessWidget {
       contentCornerRadius: contentCornerRadius,
       enableCornerAnimation: enableCornerAnimation,
       enableScaleAnimation: enableScaleAnimation,
-      animatedBagroundBuilder: animatedBagroundBuilder,
+      animatedBackgroundBuilder: animatedBackgroundBuilder,
       menu: _buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
+      withShadow: withShadow,
+      boxShadow: boxShadow,
       matrixBuilder: matrixBuilder,
+      menuTranslate: menuTranslate,
       screenSelectedBuilder: (position, bloc) {
         return Scaffold(
           backgroundColor: backgroundColorContent,

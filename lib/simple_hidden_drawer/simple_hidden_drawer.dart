@@ -5,7 +5,7 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
 import 'package:hidden_drawer_menu/util/change_notifier_consumer.dart';
 
-typedef AnimatedBagroundBuilder = Widget Function(
+typedef AnimatedBackgroundBuilder = Widget Function(
     AnimatedDrawerController controller);
 
 class SimpleHiddenDrawer extends StatefulWidget {
@@ -43,43 +43,46 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// display shadow on the edge of the drawer
   final bool withShadow;
 
+  final AnimatedBackgroundBuilder? animatedBackgroundBuilder;
+  final MatrixBuilder? matrixBuilder;
+  final bool? closeOnTap;
+
   final bool menuTranslate;
 
-  final AnimatedBagroundBuilder animatedBagroundBuilder;
-  final MatrixBuilder matrixBuilder;
-  final bool closeOnTap;
+  /// shadow properties on the edge of the drawer
+  final List<BoxShadow>? boxShadow;
 
-  const SimpleHiddenDrawer(
-      {Key key,
-      this.initPositionSelected = 0,
-      this.isDraggable = true,
-      this.slidePercent = 80.0,
-      this.verticalScalePercent = 80.0,
-      this.contentCornerRadius = 10.0,
-      this.curveAnimation = Curves.decelerate,
-      this.screenSelectedBuilder,
-      this.menu,
-      this.enableScaleAnimation = true,
-      this.enableCornerAnimation = true,
-      this.typeOpen = TypeOpen.FROM_LEFT,
-      this.withShadow = true,
-      this.menuTranslate = true,
-      this.animatedBagroundBuilder,
-      this.matrixBuilder,
-      this.closeOnTap})
-      : assert(screenSelectedBuilder != null),
-        assert(menu != null),
-        super(key: key);
+  const SimpleHiddenDrawer({
+    Key? key,
+    this.initPositionSelected = 0,
+    this.isDraggable = true,
+    this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
+    this.curveAnimation = Curves.decelerate,
+    required this.screenSelectedBuilder,
+    required this.menu,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.withShadow = true,
+    this.boxShadow,
+    this.animatedBackgroundBuilder,
+    this.matrixBuilder,
+    this.closeOnTap,
+    this.menuTranslate = true,
+  }) : super(key: key);
+
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
 
 class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
     with TickerProviderStateMixin {
-  SimpleHiddenDrawerController _simpleHiddenDrawerController;
+  late SimpleHiddenDrawerController _simpleHiddenDrawerController;
 
   /// controller responsible to animation of the drawer
-  AnimatedDrawerController _animatedDrawerController;
+  late AnimatedDrawerController _animatedDrawerController;
 
   @override
   void initState() {
@@ -101,7 +104,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       controller: _simpleHiddenDrawerController,
       child: Stack(
         children: [
-          if (widget.animatedBagroundBuilder != null) _buildBackground(),
+          if (widget.animatedBackgroundBuilder != null) _buildBackground(),
           _buildMenu(),
           _createContentDisplay(),
         ],
@@ -110,7 +113,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
   }
 
   _buildBackground() {
-    return widget.animatedBagroundBuilder(_animatedDrawerController);
+    return widget.animatedBackgroundBuilder?.call(_animatedDrawerController);
   }
 
   _buildMenu() {
@@ -133,15 +136,12 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
     );
   }
 
-// AnimatedBuilder(
-//         animation: widget.controller,
-//         builder: (_, child) {
   Widget _createContentDisplay() {
     return AnimatedDrawerContent(
       withPaddingTop: true,
       controller: _animatedDrawerController,
       isDraggable: widget.isDraggable,
-      closeOnTap: widget.closeOnTap,
+      closeOnTap: widget.closeOnTap ?? true,
       slidePercent: widget.slidePercent,
       verticalScalePercent: widget.verticalScalePercent,
       contentCornerRadius: widget.contentCornerRadius,
@@ -149,6 +149,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       enableCornerAnimation: widget.enableCornerAnimation,
       typeOpen: widget.typeOpen,
       withShadow: widget.withShadow,
+      boxShadow: widget.boxShadow,
       matrixBuilder: widget.matrixBuilder,
       child: ChangeNotifierConsumer<SimpleHiddenDrawerController>(
         changeNotifier: _simpleHiddenDrawerController,
