@@ -85,46 +85,53 @@ class HiddenDrawerMenu extends StatelessWidget {
   final bool disableAppBarDefault;
 
   final TypeOpen typeOpen;
-
-  HiddenDrawerMenu({
-    this.screens,
-    this.initPositionSelected = 0,
-    this.backgroundColorAppBar,
-    this.elevationAppBar = 4.0,
-    this.leadingAppBar = const Icon(Icons.menu),
-    this.backgroundMenu,
-    this.backgroundColorMenu,
-    this.backgroundColorContent = Colors.white,
-    this.whithAutoTittleName = true,
-    this.styleAutoTittleName,
-    this.actionsAppBar,
-    this.tittleAppBar,
-    this.isTitleCentered,
-    this.enableShadowItensMenu = false,
-    this.curveAnimation = Curves.decelerate,
-    this.isDraggable = true,
-    this.slidePercent = 80.0,
-    this.verticalScalePercent = 80.0,
-    this.contentCornerRadius = 10.0,
-    this.enableScaleAnimation = true,
-    this.enableCornerAnimation = true,
-    this.disableAppBarDefault = false,
-    this.typeOpen = TypeOpen.FROM_LEFT,
-  });
+  final MatrixBuilder matrixBuilder;
+  final AnimatedBagroundBuilder animatedBagroundBuilder;
+  final bool closeOnTap;
+  HiddenDrawerMenu(
+      {this.screens,
+      this.initPositionSelected = 0,
+      this.backgroundColorAppBar,
+      this.elevationAppBar = 4.0,
+      this.leadingAppBar = const Icon(Icons.menu),
+      this.backgroundMenu,
+      this.backgroundColorMenu,
+      this.backgroundColorContent = Colors.white,
+      this.whithAutoTittleName = true,
+      this.styleAutoTittleName,
+      this.actionsAppBar,
+      this.tittleAppBar,
+      this.isTitleCentered,
+      this.enableShadowItensMenu = false,
+      this.curveAnimation = Curves.decelerate,
+      this.isDraggable = true,
+      this.slidePercent = 80.0,
+      this.verticalScalePercent = 80.0,
+      this.contentCornerRadius = 10.0,
+      this.enableScaleAnimation = true,
+      this.enableCornerAnimation = true,
+      this.disableAppBarDefault = false,
+      this.typeOpen = TypeOpen.FROM_LEFT,
+      this.matrixBuilder,
+      this.animatedBagroundBuilder,
+      this.closeOnTap});
 
   @override
   Widget build(BuildContext context) {
     return SimpleHiddenDrawer(
       isDraggable: isDraggable,
+      closeOnTap: closeOnTap,
       curveAnimation: curveAnimation,
       slidePercent: slidePercent,
       verticalScalePercent: verticalScalePercent,
       contentCornerRadius: contentCornerRadius,
       enableCornerAnimation: enableCornerAnimation,
       enableScaleAnimation: enableScaleAnimation,
+      animatedBagroundBuilder: animatedBagroundBuilder,
       menu: _buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
+      matrixBuilder: matrixBuilder,
       screenSelectedBuilder: (position, bloc) {
         return Scaffold(
           backgroundColor: backgroundColorContent,

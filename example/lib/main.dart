@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu_demo/custom/example_custom_menu.dart';
 import 'package:hidden_drawer_menu_demo/simple/example_hidden_drawer.dart';
 
+import 'drawer_open_door/drawer_open_door.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -70,7 +72,25 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     "Custom Menu Drawer",
                     style: TextStyle(color: Colors.white),
                   )),
-            )
+            ),
+            SizedBox(
+              width: 200.0,
+              child: RaisedButton(
+                  color: Colors.black54,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HiddenDrawerDoorExample()),
+                    );
+                  },
+                  child: Text(
+                    "Door Menu Drawer",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            ),
           ],
         ),
       ),

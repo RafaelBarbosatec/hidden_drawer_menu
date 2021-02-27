@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/animated_drawer_controller.dart';
 
 enum TypeOpen { FROM_LEFT, FROM_RIGHT }
+typedef MatrixBuilder = Matrix4 Function(double animatePercent);
 
 class AnimatedDrawerContent extends StatefulWidget {
   final AnimatedDrawerController controller;
@@ -15,12 +16,15 @@ class AnimatedDrawerContent extends StatefulWidget {
   final bool enableScaleAnimation;
   final bool enableCornerAnimation;
   final TypeOpen typeOpen;
+  final MatrixBuilder matrixBuilder;
+  final bool closeOnTap;
 
   const AnimatedDrawerContent(
       {Key key,
       this.controller,
       this.child,
       this.isDraggable = true,
+      this.closeOnTap = true,
       this.slidePercent,
       this.verticalScalePercent,
       this.contentCornerRadius,
@@ -28,7 +32,8 @@ class AnimatedDrawerContent extends StatefulWidget {
       this.withShadow = true,
       this.enableScaleAnimation = true,
       this.enableCornerAnimation = true,
-      this.typeOpen = TypeOpen.FROM_LEFT})
+      this.typeOpen = TypeOpen.FROM_LEFT,
+      this.matrixBuilder})
       : assert(controller != null),
         super(key: key);
 
@@ -52,28 +57,33 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
         animation: widget.controller,
         builder: (_, child) {
           var animatePercent = widget.controller.value;
-          slideAmount = ((constraints.maxWidth) / 100 * widget.slidePercent) *
-              animatePercent;
+          Matrix4 matrix;
+          if (widget.matrixBuilder == null) {
+            slideAmount = ((constraints.maxWidth) / 100 * widget.slidePercent) *
+                animatePercent;
 
-          if (widget.enableScaleAnimation)
-            contentScale = 1.0 -
-                (((100 - widget.verticalScalePercent) / 100) * animatePercent);
+            if (widget.enableScaleAnimation)
+              contentScale = 1.0 -
+                  (((100 - widget.verticalScalePercent) / 100) *
+                      animatePercent);
 
+            slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
+                ? slideAmount
+                : (-1 * slideAmount);
+            matrix = Matrix4.translationValues(slideAmount, 0.0, 0.0)
+              ..scale(contentScale, contentScale);
+          }
           if (widget.enableCornerAnimation)
             cornerRadius = widget.contentCornerRadius * animatePercent;
-
-          slideAmount = widget.typeOpen == TypeOpen.FROM_LEFT
-              ? slideAmount
-              : (-1 * slideAmount);
-
           return Transform(
-            transform: new Matrix4.translationValues(slideAmount, 0.0, 0.0)
-              ..scale(contentScale, contentScale),
+            transform: widget.matrixBuilder != null
+                ? widget.matrixBuilder(animatePercent)
+                : matrix,
             alignment: widget.typeOpen == TypeOpen.FROM_LEFT
                 ? Alignment.centerLeft
                 : Alignment.centerRight,
             child: Container(
-              decoration: new BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: _getShadow(),
               ),
               child: ClipRRect(
@@ -153,7 +163,7 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   void _myOnTap() {
-    if (!widget.isDraggable) return;
+    if (!widget.closeOnTap) return;
     if (widget.controller.state == MenuState.open) {
       widget.controller.close();
     }

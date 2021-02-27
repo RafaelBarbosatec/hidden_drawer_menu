@@ -66,6 +66,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
           image: widget.background,
@@ -75,17 +76,17 @@ class _HiddenMenuState extends State<HiddenMenu> {
           child: Container(
             padding: EdgeInsets.only(top: 40.0, bottom: 40.0),
             decoration: BoxDecoration(
-              boxShadow: widget.enableShadowItensMenu
-                  ? [
-                      new BoxShadow(
-                        color: const Color(0x44000000),
-                        offset: const Offset(0.0, 5.0),
-                        blurRadius: 50.0,
-                        spreadRadius: 30.0,
-                      ),
-                    ]
-                  : [],
-            ),
+                boxShadow: widget.enableShadowItensMenu
+                    ? [
+                        new BoxShadow(
+                          color: const Color(0x44000000),
+                          offset: const Offset(0.0, 5.0),
+                          blurRadius: 50.0,
+                          spreadRadius: 30.0,
+                        ),
+                      ]
+                    : [],
+                color: Colors.transparent),
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
