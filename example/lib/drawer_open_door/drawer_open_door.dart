@@ -57,10 +57,10 @@ class HiddenDrawerDoorExample extends StatelessWidget {
           ..translate(width, 0.0)
           ..multiply(Matrix4.rotationY((pi * 65 / 180) * val))
           ..translate(
-              -width + lerpDouble(0.0, ((1.1 - scaleDown) * width), val));
+              -width + (lerpDouble(0.0, ((1.1 - scaleDown) * width), val) ?? 0.0));
         // ..rotateY(-(pi * 45 / 180) * val) ..translate(val * -width, 0.0);
       },
-      animatedBagroundBuilder: (controller) => AnimatedBuilder(
+      animatedBackgroundBuilder: (controller) => AnimatedBuilder(
         animation: controller,
         builder: (_, child) => Container(
             decoration: BoxDecoration(
