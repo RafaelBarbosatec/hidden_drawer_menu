@@ -7,12 +7,15 @@ typedef ChangeNotifierWidgetBuilder<T extends ChangeNotifier> = Widget Function(
 class ChangeNotifierConsumer<T extends ChangeNotifier> extends StatefulWidget {
   final T changeNotifier;
   final ChangeNotifierWidgetBuilder<T> builder;
-  ChangeNotifierWidgetBuilder<T> _builderInner;
+  late ChangeNotifierWidgetBuilder<T> _builderInner;
 
-  ChangeNotifierConsumer({Key key, this.changeNotifier, this.builder})
-      : super(key: key) {
+  ChangeNotifierConsumer({
+    Key? key,
+    required this.changeNotifier,
+    required this.builder,
+  }) : super(key: key) {
     _builderInner = (BuildContext context, ChangeNotifier snapshot) {
-      return builder(context, snapshot);
+      return builder(context, snapshot as T);
     };
   }
   @override

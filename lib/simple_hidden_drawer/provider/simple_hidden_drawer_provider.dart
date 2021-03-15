@@ -5,9 +5,9 @@ class MyProvider extends InheritedWidget {
   final SimpleHiddenDrawerController controller;
 
   MyProvider({
-    Key key,
-    @required this.controller,
-    Widget child,
+    Key? key,
+    required this.controller,
+    required Widget child,
   }) : super(key: key, child: child);
 
   @override

@@ -5,7 +5,7 @@ class ItemHiddenMenu {
   final String name;
 
   /// callback to recibe action click in item
-  final Function onTap;
+  final Function? onTap;
 
   final Color colorLineSelected;
 
@@ -18,12 +18,12 @@ class ItemHiddenMenu {
   final bool selected;
 
   ItemHiddenMenu({
-    Key key,
-    this.name,
+    Key? key,
+    required this.name,
     this.selected = false,
     this.onTap,
     this.colorLineSelected = Colors.blue,
-    this.baseStyle,
-    this.selectedStyle,
+    required this.baseStyle,
+    required this.selectedStyle,
   });
 }

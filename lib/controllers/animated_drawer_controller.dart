@@ -15,9 +15,9 @@ class AnimatedDrawerController extends ChangeNotifier {
   final Duration duration;
 
   /// animationController used to animation of the drawer
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
-  CurvedAnimation _curvedAnimation;
+  late CurvedAnimation _curvedAnimation;
 
   double value = 0.0;
 
@@ -27,7 +27,7 @@ class AnimatedDrawerController extends ChangeNotifier {
   MenuState state = MenuState.closed;
 
   AnimatedDrawerController({
-    this.vsync,
+    required this.vsync,
     this.animationCurve = Curves.decelerate,
     this.duration = const Duration(milliseconds: 350),
   }) {

@@ -41,32 +41,30 @@ class SimpleHiddenDrawer extends StatefulWidget {
   final bool withShadow;
 
   const SimpleHiddenDrawer(
-      {Key key,
+      {Key? key,
       this.initPositionSelected = 0,
       this.isDraggable = true,
       this.slidePercent = 80.0,
       this.verticalScalePercent = 80.0,
       this.contentCornerRadius = 10.0,
       this.curveAnimation = Curves.decelerate,
-      this.screenSelectedBuilder,
-      this.menu,
+      required this.screenSelectedBuilder,
+      required this.menu,
       this.enableScaleAnimation = true,
       this.enableCornerAnimation = true,
       this.typeOpen = TypeOpen.FROM_LEFT,
       this.withShadow = true})
-      : assert(screenSelectedBuilder != null),
-        assert(menu != null),
-        super(key: key);
+      : super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
 
 class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
     with TickerProviderStateMixin {
-  SimpleHiddenDrawerController _simpleHiddenDrawerController;
+  late SimpleHiddenDrawerController _simpleHiddenDrawerController;
 
   /// controller responsible to animation of the drawer
-  AnimatedDrawerController _animatedDrawerController;
+  late AnimatedDrawerController _animatedDrawerController;
 
   @override
   void initState() {
