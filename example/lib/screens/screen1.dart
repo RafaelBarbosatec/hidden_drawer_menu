@@ -14,7 +14,7 @@ class Screen1 extends StatelessWidget {
               "Screen 1",
               style: TextStyle(color: Colors.white, fontSize: 30.0),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Toggle'),
               onPressed: () {
                 SimpleHiddenDrawerController.of(context).toggle();
