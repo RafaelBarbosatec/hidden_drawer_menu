@@ -4,7 +4,7 @@ class ItemHiddenMenu {
   /// name of the menu item
   final String name;
 
-  /// callback to recibe action click in item
+  /// callback to receive action click in item
   final Function? onTap;
 
   final Color colorLineSelected;

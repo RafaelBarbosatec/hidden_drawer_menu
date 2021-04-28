@@ -3,26 +3,22 @@ import 'package:flutter/material.dart';
 typedef ChangeNotifierWidgetBuilder<T extends ChangeNotifier> = Widget Function(
     BuildContext context, T model);
 
-// ignore: must_be_immutable
 class ChangeNotifierConsumer<T extends ChangeNotifier> extends StatefulWidget {
   final T changeNotifier;
   final ChangeNotifierWidgetBuilder<T> builder;
-  late ChangeNotifierWidgetBuilder<T> _builderInner;
 
   ChangeNotifierConsumer({
     Key? key,
     required this.changeNotifier,
     required this.builder,
-  }) : super(key: key) {
-    _builderInner = (BuildContext context, ChangeNotifier snapshot) {
-      return builder(context, snapshot as T);
-    };
-  }
+  }) : super(key: key);
   @override
-  _ChangeNotifierConsumerState createState() => _ChangeNotifierConsumerState();
+  _ChangeNotifierConsumerState<T> createState() =>
+      _ChangeNotifierConsumerState<T>();
 }
 
-class _ChangeNotifierConsumerState extends State<ChangeNotifierConsumer> {
+class _ChangeNotifierConsumerState<T extends ChangeNotifier>
+    extends State<ChangeNotifierConsumer> {
   @override
   void initState() {
     widget.changeNotifier.addListener(_listener);
@@ -37,10 +33,15 @@ class _ChangeNotifierConsumerState extends State<ChangeNotifierConsumer> {
 
   @override
   Widget build(BuildContext context) {
-    return widget._builderInner(context, widget.changeNotifier);
+    return notifierConsumerWidget.builder(
+        context, notifierConsumerWidget.changeNotifier);
   }
 
   void _listener() {
     setState(() {});
+  }
+
+  ChangeNotifierConsumer<T> get notifierConsumerWidget {
+    return widget as ChangeNotifierConsumer<T>;
   }
 }

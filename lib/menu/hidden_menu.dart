@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/menu/hidden_menu_widget.dart';
+import 'package:hidden_drawer_menu/menu/hidden_menu_item.dart';
 import 'package:hidden_drawer_menu/model/item_hidden_menu.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 
@@ -93,7 +93,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
               padding: EdgeInsets.all(0.0),
               itemCount: widget.itens.length,
               itemBuilder: (context, index) {
-                return HiddenMenuWidget(
+                return HiddenMenuItem(
                   name: widget.itens[index].name,
                   selected: index == _indexSelected,
                   colorLineSelected: widget.itens[index].colorLineSelected,

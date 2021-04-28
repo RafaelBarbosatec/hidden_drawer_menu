@@ -50,9 +50,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-                // color: Colors.blue,
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -70,39 +67,42 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             SizedBox(
               width: 200.0,
               child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.orange),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            20.0,
-                          ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.orange),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(
+                          20.0,
                         ),
                       ),
                     ),
                   ),
-                  // color: Colors.orange,
-                  // shape: RoundedRectangleBorder(
-                  //     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ExampleCustomMenu()),
-                    );
-                  },
-                  child: Text(
-                    "Custom Menu Drawer",
-                    style: TextStyle(color: Colors.white),
-                  )),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ExampleCustomMenu()),
+                  );
+                },
+                child: Text(
+                  "Custom Menu Drawer",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
             SizedBox(
               width: 200.0,
-              child: RaisedButton(
-                  color: Colors.black54,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black54),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.push(
                       context,
