@@ -30,7 +30,7 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   //AppBar
   /// enable auto title in appbar with menu item name
-  final bool whithAutoTittleName;
+  final bool withAutoTittleName;
 
   /// Style of the title in appbar
   final TextStyle? styleAutoTittleName;
@@ -167,7 +167,7 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   Widget? getTittleAppBar(int position) {
     if (tittleAppBar == null) {
-      return whithAutoTittleName
+      return withAutoTittleName
           ? Text(
               screens[position].itemMenu.name,
               style: styleAutoTittleName,

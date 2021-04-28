@@ -38,15 +38,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
       screens: itemList,
       backgroundColorMenu: Colors.cyan,
       slidePercent: 50,
-      boxShadow: [
-        new BoxShadow(
-          color: Colors.purple,
-          offset: const Offset(0.0, 5.0),
-          blurRadius: 10,
-          spreadRadius: 5.0,
-        ),
-      ],
-//      typeOpen: TypeOpen.FROM_RIGHT,
+      //  typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,
       //    slidePercent: 80.0,
@@ -54,7 +46,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
       //    contentCornerRadius: 10.0,
       //    iconMenuAppBar: Icon(Icons.menu),
       //    backgroundContent: DecorationImage((image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
-      //    whithAutoTittleName: true,
+      //    withAutoTittleName: true,
       //    styleAutoTittleName: TextStyle(color: Colors.red),
       //    actionsAppBar: <Widget>[],
       //    backgroundColorContent: Colors.blue,
@@ -63,6 +55,15 @@ class ExampleHiddenDrawer extends StatelessWidget {
       //    tittleAppBar: Center(child: Icon(Icons.ac_unit),),
       //    enableShadowItensMenu: true,
       //    backgroundMenu: DecorationImage(image: ExactAssetImage('assets/bg_news.jpg'),fit: BoxFit.cover),
+      //    withShadow: true,
+      //   boxShadow: [
+      //     new BoxShadow(
+      //       color: Colors.purple,
+      //       offset: const Offset(0.0, 5.0),
+      //       blurRadius: 10,
+      //       spreadRadius: 5.0,
+      //     ),
+      // ],
     );
   }
 }
