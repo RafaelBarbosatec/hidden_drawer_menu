@@ -38,6 +38,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
       screens: itemList,
       backgroundColorMenu: Colors.cyan,
       slidePercent: 50,
+      isDraggable: false,
 //      typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,

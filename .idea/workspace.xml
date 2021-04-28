@@ -31,13 +31,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f03bb378-8796-4793-90e9-c22997dcefdc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/menu/hidden_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/menu/hidden_menu.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/menu/hidden_menu_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/menu/hidden_menu_item.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model/item_hidden_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/item_hidden_menu.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/util/change_notifier_consumer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/change_notifier_consumer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/simple_hidden_drawer/animated_drawer_content.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simple_hidden_drawer/animated_drawer_content.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,33 +50,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>hiddenDrawer</find>
-      <find>listItensMenu</find>
-      <find>getActionToggle</find>
-      <find>HiddenDrawerMenuProvider</find>
-      <find>SimpleHiddenDrawerMenuProvider</find>
-      <find>enablePerspective</find>
-      <find>animateContent</find>
-      <find>_controller</find>
-      <find>setPositionSelected</find>
-      <find>_getShadow</find>
-      <find>tittleAppBar</find>
-      <find>leading</find>
-      <find>isDraggable</find>
-      <find>_afterLayout</find>
-      <find>typeOpen</find>
-      <find>_bloc</find>
-      <find>itens</find>
-      <find>_indexSelected</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>SimpleHiddenDrawerMenuProvider</replace>
-      <replace>SimpleHiddenDrawerProvider</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -88,11 +57,6 @@
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1384" />
-    <option name="height" value="1097" />
   </component>
   <component name="ProjectId" id="1rnphAV1qEeKrk7WgYxliWSMZzO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -174,21 +138,25 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1740" height="262" key="GridCell.Tab.0.bottom" timestamp="1619622003036">
-      <screen x="0" y="23" width="1792" height="1012" />
+    <state width="1740" height="378" key="GridCell.Tab.0.bottom" timestamp="1619623750223">
+      <screen x="0" y="23" width="1792" height="1011" />
     </state>
-    <state width="1740" height="262" key="GridCell.Tab.0.bottom/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619622003036" />
-    <state width="1740" height="262" key="GridCell.Tab.0.center" timestamp="1619622003036">
-      <screen x="0" y="23" width="1792" height="1012" />
+    <state width="1740" height="378" key="GridCell.Tab.0.bottom/-1366.171.1366.745/0.23.1792.1011@0.23.1792.1011" timestamp="1619623750223" />
+    <state width="1740" height="379" key="GridCell.Tab.0.bottom/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619623167638" />
+    <state width="1740" height="378" key="GridCell.Tab.0.center" timestamp="1619623750223">
+      <screen x="0" y="23" width="1792" height="1011" />
     </state>
-    <state width="1740" height="262" key="GridCell.Tab.0.center/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619622003036" />
-    <state width="1740" height="262" key="GridCell.Tab.0.left" timestamp="1619622003035">
-      <screen x="0" y="23" width="1792" height="1012" />
+    <state width="1740" height="378" key="GridCell.Tab.0.center/-1366.171.1366.745/0.23.1792.1011@0.23.1792.1011" timestamp="1619623750223" />
+    <state width="1740" height="379" key="GridCell.Tab.0.center/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619623167637" />
+    <state width="1740" height="378" key="GridCell.Tab.0.left" timestamp="1619623750222">
+      <screen x="0" y="23" width="1792" height="1011" />
     </state>
-    <state width="1740" height="262" key="GridCell.Tab.0.left/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619622003035" />
-    <state width="1740" height="262" key="GridCell.Tab.0.right" timestamp="1619622003036">
-      <screen x="0" y="23" width="1792" height="1012" />
+    <state width="1740" height="378" key="GridCell.Tab.0.left/-1366.171.1366.745/0.23.1792.1011@0.23.1792.1011" timestamp="1619623750222" />
+    <state width="1740" height="379" key="GridCell.Tab.0.left/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619623167637" />
+    <state width="1740" height="378" key="GridCell.Tab.0.right" timestamp="1619623750223">
+      <screen x="0" y="23" width="1792" height="1011" />
     </state>
-    <state width="1740" height="262" key="GridCell.Tab.0.right/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619622003036" />
+    <state width="1740" height="378" key="GridCell.Tab.0.right/-1366.171.1366.745/0.23.1792.1011@0.23.1792.1011" timestamp="1619623750223" />
+    <state width="1740" height="379" key="GridCell.Tab.0.right/-1366.171.1366.745/0.23.1792.1012@0.23.1792.1012" timestamp="1619623167638" />
   </component>
 </project>

@@ -1,6 +1,7 @@
 ## [3.0.0]
 
 * Migrate to Null-Safety
+* Improvements in `isDraggable`
 
 ## [2.0.1] - 24/07/2020
 
