@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
+import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 
-class SimpleHiddenDrawerProvider extends InheritedWidget {
-  final SimpleHiddenDrawerBloc hiddenDrawerBloc;
+class MyProvider extends InheritedWidget {
+  final SimpleHiddenDrawerController controller;
 
-  SimpleHiddenDrawerProvider({
-    Key key,
-    @required this.hiddenDrawerBloc,
-    Widget child,
+  MyProvider({
+    Key? key,
+    required this.controller,
+    required Widget child,
   }) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
-
-  static SimpleHiddenDrawerBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(SimpleHiddenDrawerProvider) as SimpleHiddenDrawerProvider)
-          .hiddenDrawerBloc;
 }

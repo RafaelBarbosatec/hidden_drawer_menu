@@ -1,98 +1,134 @@
 import 'package:flutter/material.dart';
-import 'package:hidden_drawer_menu/controllers/hidden_drawer_controller.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/AnimatedDrawerContent.dart';
-import 'package:hidden_drawer_menu/simple_hidden_drawer/bloc/simple_hidden_drawer_bloc.dart';
+import 'package:hidden_drawer_menu/controllers/animated_drawer_controller.dart';
+import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
+import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.dart';
 import 'package:hidden_drawer_menu/simple_hidden_drawer/provider/simple_hidden_drawer_provider.dart';
+import 'package:hidden_drawer_menu/util/change_notifier_consumer.dart';
 
 class SimpleHiddenDrawer extends StatefulWidget {
-
   /// position initial item selected in menu( start in 0)
   final int initPositionSelected;
 
   /// enable and disable open and close with gesture
   final bool isDraggable;
 
+  /// percent the container should be slided to the side
+  final double slidePercent;
+
+  /// percent the content should scale vertically
+  final double verticalScalePercent;
+
+  /// radius applied to the content when active
+  final double contentCornerRadius;
+
   /// curve effect to open and close drawer
   final Curve curveAnimation;
 
-  /// Function of the recive screen to show
-  final Widget Function(int position, SimpleHiddenDrawerBloc bloc) screenSelectedBuilder;
+  /// enable animation Scale
+  final bool enableScaleAnimation;
+
+  /// enable animation borderRadius
+  final bool enableCornerAnimation;
+
+  /// Function of the receive screen to show
+  final AsyncScreenBuilder screenSelectedBuilder;
 
   final Widget menu;
 
+  final TypeOpen typeOpen;
+
+  /// display shadow on the edge of the drawer
+  final bool withShadow;
+
+  /// shadow properties on the edge of the drawer
+  final List<BoxShadow>? boxShadow;
+
   const SimpleHiddenDrawer({
-    Key key,
+    Key? key,
     this.initPositionSelected = 0,
     this.isDraggable = true,
+    this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
     this.curveAnimation = Curves.decelerate,
-    this.screenSelectedBuilder,
-    this.menu
-  }) : assert(screenSelectedBuilder != null), super(key: key);
+    required this.screenSelectedBuilder,
+    required this.menu,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.withShadow = true,
+    this.boxShadow,
+  }) : super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
 
-class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer> with TickerProviderStateMixin {
-
-  SimpleHiddenDrawerBloc _bloc;
+class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
+    with TickerProviderStateMixin {
+  late SimpleHiddenDrawerController _simpleHiddenDrawerController;
 
   /// controller responsible to animation of the drawer
-  HiddenDrawerController _controller;
+  late AnimatedDrawerController _animatedDrawerController;
+
+  @override
+  void initState() {
+    _animatedDrawerController = AnimatedDrawerController(
+      vsync: this,
+      animationCurve: widget.curveAnimation,
+    );
+
+    _simpleHiddenDrawerController = SimpleHiddenDrawerController(
+      widget.initPositionSelected,
+      _animatedDrawerController,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    if(_bloc == null) {
-      _bloc = SimpleHiddenDrawerBloc(widget.initPositionSelected,widget.screenSelectedBuilder);
-      initControllerAnimation();
-    }
-
-    return SimpleHiddenDrawerProvider(
-      hiddenDrawerBloc: _bloc,
-      child: buildLayout(),
+    return MyProvider(
+      controller: _simpleHiddenDrawerController,
+      child: Stack(
+        children: [
+          widget.menu,
+          _createContentDisplay(),
+        ],
+      ),
     );
   }
 
-  Widget buildLayout() {
-    return Stack(
-      children: [
-        widget.menu,
-        createContentDisplay()
-      ],
-    );
-  }
-
-  createContentDisplay() {
+  Widget _createContentDisplay() {
     return AnimatedDrawerContent(
-      whithPaddingTop: true,
-      controller:_controller,
+      withPaddingTop: true,
+      controller: _animatedDrawerController,
       isDraggable: widget.isDraggable,
-      child: StreamBuilder(
-          stream: _bloc.controllers.getScreenSelected,
-          initialData: Container(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return snapshot.data;
-          }),
+      slidePercent: widget.slidePercent,
+      verticalScalePercent: widget.verticalScalePercent,
+      contentCornerRadius: widget.contentCornerRadius,
+      enableScaleAnimation: widget.enableScaleAnimation,
+      enableCornerAnimation: widget.enableCornerAnimation,
+      typeOpen: widget.typeOpen,
+      withShadow: widget.withShadow,
+      boxShadow: widget.boxShadow,
+      child: ChangeNotifierConsumer<SimpleHiddenDrawerController>(
+        changeNotifier: _simpleHiddenDrawerController,
+        builder: (context, model) {
+          return IgnorePointer(
+            ignoring: model.state == MenuState.open,
+            child: widget.screenSelectedBuilder(
+              model.position,
+              model,
+            ),
+          );
+        },
+      ),
     );
-  }
-
-  void initControllerAnimation() {
-
-    _controller = new HiddenDrawerController(
-      vsync: this,
-      animationCurve: widget.curveAnimation
-    );
-
-    _bloc.controllers.getActionToggle.listen((d){
-      _controller.toggle();
-    });
-
   }
 
   @override
   void dispose() {
-    _bloc.dispose();
+    _simpleHiddenDrawerController.dispose();
+    _animatedDrawerController.dispose();
     super.dispose();
   }
-
 }
