@@ -118,14 +118,15 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
   List<BoxShadow> _getShadow() {
     if (widget.withShadow) {
-      return [
-        new BoxShadow(
-          color: const Color(0x44000000),
-          offset: const Offset(0.0, 5.0),
-          blurRadius: BLUR_SHADOW,
-          spreadRadius: 5.0,
-        ),
-      ];
+      return widget.boxShadow ??
+          [
+            new BoxShadow(
+              color: const Color(0x44000000),
+              offset: const Offset(0.0, 5.0),
+              blurRadius: BLUR_SHADOW,
+              spreadRadius: 5.0,
+            ),
+          ];
     } else {
       return [];
     }

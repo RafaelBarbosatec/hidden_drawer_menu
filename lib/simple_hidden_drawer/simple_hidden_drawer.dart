@@ -49,6 +49,7 @@ class SimpleHiddenDrawer extends StatefulWidget {
 
   final bool menuTranslate;
 
+
   /// shadow properties on the edge of the drawer
   final List<BoxShadow>? boxShadow;
 

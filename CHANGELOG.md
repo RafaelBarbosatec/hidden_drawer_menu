@@ -2,6 +2,7 @@
 
 * Migrate to Null-Safety. Thanks [SaulRinconOlvera](https://github.com/SaulRinconOlvera)
 * Improvements in `isDraggable`
+* adds param `boxShadow` to customize shadow
 
 ## [2.0.1] - 24/07/2020
 
