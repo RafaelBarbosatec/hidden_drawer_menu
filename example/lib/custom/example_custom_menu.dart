@@ -22,10 +22,11 @@ class ExampleCustomMenu extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  controller.toggle();
-                }),
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                controller.toggle();
+              },
+            ),
           ),
           body: screenCurrent,
         );
@@ -45,8 +46,10 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
     super.initState();
   }
 
@@ -107,10 +110,6 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        //color: Colors.blue,
-                        // shape: RoundedRectangleBorder(
-                        //     borderRadius:
-                        //         BorderRadius.all(Radius.circular(20.0))),
                         onPressed: () {
                           _controller.setSelectedMenuPosition(0);
                         },
@@ -123,30 +122,27 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     SizedBox(
                       width: 200.0,
                       child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.orange),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                    20.0,
-                                  ),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.orange),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  20.0,
                                 ),
                               ),
                             ),
                           ),
-                          // //color: Colors.orange,
-                          // shape: RoundedRectangleBorder(
-                          //     borderRadius:
-                          //         BorderRadius.all(Radius.circular(20.0))),
-                          onPressed: () {
-                            _controller.setSelectedMenuPosition(1);
-                          },
-                          child: Text(
-                            "Menu 2",
-                            style: TextStyle(color: Colors.white),
-                          )),
+                        ),
+                        onPressed: () {
+                          _controller.setSelectedMenuPosition(1);
+                        },
+                        child: Text(
+                          "Menu 2",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     )
                   ],
                 ),

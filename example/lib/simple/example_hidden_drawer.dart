@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:hidden_drawer_menu_demo/screens/screen1.dart';
-import 'package:hidden_drawer_menu_demo/screens/screen2.dart';
+
+import '../screens/screen1.dart';
+import '../screens/screen2.dart';
 
 class ExampleHiddenDrawer extends StatelessWidget {
-  final List<ScreenHiddenDrawer> itens = [
+  final List<ScreenHiddenDrawer> itemList = [
     ScreenHiddenDrawer(
       ItemHiddenMenu(
         name: "Screen 1",
@@ -34,7 +35,7 @@ class ExampleHiddenDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
       initPositionSelected: 0,
-      screens: itens,
+      screens: itemList,
       backgroundColorMenu: Colors.cyan,
       slidePercent: 50,
 //      typeOpen: TypeOpen.FROM_RIGHT,
