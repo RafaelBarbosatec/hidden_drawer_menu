@@ -186,11 +186,11 @@ class HiddenDrawerMenu extends StatelessWidget {
     });
 
     return HiddenMenu(
-      itens: _itensMenu,
+      items: _itensMenu,
       background: backgroundMenu,
       backgroundColorMenu: backgroundColorMenu,
       initPositionSelected: initPositionSelected,
-      enableShadowItensMenu: enableShadowItensMenu,
+      enableShadowItemsMenu: enableShadowItensMenu,
       typeOpen: typeOpen,
     );
   }

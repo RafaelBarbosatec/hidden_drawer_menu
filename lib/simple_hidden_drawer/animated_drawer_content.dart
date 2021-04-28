@@ -100,6 +100,9 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   Widget _buildContent(BoxConstraints constraints) {
+    if (!widget.isDraggable) {
+      return widget.child;
+    }
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onHorizontalDragStart: _myOnHorizontalDragStart,
@@ -129,7 +132,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   void _myOnHorizontalDragStart(DragStartDetails detail) {
-    if (!widget.isDraggable) return;
     if (detail.localPosition.dx <= WIDTH_GESTURE &&
         !(widget.withPaddingTop && detail.localPosition.dy <= HEIGHT_APPBAR)) {
       this.setState(() {
@@ -142,7 +144,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
     DragUpdateDetails detail,
     BoxConstraints constraints,
   ) {
-    if (!widget.isDraggable) return;
     if (dragging) {
       var globalPosition = detail.globalPosition.dx;
       globalPosition = globalPosition < 0 ? 0 : globalPosition;
@@ -154,7 +155,6 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   void _myOnHorizontalDragEnd(DragEndDetails detail) {
-    if (!widget.isDraggable) return;
     if (dragging) {
       widget.controller.openOrClose();
       setState(() {

@@ -9,16 +9,16 @@ class HiddenMenu extends StatefulWidget {
   final DecorationImage? background;
 
   /// that allows us to add shadow above menu items
-  final bool enableShadowItensMenu;
+  final bool enableShadowItemsMenu;
 
   /// that allows us to add backgroud in the menu(color)
   final Color backgroundColorMenu;
 
   /// Items of the menu
-  final List<ItemHiddenMenu> itens;
+  final List<ItemHiddenMenu> items;
 
-  /// Callback to recive item selected for user
-  final Function(int)? selectedListern;
+  /// Callback to receive item selected for user
+  final Function(int)? selectedListen;
 
   /// position to set initial item selected in menu
   final int initPositionSelected;
@@ -28,11 +28,11 @@ class HiddenMenu extends StatefulWidget {
   HiddenMenu(
       {Key? key,
       required this.background,
-      required this.itens,
-      this.selectedListern,
+      required this.items,
+      this.selectedListen,
       required this.initPositionSelected,
       required this.backgroundColorMenu,
-      this.enableShadowItensMenu = false,
+      this.enableShadowItemsMenu = false,
       this.typeOpen = TypeOpen.FROM_LEFT})
       : super(key: key);
 
@@ -91,18 +91,18 @@ class _HiddenMenuState extends State<HiddenMenu> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.all(0.0),
-              itemCount: widget.itens.length,
+              itemCount: widget.items.length,
               itemBuilder: (context, index) {
                 return HiddenMenuItem(
-                  name: widget.itens[index].name,
+                  name: widget.items[index].name,
                   selected: index == _indexSelected,
-                  colorLineSelected: widget.itens[index].colorLineSelected,
-                  baseStyle: widget.itens[index].baseStyle,
-                  selectedStyle: widget.itens[index].selectedStyle,
+                  colorLineSelected: widget.items[index].colorLineSelected,
+                  baseStyle: widget.items[index].baseStyle,
+                  selectedStyle: widget.items[index].selectedStyle,
                   typeOpen: widget.typeOpen,
                   onTap: () {
-                    if (widget.itens[index].onTap != null) {
-                      widget.itens[index].onTap!();
+                    if (widget.items[index].onTap != null) {
+                      widget.items[index].onTap!();
                     }
                     controller.setSelectedMenuPosition(index);
                   },
