@@ -30,12 +30,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f03bb378-8796-4793-90e9-c22997dcefdc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hidden_drawer_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/hidden_drawer_menu.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/simple_hidden_drawer/animated_drawer_content.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simple_hidden_drawer/animated_drawer_content.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/simple_hidden_drawer/simple_hidden_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/simple_hidden_drawer/simple_hidden_drawer.dart" afterDir="false" />
-    </list>
+    <list default="true" id="f03bb378-8796-4793-90e9-c22997dcefdc" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
