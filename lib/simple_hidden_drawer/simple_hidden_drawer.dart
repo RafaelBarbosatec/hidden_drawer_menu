@@ -40,21 +40,25 @@ class SimpleHiddenDrawer extends StatefulWidget {
   /// display shadow on the edge of the drawer
   final bool withShadow;
 
-  const SimpleHiddenDrawer(
-      {Key? key,
-      this.initPositionSelected = 0,
-      this.isDraggable = true,
-      this.slidePercent = 80.0,
-      this.verticalScalePercent = 80.0,
-      this.contentCornerRadius = 10.0,
-      this.curveAnimation = Curves.decelerate,
-      required this.screenSelectedBuilder,
-      required this.menu,
-      this.enableScaleAnimation = true,
-      this.enableCornerAnimation = true,
-      this.typeOpen = TypeOpen.FROM_LEFT,
-      this.withShadow = true})
-      : super(key: key);
+  /// shadow properties on the edge of the drawer
+  final List<BoxShadow>? boxShadow;
+
+  const SimpleHiddenDrawer({
+    Key? key,
+    this.initPositionSelected = 0,
+    this.isDraggable = true,
+    this.slidePercent = 80.0,
+    this.verticalScalePercent = 80.0,
+    this.contentCornerRadius = 10.0,
+    this.curveAnimation = Curves.decelerate,
+    required this.screenSelectedBuilder,
+    required this.menu,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.withShadow = true,
+    this.boxShadow,
+  }) : super(key: key);
   @override
   _SimpleHiddenDrawerState createState() => _SimpleHiddenDrawerState();
 }
@@ -105,6 +109,7 @@ class _SimpleHiddenDrawerState extends State<SimpleHiddenDrawer>
       enableCornerAnimation: widget.enableCornerAnimation,
       typeOpen: widget.typeOpen,
       withShadow: widget.withShadow,
+      boxShadow: widget.boxShadow,
       child: ChangeNotifierConsumer<SimpleHiddenDrawerController>(
         changeNotifier: _simpleHiddenDrawerController,
         builder: (context, model) {

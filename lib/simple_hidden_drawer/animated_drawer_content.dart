@@ -15,21 +15,23 @@ class AnimatedDrawerContent extends StatefulWidget {
   final bool enableScaleAnimation;
   final bool enableCornerAnimation;
   final TypeOpen typeOpen;
+  final List<BoxShadow>? boxShadow;
 
-  const AnimatedDrawerContent(
-      {Key? key,
-      required this.controller,
-      required this.child,
-      this.isDraggable = true,
-      required this.slidePercent,
-      required this.verticalScalePercent,
-      required this.contentCornerRadius,
-      this.withPaddingTop = false,
-      this.withShadow = true,
-      this.enableScaleAnimation = true,
-      this.enableCornerAnimation = true,
-      this.typeOpen = TypeOpen.FROM_LEFT})
-      : super(key: key);
+  const AnimatedDrawerContent({
+    Key? key,
+    required this.controller,
+    required this.child,
+    this.isDraggable = true,
+    required this.slidePercent,
+    required this.verticalScalePercent,
+    required this.contentCornerRadius,
+    this.withPaddingTop = false,
+    this.withShadow = true,
+    this.enableScaleAnimation = true,
+    this.enableCornerAnimation = true,
+    this.typeOpen = TypeOpen.FROM_LEFT,
+    this.boxShadow,
+  }) : super(key: key);
 
   @override
   _AnimatedDrawerContentState createState() => _AnimatedDrawerContentState();
@@ -106,14 +108,15 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
 
   List<BoxShadow> _getShadow() {
     if (widget.withShadow) {
-      return [
-        new BoxShadow(
-          color: const Color(0x44000000),
-          offset: const Offset(0.0, 5.0),
-          blurRadius: BLUR_SHADOW,
-          spreadRadius: 5.0,
-        ),
-      ];
+      return widget.boxShadow ??
+          [
+            new BoxShadow(
+              color: const Color(0x44000000),
+              offset: const Offset(0.0, 5.0),
+              blurRadius: BLUR_SHADOW,
+              spreadRadius: 5.0,
+            ),
+          ];
     } else {
       return [];
     }

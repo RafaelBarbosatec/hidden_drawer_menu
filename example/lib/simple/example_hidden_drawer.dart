@@ -38,7 +38,14 @@ class ExampleHiddenDrawer extends StatelessWidget {
       screens: itemList,
       backgroundColorMenu: Colors.cyan,
       slidePercent: 50,
-      isDraggable: false,
+      boxShadow: [
+        new BoxShadow(
+          color: Colors.purple,
+          offset: const Offset(0.0, 5.0),
+          blurRadius: 10,
+          spreadRadius: 5.0,
+        ),
+      ],
 //      typeOpen: TypeOpen.FROM_RIGHT,
       //    enableScaleAnimin: true,
       //    enableCornerAnimin: true,

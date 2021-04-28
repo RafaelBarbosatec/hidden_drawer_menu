@@ -86,6 +86,12 @@ class HiddenDrawerMenu extends StatelessWidget {
 
   final TypeOpen typeOpen;
 
+  /// display shadow on the edge of the drawer
+  final bool withShadow;
+
+  /// shadow properties on the edge of the drawer
+  final List<BoxShadow>? boxShadow;
+
   HiddenDrawerMenu({
     required this.screens,
     this.initPositionSelected = 0,
@@ -109,6 +115,8 @@ class HiddenDrawerMenu extends StatelessWidget {
     this.enableScaleAnimation = true,
     this.enableCornerAnimation = true,
     this.disableAppBarDefault = false,
+    this.withShadow = true,
+    this.boxShadow,
     this.typeOpen = TypeOpen.FROM_LEFT,
   });
 
@@ -125,6 +133,8 @@ class HiddenDrawerMenu extends StatelessWidget {
       menu: _buildMenu(),
       typeOpen: typeOpen,
       initPositionSelected: initPositionSelected,
+      withShadow: withShadow,
+      boxShadow: boxShadow,
       screenSelectedBuilder: (position, bloc) {
         return Scaffold(
           backgroundColor: backgroundColorContent,
