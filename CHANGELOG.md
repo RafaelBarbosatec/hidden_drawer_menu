@@ -1,3 +1,7 @@
+## [3.0.0]
+
+* Migrate to Null-Safety
+
 ## [2.0.1] - 24/07/2020
 
 * add optional param `openMenu` in 'setSelectedMenuPosition'
