@@ -17,20 +17,19 @@ class AnimatedDrawerContent extends StatefulWidget {
   final TypeOpen typeOpen;
 
   const AnimatedDrawerContent(
-      {Key key,
-      this.controller,
-      this.child,
+      {Key? key,
+      required this.controller,
+      required this.child,
       this.isDraggable = true,
-      this.slidePercent,
-      this.verticalScalePercent,
-      this.contentCornerRadius,
+      required this.slidePercent,
+      required this.verticalScalePercent,
+      required this.contentCornerRadius,
       this.withPaddingTop = false,
       this.withShadow = true,
       this.enableScaleAnimation = true,
       this.enableCornerAnimation = true,
       this.typeOpen = TypeOpen.FROM_LEFT})
-      : assert(controller != null),
-        super(key: key);
+      : super(key: key);
 
   @override
   _AnimatedDrawerContentState createState() => _AnimatedDrawerContentState();

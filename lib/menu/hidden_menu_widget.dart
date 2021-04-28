@@ -6,29 +6,29 @@ class HiddenMenuWidget extends StatelessWidget {
   final String name;
 
   /// callback to recibe action click in item
-  final Function onTap;
+  final GestureTapCallback? onTap;
 
   final Color colorLineSelected;
 
   /// Base style of the text-item.
-  final TextStyle baseStyle;
+  final TextStyle? baseStyle;
 
   /// style to apply to text when item is selected
-  final TextStyle selectedStyle;
+  final TextStyle? selectedStyle;
 
   final bool selected;
 
   final TypeOpen typeOpen;
 
   const HiddenMenuWidget({
-    Key key,
-    this.name,
+    Key? key,
+    required this.name,
     this.onTap,
-    this.colorLineSelected,
+    required this.colorLineSelected,
     this.baseStyle,
     this.selectedStyle,
-    this.selected,
-    this.typeOpen,
+    required this.selected,
+    required this.typeOpen,
   }) : super(key: key);
 
   @override
@@ -83,7 +83,7 @@ class HiddenMenuWidget extends StatelessWidget {
     );
   }
 
-  TextStyle _getStyleSelected() {
+  TextStyle? _getStyleSelected() {
     return this.selected
         ? this.selectedStyle ?? TextStyle(color: Colors.white)
         : null;

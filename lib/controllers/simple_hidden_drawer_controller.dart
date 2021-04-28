@@ -54,6 +54,6 @@ class SimpleHiddenDrawerController extends ChangeNotifier {
   }
 
   static SimpleHiddenDrawerController of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<MyProvider>().controller;
+    return context.dependOnInheritedWidgetOfExactType<MyProvider>()!.controller;
   }
 }

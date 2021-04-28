@@ -9,7 +9,7 @@ class ExampleCustomMenu extends StatelessWidget {
     return SimpleHiddenDrawer(
       menu: Menu(),
       screenSelectedBuilder: (position, controller) {
-        Widget screenCurrent;
+        Widget? screenCurrent;
         switch (position) {
           case 0:
             screenCurrent = Screen1();
@@ -40,8 +40,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  SimpleHiddenDrawerController _controller;
+  late AnimationController _animationController;
+  late SimpleHiddenDrawerController _controller;
 
   @override
   void initState() {
@@ -93,11 +93,24 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                   children: <Widget>[
                     SizedBox(
                       width: 200.0,
-                      child: RaisedButton(
-                        color: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0))),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  20.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        //color: Colors.blue,
+                        // shape: RoundedRectangleBorder(
+                        //     borderRadius:
+                        //         BorderRadius.all(Radius.circular(20.0))),
                         onPressed: () {
                           _controller.setSelectedMenuPosition(0);
                         },
@@ -109,11 +122,24 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     ),
                     SizedBox(
                       width: 200.0,
-                      child: RaisedButton(
-                          color: Colors.orange,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.orange),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                    20.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          // //color: Colors.orange,
+                          // shape: RoundedRectangleBorder(
+                          //     borderRadius:
+                          //         BorderRadius.all(Radius.circular(20.0))),
                           onPressed: () {
                             _controller.setSelectedMenuPosition(1);
                           },

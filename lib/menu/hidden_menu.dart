@@ -6,7 +6,7 @@ import 'package:hidden_drawer_menu/simple_hidden_drawer/animated_drawer_content.
 
 class HiddenMenu extends StatefulWidget {
   /// Decocator that allows us to add backgroud in the menu(img)
-  final DecorationImage background;
+  final DecorationImage? background;
 
   /// that allows us to add shadow above menu items
   final bool enableShadowItensMenu;
@@ -18,7 +18,7 @@ class HiddenMenu extends StatefulWidget {
   final List<ItemHiddenMenu> itens;
 
   /// Callback to recive item selected for user
-  final Function(int) selectedListern;
+  final Function(int)? selectedListern;
 
   /// position to set initial item selected in menu
   final int initPositionSelected;
@@ -26,12 +26,12 @@ class HiddenMenu extends StatefulWidget {
   final TypeOpen typeOpen;
 
   HiddenMenu(
-      {Key key,
-      this.background,
-      this.itens,
+      {Key? key,
+      required this.background,
+      required this.itens,
       this.selectedListern,
-      this.initPositionSelected,
-      this.backgroundColorMenu,
+      required this.initPositionSelected,
+      required this.backgroundColorMenu,
       this.enableShadowItensMenu = false,
       this.typeOpen = TypeOpen.FROM_LEFT})
       : super(key: key);
@@ -41,8 +41,8 @@ class HiddenMenu extends StatefulWidget {
 }
 
 class _HiddenMenuState extends State<HiddenMenu> {
-  int _indexSelected;
-  SimpleHiddenDrawerController controller;
+  late int _indexSelected;
+  late SimpleHiddenDrawerController controller;
 
   @override
   void initState() {
@@ -101,7 +101,7 @@ class _HiddenMenuState extends State<HiddenMenu> {
                   typeOpen: widget.typeOpen,
                   onTap: () {
                     if (widget.itens[index].onTap != null) {
-                      widget.itens[index].onTap();
+                      widget.itens[index].onTap!();
                     }
                     controller.setSelectedMenuPosition(index);
                   },

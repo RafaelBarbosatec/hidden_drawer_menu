@@ -33,10 +33,10 @@ class HiddenDrawerMenu extends StatelessWidget {
   final bool whithAutoTittleName;
 
   /// Style of the title in appbar
-  final TextStyle styleAutoTittleName;
+  final TextStyle? styleAutoTittleName;
 
   /// change backgroundColor of the AppBar
-  final Color backgroundColorAppBar;
+  final Color? backgroundColorAppBar;
 
   ///Change elevation of the AppBar
   final double elevationAppBar;
@@ -45,17 +45,17 @@ class HiddenDrawerMenu extends StatelessWidget {
   final Widget leadingAppBar;
 
   /// Add actions in the AppBar
-  final List<Widget> actionsAppBar;
+  final List<Widget>? actionsAppBar;
 
   /// Set custom widget in tittleAppBar
-  final Widget tittleAppBar;
+  final Widget? tittleAppBar;
 
   /// Decide whether title is centered or not
-  final bool isTitleCentered;
+  final bool? isTitleCentered;
 
   //Menu
   /// Decocator that allows us to add backgroud in the menu(img)
-  final DecorationImage backgroundMenu;
+  final DecorationImage? backgroundMenu;
 
   /// that allows us to add backgroud in the menu(color)
   final Color backgroundColorMenu;
@@ -87,13 +87,13 @@ class HiddenDrawerMenu extends StatelessWidget {
   final TypeOpen typeOpen;
 
   HiddenDrawerMenu({
-    this.screens,
+    required this.screens,
     this.initPositionSelected = 0,
     this.backgroundColorAppBar,
     this.elevationAppBar = 4.0,
     this.leadingAppBar = const Icon(Icons.menu),
     this.backgroundMenu,
-    this.backgroundColorMenu,
+    required this.backgroundColorMenu,
     this.backgroundColorContent = Colors.white,
     this.whithAutoTittleName = true,
     this.styleAutoTittleName,
@@ -135,7 +135,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     );
   }
 
-  Widget getTittleAppBar(int position) {
+  Widget? getTittleAppBar(int position) {
     if (tittleAppBar == null) {
       return whithAutoTittleName
           ? Text(
@@ -149,7 +149,7 @@ class HiddenDrawerMenu extends StatelessWidget {
   }
 
   Widget _buildMenu() {
-    List<ItemHiddenMenu> _itensMenu = new List();
+    List<ItemHiddenMenu> _itensMenu = [];
 
     screens.forEach((item) {
       _itensMenu.add(item.itemMenu);
@@ -173,13 +173,13 @@ class HiddenDrawerMenu extends StatelessWidget {
     }
   }
 
-  PreferredSizeWidget _getAppbar(
+  PreferredSizeWidget? _getAppbar(
     int position,
     SimpleHiddenDrawerController bloc,
   ) {
     if (disableAppBarDefault) return null;
 
-    List<Widget> actions = List();
+    List<Widget> actions = [];
 
     if (typeOpen == TypeOpen.FROM_RIGHT) {
       actions.add(
@@ -193,7 +193,7 @@ class HiddenDrawerMenu extends StatelessWidget {
     }
 
     if (actionsAppBar != null) {
-      actions.addAll(actionsAppBar);
+      actions.addAll(actionsAppBar!);
     }
 
     return AppBar(
