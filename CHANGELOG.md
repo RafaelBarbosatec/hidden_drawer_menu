@@ -1,3 +1,7 @@
+## [3.0.1]
+
+* Fix bug when isDraggable is false. [#54](https://github.com/RafaelBarbosatec/hidden_drawer_menu/pull/54)
+
 ## [3.0.0]
 
 * Migrate to Null-Safety. Thanks [SaulRinconOlvera](https://github.com/SaulRinconOlvera)
