@@ -1,0 +1,7 @@
+workspace.xml
+usage.statistics.xml
+libraries/
+assetWizardSettings.xml
+gradle.xml
+caches/
+modules.xml
