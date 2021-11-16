@@ -90,17 +90,17 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   Widget _buildContent(BoxConstraints constraints) {
-    if (!widget.isDraggable) {
-      return widget.child;
-    }
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onHorizontalDragStart: _myOnHorizontalDragStart,
-      onHorizontalDragUpdate: (detail) => _myOnHorizontalDragUpdate(
-        detail,
-        constraints,
-      ),
-      onHorizontalDragEnd: _myOnHorizontalDragEnd,
+      onHorizontalDragStart:
+          widget.isDraggable ? _myOnHorizontalDragStart : (_) {},
+      onHorizontalDragUpdate: widget.isDraggable
+          ? (detail) => _myOnHorizontalDragUpdate(
+                detail,
+                constraints,
+              )
+          : (_) {},
+      onHorizontalDragEnd: widget.isDraggable ? _myOnHorizontalDragEnd : (_) {},
       onTap: _myOnTap,
       child: widget.child,
     );
