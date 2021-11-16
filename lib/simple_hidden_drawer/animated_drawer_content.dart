@@ -90,9 +90,16 @@ class _AnimatedDrawerContentState extends State<AnimatedDrawerContent> {
   }
 
   Widget _buildContent(BoxConstraints constraints) {
+    // when widget isn't draggable, we still need the onTap Gesture detector to allow closing
     if (!widget.isDraggable) {
-      return widget.child;
+      return GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: _myOnTap,
+        child: widget.child,
+      );
     }
+
+    // when widget is draggable, we add all GestureDetectors
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onHorizontalDragStart: _myOnHorizontalDragStart,
