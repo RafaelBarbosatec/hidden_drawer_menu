@@ -10,7 +10,7 @@ You can use a pre-defined menu or make a fully customized menu.
 ![Usage of the hidden_drawer_menu widget on an android device](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/imgs/example.gif)
 
 
-[Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/model.apk)
+[Download APK Example](https://github.com/RafaelBarbosatec/hidden_drawer_menu/blob/master/apk/hidden_drawer.apk)
 
 
 # Use with default menu
